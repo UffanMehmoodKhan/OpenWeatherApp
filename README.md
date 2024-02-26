@@ -6,7 +6,7 @@ Current features include:
 1. Check weather with longitude and latitude by adding multiple locations.
 2. Check weather with city/country name by adding multiple locations.
 3. Show current weather conditions of current location.
-4. Show waether and temperature forecase as in format of “Feels like, minimum and maximum temperature” etc
+4. Show weather and temperature forecast as in format of “Feels like, Minimum and Maximum temperature” etc
 5. Show sunrise and sunset time of specified location.
 6. Show weather forecast for 5 days of specified location.
 7. Show weather data for any timestamp from 1st January 1979 till 4 days ahead forecast
