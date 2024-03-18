@@ -3,16 +3,11 @@ package main.Session;
 import main.UserInterface.UserInterface;
 import main.API.API;
 
-
-
-public class Session {
-	UserInterface UI = null;
+public interface Session {
+	
+	public static API APIInterface = null;
+	public void printSessionType(UserInterface userInterface);
 	
 
-	public Session(String UI_type){
-		System.out.println("Session Started!");
-		UI = new UserInterface(UI_type);
-		
-	}
-
+	//Methods for API calls ----> made to DB first ----> then to API calls ----> then back ----------------<
 }

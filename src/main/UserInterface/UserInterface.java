@@ -1,6 +1,5 @@
 package main.UserInterface;
 
-
 public class UserInterface {
 	private String UI;
 
@@ -8,25 +7,9 @@ public class UserInterface {
 		this.UI = ui;
 		System.out.println("UI " + this.UI);
 	}
-}
-
-class terminal extends UserInterface{
 	
-	public terminal(String ui) {
-		super(ui);
-		//TODOs
-	}
-	public void readAPIkey(){
-		//TODO
-	}
-	
+	public String getUI() {
+        return UI;
+    }
 }
 
-class desktop extends UserInterface{
-
-	public desktop(String ui) {
-		super(ui);
-		//TODO Auto-generated constructor stub
-	}
- 
-}
