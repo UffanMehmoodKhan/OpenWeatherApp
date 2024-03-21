@@ -9,6 +9,7 @@ public class SessionDT implements Session {
 		System.out.println("Desktop is Operational");
 		UserInterface UIInterface = new desktop("desktop");
 		printSessionType(UIInterface);
+		main();
 	}
 
 	@Override
@@ -16,5 +17,19 @@ public class SessionDT implements Session {
 		System.out.println(userInterface.getUI());
         
     }
+
+
+	public static void main() {
+		System.out.println("This will be the control mechanism of the desktop, where all of the tasks will occur");
+		
+		// all methods should be executed here as per user specs, with exception handling
+		// boolean status = true;
+		// while (status == true) {
+		//	
+		// 	// TODO 
+		//
+		// }
+	}
+ 
 	
 }
