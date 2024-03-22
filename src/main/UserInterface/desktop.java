@@ -1,14 +1,17 @@
 package main.UserInterface;
 
-public class desktop extends UserInterface{
+public class desktop implements UserInterface{
 
+	String interfaceType;
+	
 	public desktop(String ui) {
-		super(ui);	
+		interfaceType = ui;	
 	}
 
 
+	@Override
 	public String getUI(){
-		return super.getUI();
+		return interfaceType;
 	}
  
 }
