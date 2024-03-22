@@ -1,15 +1,11 @@
 package main.UserInterface;
 
-public class UserInterface {
-	private String UI;
+public interface UserInterface {
 
-	public UserInterface (String ui){
-		this.UI = ui;
-		System.out.println("UI " + this.UI);
-	}
+	public static UserInterface UIInterface = null;
+	public String getUI();
 	
-	public String getUI() {
-        return UI;
-    }
+	//TODO: implement remaining methods
 }
+
 

@@ -1,16 +1,16 @@
 package main.UserInterface;
 
-public class terminal extends UserInterface{
+public class terminal implements UserInterface{
+
+	String interfaceType;
 	
 	public terminal(String ui) {
-		super(ui);
+		interfaceType = ui;
 	}
 
+	@Override
 	public String getUI(){
-		return super.getUI();
+		return UIInterface.getUI();
 	}
 
-	public void readAPIkey(){
-		//TODO
-	}	
 }
