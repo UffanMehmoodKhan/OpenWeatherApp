@@ -28,7 +28,16 @@ public class terminal implements UserInterface
         }
         sessionInstance.getWeatherLoc_LatProcess(dataarr);  
     }
-    
+    @Override
+    public void displayscreen(Session sessionInstance)  
+    {
+        //display the data in the terminal
+        // for(int i = 0; i < 3; i++)
+        // {
+        //     System.out.println("Latitude of location " + (i+1) + " is " + sessionInstance.dataarr[i][0]);
+        //     System.out.println("Longitude of location " + (i+1) + " is " + sessionInstance.dataarr[i][1]);
+        // }
+    }
     
 } 
  
