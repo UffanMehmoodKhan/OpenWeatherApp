@@ -1,15 +1,6 @@
 package main.Session; 
-
- 
-
-import java.util.Scanner;
-
 import main.UserInterface.UserInterface; 
-
 import main.UserInterface.terminal; 
-
- 
-
 public class SessionT implements Session 
 { 
     UserInterface UIInterface = new terminal(); 
@@ -31,9 +22,6 @@ public class SessionT implements Session
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'test'");
     }
-
-
-
     @Override
     public void getWeatherLoc_LatInput(Session sessionInstance) 
     {
@@ -49,6 +37,12 @@ public class SessionT implements Session
             System.out.println("Latitude of location " + (i+1) + " is " + dataarr[i][0]);
             System.out.println("Longitude of location " + (i+1) + " is " + dataarr[i][1]);
         }
+    }
+
+    @Override
+    public void getWeatherLocationInput(Session sessionInstance) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getWeatherLocationInput'");
     } 
 
 

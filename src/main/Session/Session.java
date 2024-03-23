@@ -12,7 +12,7 @@ public interface Session {
     public void getWeatherLoc_LatInput(Session sessionInstance);
     public void getWeatherLoc_LatProcess(int[][] dataarra);
     //------------------------
-     
+    public void getWeatherLocationInput(Session sessionInstance);
     //Methods for API calls ----> made to DB first ----> then to API calls ----> then back ----------------< 
 
 } 

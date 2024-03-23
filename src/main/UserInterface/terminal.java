@@ -26,7 +26,13 @@ public class terminal implements UserInterface
             System.out.println("Enter the longitude of location " + (i+1));
             dataarr[i][1] = sc.nextInt();
         }
+        
         sessionInstance.getWeatherLoc_LatProcess(dataarr);  
+    }
+
+    @Override
+    public void locationInputScreen(Session sessionInstance) {
+        
     }
     
     

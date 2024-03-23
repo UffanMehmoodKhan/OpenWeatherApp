@@ -40,5 +40,9 @@ public class SessionDT implements Session {
         // the return type of this method is also subject to change
         // after processing the data we will call UIinterface.displayscreen yet to be implemtned
     }
+    @Override
+    public void getWeatherLocationInput(Session sessionInstance) {
+       UIInterface.locationInputScreen(sessionInstance);
+    }
  
 }
