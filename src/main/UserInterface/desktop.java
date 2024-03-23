@@ -21,7 +21,7 @@ public class desktop implements UserInterface
 
     @Override
     public void locationInputScreen(Session sessionInstance) {
-        new LocationInputScreen();
+        new LocationInputScreen(sessionInstance);
     }
 
     @Override

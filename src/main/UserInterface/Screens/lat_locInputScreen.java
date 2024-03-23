@@ -68,7 +68,7 @@ public class lat_locInputScreen extends JFrame {
                 }
             }
             //  sessionInstance.getWeatherLoc_LatProcess(enteredData); //// orignal call will be this 
-            sessionInstance.test(sessionInstance, enteredData); // temporary test call
+            //sessionInstance.test(sessionInstance, enteredData); // temporary test call
             dispose(); // Close the current JFrame
         }
     }

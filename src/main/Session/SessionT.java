@@ -17,7 +17,7 @@ public class SessionT implements Session
     } 
 
     @Override
-    public void test(Session sessionInstance,int[][] a)
+    public void test(Session sessionInstance,String[] a)
     {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'test'");
