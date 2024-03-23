@@ -6,17 +6,27 @@ import main.UserInterface.Screens.lat_locInputScreen;
 import main.UserInterface.Screens.LocationInputScreen; 
 
 
-public class desktop implements UserInterface { 
+public class desktop implements UserInterface 
+{ 
     @Override
-    public void welcomeScreen(Session sessionInstance) { 
+    public void welcomeScreen(Session sessionInstance) 
+    { 
         new welcomeScreen(sessionInstance); 
     }
+
     @Override
     public void lat_locInputScreen(Session sessionInstance) {
          new lat_locInputScreen(sessionInstance);
     }
+
     @Override
     public void locationInputScreen(Session sessionInstance) {
-       new LocationInputScreen();
+        new LocationInputScreen();
+    }
+
+    @Override
+    public void displayscreen(Session sessionInstance) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'displayscreen'");
     } 
 } 

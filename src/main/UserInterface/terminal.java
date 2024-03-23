@@ -32,7 +32,14 @@ public class terminal implements UserInterface
 
     @Override
     public void locationInputScreen(Session sessionInstance) {
-        
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'locationInputScreen'");
+    }
+
+    @Override
+    public void displayscreen(Session sessionInstance) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'displayscreen'");
     }
     
     
