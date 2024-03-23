@@ -2,7 +2,7 @@ package main.UserInterface;
 
 public class desktop implements UserInterface{
 
-	String interfaceType;
+	private String interfaceType;
 	
 	public desktop(String ui) {
 		interfaceType = ui;	

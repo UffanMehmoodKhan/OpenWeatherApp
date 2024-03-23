@@ -2,15 +2,16 @@ package main.UserInterface;
 
 public class terminal implements UserInterface{
 
-	String interfaceType;
+	private String interfaceType;
 	
 	public terminal(String ui) {
-		interfaceType = ui;
+		interfaceType = ui;	
 	}
+
 
 	@Override
 	public String getUI(){
-		return UIInterface.getUI();
+		return interfaceType;
 	}
 
 }
