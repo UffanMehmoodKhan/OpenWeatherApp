@@ -1,16 +1,35 @@
-package main.UserInterface;
+package main.UserInterface; 
 
-public class terminal implements UserInterface{
+ 
 
-	String interfaceType;
-	
-	public terminal(String ui) {
-		interfaceType = ui;
-	}
+public class terminal implements UserInterface{ 
 
-	@Override
-	public String getUI(){
-		return UIInterface.getUI();
-	}
+     
 
-}
+    public terminal() { 
+
+         
+
+    } 
+
+ 
+
+    @Override 
+
+    public void welcomeScreen() 
+
+    { 
+
+         
+
+    } 
+
+ 
+
+    public void readAPIkey(){ 
+
+        //TODO 
+
+    }    
+
+} 
