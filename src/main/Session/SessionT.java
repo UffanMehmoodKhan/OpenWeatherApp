@@ -11,16 +11,13 @@ import main.UserInterface.terminal;
 public class SessionT implements Session { 
 
      
+    UserInterface UIInterface = new terminal(); 
 
     public SessionT(){ 
 
         System.out.println("Terminal is Operational"); 
 
-        UserInterface UIInterface = new terminal(); 
-
-        
-
-
+        this.getWelcomeScreen();
     } 
 
  
@@ -30,8 +27,7 @@ public class SessionT implements Session {
     public void getWelcomeScreen() 
 
     { 
-
- 
+      UIInterface.welcomeScreen(this);
 
     } 
 
@@ -42,7 +38,7 @@ public class SessionT implements Session {
     { 
 
 		System.out.println("This will be the control mechanism of the terminal, where all of the tasks will occur"); 
-
+        
          
 
         // all methods should be executed here as per user specs, with exception handling 
@@ -59,6 +55,14 @@ public class SessionT implements Session {
 
         // } 
 
+    }
+
+
+
+    @Override
+    public void test() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'test'");
     } 
 
 
