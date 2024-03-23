@@ -12,7 +12,8 @@ import java.awt.event.ActionListener;
 
  
 
-public class welcomeScreen extends JFrame implements ActionListener { 
+public class welcomeScreen extends JFrame implements ActionListener
+{ 
 
     private JButton[] buttons; 
 
@@ -20,7 +21,8 @@ public class welcomeScreen extends JFrame implements ActionListener {
 
  
 
-    public welcomeScreen() { 
+    public welcomeScreen() 
+    { 
 
         setTitle("Weather App - Welcome"); 
 

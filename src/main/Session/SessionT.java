@@ -8,30 +8,24 @@ import main.UserInterface.terminal;
 
  
 
-public class SessionT implements Session { 
+public class SessionT implements Session 
+{ 
 
-     
-
-    public SessionT(){ 
-
+    public SessionT()
+    { 
         System.out.println("Terminal is Operational"); 
 
         UserInterface UIInterface = new terminal(); 
-
         
-
-
     } 
 
  
 
     @Override 
-
     public void getWelcomeScreen() 
-
     { 
 
- 
+        UIInterface.welcomeScreenT(); 
 
     } 
 
@@ -43,7 +37,9 @@ public class SessionT implements Session {
 
 		System.out.println("This will be the control mechanism of the terminal, where all of the tasks will occur"); 
 
-         
+        SessionT TerminalSession = new SessionT(); 
+
+        TerminalSession.getWelcomeScreen(); 
 
         // all methods should be executed here as per user specs, with exception handling 
 

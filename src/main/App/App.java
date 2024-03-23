@@ -40,7 +40,8 @@ public class App{
 
  
 
-    public static void main(String[] args) { 
+    public static void main(String[] args)
+    { 
         System.out.println("\n" + args[0] + " application config");  
         App OpenWeatherMap = new App(args[0]); //Initialize OpenWeatherMap App object 
         OpenWeatherMap.getSession().process(); 

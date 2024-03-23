@@ -2,11 +2,13 @@ package main.UserInterface;
 
  
 
-public class terminal implements UserInterface{ 
+public class terminal implements UserInterface
+{ 
 
      
 
-    public terminal() { 
+    public terminal() 
+    { 
 
          
 
@@ -17,7 +19,6 @@ public class terminal implements UserInterface{
     @Override 
 
     public void welcomeScreen() 
-
     { 
 
          
@@ -26,7 +27,8 @@ public class terminal implements UserInterface{
 
  
 
-    public void readAPIkey(){ 
+    public void readAPIkey()
+    { 
 
         //TODO 
 
