@@ -6,7 +6,8 @@ import main.UserInterface.desktop;
 
  
 
-public class SessionDT implements Session { 
+public class SessionDT implements Session
+{ 
 
     UserInterface UIInterface; 
 
