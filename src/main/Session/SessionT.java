@@ -2,63 +2,53 @@ package main.Session;
 
  
 
+import java.util.Scanner;
+
 import main.UserInterface.UserInterface; 
 
 import main.UserInterface.terminal; 
 
  
 
-public class SessionT implements Session { 
-
-     
+public class SessionT implements Session 
+{ 
     UserInterface UIInterface = new terminal(); 
-
-    public SessionT(){ 
-
+    public SessionT()
+    { 
         System.out.println("Terminal is Operational"); 
-
         this.getWelcomeScreen();
     } 
 
- 
-
     @Override 
-
     public void getWelcomeScreen()
     { 
       UIInterface.welcomeScreen(this);
-
     } 
 
-  
-
-
-
     @Override
-    public void test(Session sessionInstance,int[][] a) {
+    public void test(Session sessionInstance,int[][] a)
+    {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'test'");
     }
 
 
 
-
-
-
-
     @Override
-    public void getWeatherLoc_LatInput(Session sessionInstance) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getWeatherLoc_LatInput'");
+    public void getWeatherLoc_LatInput(Session sessionInstance) 
+    {
+        UIInterface.lat_locInputScreen(sessionInstance);
     }
 
-
-
     @Override
-    public void getWeatherLoc_LatProcess(int [][] dataarr) {
-        // this is where the data will be processed 
-        // the return type of this method is also subject to change
-        // after processing the data we will call UIinterface.displayscreen
+    public void getWeatherLoc_LatProcess(int [][] dataarr)
+    {
+        //display the data in the terminal
+        for(int i = 0; i < 3; i++)
+        {
+            System.out.println("Latitude of location " + (i+1) + " is " + dataarr[i][0]);
+            System.out.println("Longitude of location " + (i+1) + " is " + dataarr[i][1]);
+        }
     } 
 
 
