@@ -7,7 +7,7 @@ public interface Session {
     //------------------------
     public void getWelcomeScreen(); 
     //------------------------
-    public void test(Session sessionInstance,int[][] a); // will be used fro testing purpose
+    public void test(Session sessionInstance,int[][] a); // will be used for testing purpose
     //------------------------
     public void getWeatherLoc_LatInput(Session sessionInstance);
     public void getWeatherLoc_LatProcess(int[][] dataarra);

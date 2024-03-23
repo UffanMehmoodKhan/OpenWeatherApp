@@ -3,9 +3,6 @@ package main.Session;
 import main.UserInterface.UserInterface; 
 
 import main.UserInterface.desktop; 
-
- 
-
 public class SessionDT implements Session { 
 
     UserInterface UIInterface; 
@@ -20,8 +17,6 @@ public class SessionDT implements Session {
     { 
         UIInterface.welcomeScreen(this); 
     } 
-    
-   
     @Override
     public void test(Session sessionInstance,int[][] a ) {
         for (int i = 0; i < a.length; i++) {
@@ -30,7 +25,10 @@ public class SessionDT implements Session {
             }
             System.out.println();
         }
-            
+    }
+    @Override
+    public void getWeatherLoc_LatInput(Session sessionInstance) {
+        UIInterface.lat_locInputScreen(sessionInstance);
     }
     @Override
     public void getWeatherLoc_LatProcess(int [][] dataarr)
@@ -39,13 +37,5 @@ public class SessionDT implements Session {
         // the return type of this method is also subject to change
         // after processing the data we will call UIinterface.displayscreen yet to be implemtned
     }
-    @Override
-    public void getWeatherLoc_LatInput(Session sessionInstance) {
-        UIInterface.lat_locInputScreen(sessionInstance);
-    }
-    
-}
-
-
-
  
+}

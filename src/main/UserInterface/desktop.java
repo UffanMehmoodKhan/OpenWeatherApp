@@ -9,10 +9,8 @@ public class desktop implements UserInterface {
     public void welcomeScreen(Session sessionInstance) { 
         new welcomeScreen(sessionInstance); 
     }
-
     @Override
     public void lat_locInputScreen(Session sessionInstance) {
          new lat_locInputScreen(sessionInstance);
-        
     } 
 } 
