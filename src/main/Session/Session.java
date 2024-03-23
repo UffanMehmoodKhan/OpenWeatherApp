@@ -4,9 +4,15 @@ import main.API.API;
 
 public interface Session { 
     public static API APIInterface = null; 
+    //------------------------
     public void getWelcomeScreen(); 
-    public void test();
-    public void process(); 
+    //------------------------
+    public void test(Session sessionInstance,int[][] a); // will be used fro testing purpose
+    //------------------------
+    public void getWeatherLoc_LatInput(Session sessionInstance);
+    public void getWeatherLoc_LatProcess(int[][] dataarra);
+    //------------------------
+     
     //Methods for API calls ----> made to DB first ----> then to API calls ----> then back ----------------< 
 
 } 

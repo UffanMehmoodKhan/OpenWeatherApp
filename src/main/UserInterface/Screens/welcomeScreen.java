@@ -52,17 +52,13 @@ public class welcomeScreen extends JFrame implements ActionListener {
     } 
     @Override 
     public void actionPerformed(ActionEvent e) { 
-
         // Handle button clicks 
-
         for (int i = 0; i < buttons.length; i++) { 
-
-            if (e.getSource() == buttons[0]) { 
-
-                // JOptionPane.showMessageDialog(this, "You clicked: " + buttonLabels[i]); 
-                // Add logic for what each button does here 
-                 sessionInstance.test();
-                 return;
+            if (e.getSource() == buttons[i]) { 
+                // Close the welcome screen
+                dispose(); // Close the current JFrame
+                sessionInstance.getWeatherLoc_LatInput(sessionInstance);
+                return;
             } 
         } 
     } 

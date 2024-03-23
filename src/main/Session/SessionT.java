@@ -24,45 +24,41 @@ public class SessionT implements Session {
 
     @Override 
 
-    public void getWelcomeScreen() 
-
+    public void getWelcomeScreen()
     { 
       UIInterface.welcomeScreen(this);
 
     } 
 
-    @Override  
+  
 
-    public void process() 
 
-    { 
 
-		System.out.println("This will be the control mechanism of the terminal, where all of the tasks will occur"); 
-        
-         
+    @Override
+    public void test(Session sessionInstance,int[][] a) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'test'");
+    }
 
-        // all methods should be executed here as per user specs, with exception handling 
 
-        // boolean status = true; 
 
-        // while (status == true) { 
 
-        // 
 
-        //  // TODO 
 
-        // 
 
-        // } 
-
+    @Override
+    public void getWeatherLoc_LatInput(Session sessionInstance) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getWeatherLoc_LatInput'");
     }
 
 
 
     @Override
-    public void test() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'test'");
+    public void getWeatherLoc_LatProcess(int [][] dataarr) {
+        // this is where the data will be processed 
+        // the return type of this method is also subject to change
+        // after processing the data we will call UIinterface.displayscreen
     } 
 
 

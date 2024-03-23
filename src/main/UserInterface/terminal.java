@@ -16,6 +16,12 @@ public class terminal implements UserInterface{
     @Override
     public void welcomeScreen(Session sessionInstance) {
         System.out.println("welcome to the terminal");
+    }
+    
+    @Override
+    public void lat_locInputScreen(Session sessionInstance) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'lat_locInputScreen'");
     }    
 
 } 
