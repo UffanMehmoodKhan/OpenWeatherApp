@@ -6,6 +6,7 @@ import main.UserInterface.desktop;
 public class SessionDT implements Session {
 
 	public SessionDT(){
+
 		System.out.println("Desktop is Operational");
 		UserInterface UIInterface = new desktop("desktop");
 		printSessionType(UIInterface);
@@ -20,13 +21,15 @@ public class SessionDT implements Session {
 
 
 	public static void main() {
-		System.out.println("This will be the control mechanism of the desktop, where all of the tasks will occur");
+		System.out.println("This will be the control mechanism of the terminal, where all of the tasks will occur");
+		System.out.println("This is the current API Key: " + OpenAI.returnKey());
+
 		
 		// all methods should be executed here as per user specs, with exception handling
 		// boolean status = true;
 		// while (status == true) {
-		//	
-		// 	// TODO 
+		//
+		// 	// TODO
 		//
 		// }
 	}

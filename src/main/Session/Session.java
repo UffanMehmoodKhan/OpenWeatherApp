@@ -1,11 +1,11 @@
 package main.Session;
 
-import main.UserInterface.UserInterface;
 import main.API.API;
+import main.UserInterface.UserInterface;
 
 public interface Session {
 	
-	public static API APIInterface = null;
+	API OpenAI = new API();
 	public void printSessionType(UserInterface userInterface);
 	
 

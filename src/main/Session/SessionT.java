@@ -6,6 +6,7 @@ import main.UserInterface.terminal;
 public class SessionT implements Session {
 	
 	public SessionT(){
+
 		System.out.println("Terminal is Operational");
 		UserInterface UIInterface = new terminal("terminal");
 		printSessionType(UIInterface);
@@ -19,6 +20,8 @@ public class SessionT implements Session {
 
 	public static void main() {
 		System.out.println("This will be the control mechanism of the terminal, where all of the tasks will occur");
+		System.out.println("This is the current API Key: " + OpenAI.returnKey());
+
 		
 		// all methods should be executed here as per user specs, with exception handling
 		// boolean status = true;
