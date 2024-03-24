@@ -64,6 +64,7 @@ public class API {
                 // Extract relevant data from JSON object
                 String cityName = (String) jsonObject.get("name");
                 long timeZoneOffset = (long) jsonObject.get("timezone");
+				long timestamp = (long) jsonObject.get("dt");
                 JSONObject sysObject = (JSONObject) jsonObject.get("sys");
                 String countryName = (String) sysObject.get("country");
                 long sunriseTimeUTC = (long) sysObject.get("sunrise");
@@ -81,6 +82,11 @@ public class API {
                 Double minTemp = (Double) mainObject.get("temp_min");
                 Double maxTemp = (Double) mainObject.get("temp_max");
 
+				// Convert timestamp to local time
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				sdf.setTimeZone(TimeZone.getDefault()); // Set local timezone
+				String localTime = sdf.format(new Date(timestamp * 1000L));
+
                 // Convert time from UTC to local time
                 long sunriseTimeLocal = sunriseTimeUTC + timeZoneOffset;
                 long sunsetTimeLocal = sunsetTimeUTC + timeZoneOffset;
@@ -92,6 +98,8 @@ public class API {
 
                 String sunriseTime = dateFormat.format(sunriseDateLocal);
                 String sunsetTime = dateFormat.format(sunsetDateLocal);
+
+
 
                 // Convert temperature from Kelvin to Celsius
                 temp = temp - 273.15;
@@ -107,6 +115,7 @@ public class API {
                 // Populate the list with extracted data
                 weatherInfoList.add(cityName);
                 weatherInfoList.add(countryName);
+				weatherInfoList.add(localTime);
                 weatherInfoList.add(sunriseTime);
                 weatherInfoList.add(sunsetTime);
                 weatherInfoList.add(latitude.toString());
@@ -178,11 +187,15 @@ public class API {
 				forecastInfoList.add(countryName);
 				forecastInfoList.add(latitude.toString());
 				forecastInfoList.add(longitude.toString());
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date date = new Date();  
+				forecastInfoList.add(formatter.format(date).toString());
 
                 // Extract relevant data from JSON object
                 JSONArray forecastList = (JSONArray) jsonObject.get("list");
                 
                 for (int i = 0; i < forecastList.size(); i++) {
+					
 					JSONObject forecastObject = (JSONObject) forecastList.get(i);
                     String dateTime = (String) forecastObject.get("dt_txt");
                     JSONObject mainObject = (JSONObject) forecastObject.get("main");
@@ -219,9 +232,9 @@ public class API {
 
             }
 
-            // for (String info : forecastInfoList) {
-            //     System.out.println(info);
-            // }
+            for (String info : forecastInfoList) {
+                System.out.println(info);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
