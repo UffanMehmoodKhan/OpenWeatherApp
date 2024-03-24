@@ -1,5 +1,15 @@
 {
  "java.project.sourcePaths": [
   "src"
- ]
+],
+"java.project.referencedLibraries": {
+  "include": [
+    "lib/**/*.jar"
+  ],
+  "exclude": [
+    "lib/mssql-jdbc-12.6.1.jre11-javadoc.jar",
+    "lib/mssql-jdbc-12.6.1.jre8.jar",
+    "lib/mssql-jdbc-12.6.1.jre8-javadoc.jar"
+  ]
+}
 }
