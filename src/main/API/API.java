@@ -21,13 +21,11 @@ public class API {
     }
 
     // Method to get weather by city name
-    @SuppressWarnings("deprecation")
     public String[] getCurrentWeather(String cityName) {
         return getCurrentWeatherData("q=" + cityName);
     }
 
     // Method to get weather by coordinates
-    @SuppressWarnings("deprecation")
     public String[] getCurrentWeather(double lat, double lon) {
         return getCurrentWeatherData("lat=" + lat + "&lon=" + lon);
     }
@@ -243,13 +241,11 @@ public class API {
     }
 
 	// Method to get Air Quality by city name
-	@SuppressWarnings("deprecation")
 	public String[] getAirQuality(String cityName) {
 		return getAirQualityData("q=" + cityName);
 	}
 
 	// Method to get Air Quality by coordinates
-	@SuppressWarnings("deprecation")
 	public String[] getAirQuality(double lat, double lon) {
 		return getAirQualityData("lat=" + lat + "&lon=" + lon);
 	}
