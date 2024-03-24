@@ -23,6 +23,7 @@ public class SessionT implements Session {
 		System.out.println("This is the current API Key: " + OpenAI.returnKey());
 		OpenAI.getCurrentWeather(31.5497, 74.3436);
 		OpenAI.get5DayForecast("Lahore");
+		OpenAI.getAirQuality(31.5467, 74.3401);
 		
 		// all methods should be executed here as per user specs, with exception handling
 		// boolean status = true;

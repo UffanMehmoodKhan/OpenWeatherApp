@@ -118,9 +118,9 @@ public class API {
                 weatherInfoList.add(formattedMinTemp);
                 weatherInfoList.add(formattedMaxTemp);
             }
-			for (String info : weatherInfoList) {
-                System.out.println(info);
-            }
+			// for (String info : weatherInfoList) {
+            //     System.out.println(info);
+            // }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -194,8 +194,6 @@ public class API {
                     JSONObject weatherObject = (JSONObject) weatherArray.get(0);
                     String weather = (String) weatherObject.get("main");
                     String weatherDescription = (String) weatherObject.get("description");
-                    JSONObject windObject = (JSONObject) forecastObject.get("wind");
-                    Double windSpeed = (Double) windObject.get("speed");
 
 					
                     // Convert temperature from Kelvin to Celsius
@@ -217,20 +215,116 @@ public class API {
                     forecastInfoList.add(formattedMaxTemp);
                     forecastInfoList.add(weather);
                     forecastInfoList.add(weatherDescription);
-                    forecastInfoList.add(String.valueOf(windSpeed));
                 }
 
             }
 
-            for (String info : forecastInfoList) {
-                System.out.println(info);
-            }
+            // for (String info : forecastInfoList) {
+            //     System.out.println(info);
+            // }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return forecastInfoList.toArray(new String[0]);
     }
+
+	// Method to get Air Quality by city name
+	@SuppressWarnings("deprecation")
+	public String[] getAirQuality(String cityName) {
+		return getAirQualityData("q=" + cityName);
+	}
+
+	// Method to get Air Quality by coordinates
+	@SuppressWarnings("deprecation")
+	public String[] getAirQuality(double lat, double lon) {
+		return getAirQualityData("lat=" + lat + "&lon=" + lon);
+	}
+
+	// Private method to fetch Air Quality data from OpenWeatherMap API
+	@SuppressWarnings("deprecation")
+	private String[] getAirQualityData(String queryParameter) {
+		List<String> airQualityInfoList = new ArrayList<>();
+		try {
+			// Construct the URL for API request
+			URL url = new URL("https://api.openweathermap.org/data/2.5/air_pollution?" + queryParameter + "&appid=" + returnKey());
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("GET");
+			con.connect();
+
+			// Check the HTTP response code
+			int responseCode = con.getResponseCode();
+			if (responseCode != 200) {
+				throw new RuntimeException("Failed : HTTP error code : " + responseCode);
+			} else {
+				// Read the API response
+				StringBuilder informationString = new StringBuilder();
+				Scanner scanner = new Scanner(con.getInputStream());
+
+				while (scanner.hasNext()) {
+					informationString.append(scanner.nextLine());
+				}
+				scanner.close();
+
+				// Parse JSON response
+				JSONParser parser = new JSONParser();
+				JSONObject jsonObject = (JSONObject) parser.parse(informationString.toString());
+
+				// Extract relevant data from JSON object
+				JSONObject coordObject = (JSONObject) jsonObject.get("coord");
+				Double latitude = (Double) coordObject.get("lat");
+				Double longitude = (Double) coordObject.get("lon");
+				JSONArray listArray = (JSONArray) jsonObject.get("list");
+				JSONObject mainObject = (JSONObject) listArray.get(0);
+				long timestamp = (long) mainObject.get("dt");
+				JSONObject aqiObject = (JSONObject) mainObject.get("main");
+				Number aqi = (Number) aqiObject.get("aqi");
+				JSONObject componentsObject = (JSONObject) mainObject.get("components");
+
+				// Convert timestamp to local time
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				sdf.setTimeZone(TimeZone.getDefault()); // Set local timezone
+				String localTime = sdf.format(new Date(timestamp * 1000L));
+
+				// Extract air quality data
+				Double co = (Double) componentsObject.get("co");
+				Double no = (Double) componentsObject.get("no");
+				Double no2 = (Double) componentsObject.get("no2");
+				Double o3 = (Double) componentsObject.get("o3");
+				Double so2 = (Double) componentsObject.get("so2");
+				Double pm2_5 = (Double) componentsObject.get("pm2_5");
+				Double pm10 = (Double) componentsObject.get("pm10");
+				Double nh3 = (Double) componentsObject.get("nh3");
+
+
+				// Populate the list with extracted data
+				airQualityInfoList.add(latitude.toString());
+				airQualityInfoList.add(longitude.toString());
+				
+				airQualityInfoList.add(localTime);
+				Double aqiDouble = aqi.doubleValue();
+				airQualityInfoList.add(aqiDouble.toString());
+				airQualityInfoList.add(co + " µg/m³");
+				airQualityInfoList.add(no + " µg/m³");
+				airQualityInfoList.add(no2 + " µg/m³");
+				airQualityInfoList.add(o3 + " µg/m³");
+				airQualityInfoList.add(so2 + " µg/m³");
+				airQualityInfoList.add(pm2_5 + " µg/m³");
+				airQualityInfoList.add(pm10 + " µg/m³");
+				airQualityInfoList.add(nh3 + " µg/m³");
+			}
+
+			for (String info : airQualityInfoList) {
+				System.out.println(info);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return airQualityInfoList.toArray(new String[0]);
+	}
+
+	
 
     // Method to return the API key
     public String returnKey() {
