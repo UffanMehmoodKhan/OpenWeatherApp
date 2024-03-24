@@ -1,9 +1,10 @@
 package main.Session; 
 
 import main.API.API;
-
+import main.Database.DB;
+import main.Database.SQL;
 public interface Session { 
-    public static API APIInterface = new API(); 
+    public static API APIInterface = new API();  
     //------------------------
     public void getWelcomeScreen(); 
     //------------------------

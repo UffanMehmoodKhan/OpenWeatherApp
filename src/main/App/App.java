@@ -19,7 +19,8 @@ public class App{
 			session = new SessionDT(); 
 		}
     }
-	Session getSession() {
+	Session getSession()
+	{
         return session;
     }
 

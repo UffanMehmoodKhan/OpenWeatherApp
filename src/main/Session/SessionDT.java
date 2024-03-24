@@ -74,6 +74,7 @@ public class SessionDT implements Session {
         // API call will be made here
         for (int i = 0; i < count ; i++) {
             String[] weatherData = APIInterface.getWeather(dataarra[i]);
+
             arr[i] = weatherData;
         }
 
