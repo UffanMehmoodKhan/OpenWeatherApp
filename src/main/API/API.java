@@ -22,19 +22,19 @@ public class API {
 
     // Method to get weather by city name
     @SuppressWarnings("deprecation")
-    public String[] getWeather(String cityName) {
-        return getWeatherData("q=" + cityName);
+    public String[] getCurrentWeather(String cityName) {
+        return getCurrentWeatherData("q=" + cityName);
     }
 
     // Method to get weather by coordinates
     @SuppressWarnings("deprecation")
-    public String[] getWeather(double lat, double lon) {
-        return getWeatherData("lat=" + lat + "&lon=" + lon);
+    public String[] getCurrentWeather(double lat, double lon) {
+        return getCurrentWeatherData("lat=" + lat + "&lon=" + lon);
     }
 
     // Private method to fetch weather data from OpenWeatherMap API
     @SuppressWarnings("deprecation")
-    private String[] getWeatherData(String queryParameter) {
+    private String[] getCurrentWeatherData(String queryParameter) {
         List<String> weatherInfoList = new ArrayList<>();
         try {
             // Construct the URL for API request
@@ -42,7 +42,7 @@ public class API {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             con.connect();
-
+			
             // Check the HTTP response code
             int responseCode = con.getResponseCode();
             if (responseCode != 200) {
@@ -126,6 +126,110 @@ public class API {
             e.printStackTrace();
         }
         return weatherInfoList.toArray(new String[0]);
+    }
+
+	// Method to get 5-day weather by city name
+	public String[] get5DayForecast(String cityName){
+		return get5DayForecastData("q=" + cityName);
+	}
+
+	// Method to get 5-day weather by coordinates
+	public String[] get5DayForecast(double lat, double lon){
+		return get5DayForecastData("lat=" + lat + "&lon=" + lon);
+	}
+
+	// Method to get 5 day forcast data
+	@SuppressWarnings("deprecation")
+    private String[] get5DayForecastData(String queryParameter) {
+        List<String> forecastInfoList = new ArrayList<>();
+        try {
+            // Construct the URL for API request
+            URL url = new URL("https://api.openweathermap.org/data/2.5/forecast?" + queryParameter + "&appid=" + returnKey());
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.connect();
+
+            // Check the HTTP response code
+            int responseCode = con.getResponseCode();
+            if (responseCode != 200) {
+                throw new RuntimeException("Failed : HTTP error code : " + responseCode);
+            } else {
+                // Read the API response
+                StringBuilder informationString = new StringBuilder();
+                Scanner scanner = new Scanner(con.getInputStream());
+
+                while (scanner.hasNext()) {
+                    informationString.append(scanner.nextLine());
+                }
+                scanner.close();
+
+                // Parse JSON response
+                JSONParser parser = new JSONParser();
+                JSONObject jsonObject = (JSONObject) parser.parse(informationString.toString());
+
+				
+				String countryName = (String) jsonObject.get("country");
+				JSONObject cityObject = (JSONObject) jsonObject.get("city");
+				String cityName = (String) cityObject.get("name");
+				JSONObject coordObject = (JSONObject) cityObject.get("coord");
+				Double latitude = (Double) coordObject.get("lat");
+				Double longitude = (Double) coordObject.get("lon");
+				forecastInfoList.add(cityName);
+				forecastInfoList.add(countryName);
+				forecastInfoList.add(latitude.toString());
+				forecastInfoList.add(longitude.toString());
+
+                // Extract relevant data from JSON object
+                JSONArray forecastList = (JSONArray) jsonObject.get("list");
+                
+                for (int i = 0; i < forecastList.size(); i++) {
+					JSONObject forecastObject = (JSONObject) forecastList.get(i);
+                    String dateTime = (String) forecastObject.get("dt_txt");
+                    JSONObject mainObject = (JSONObject) forecastObject.get("main");
+                    Number temp = (Number) mainObject.get("temp");
+                    Number feelsLike = (Number) mainObject.get("feels_like");
+                    Number minTemp = (Number) mainObject.get("temp_min");
+                    Number maxTemp = (Number) mainObject.get("temp_max");
+                    JSONArray weatherArray = (JSONArray) forecastObject.get("weather");
+                    JSONObject weatherObject = (JSONObject) weatherArray.get(0);
+                    String weather = (String) weatherObject.get("main");
+                    String weatherDescription = (String) weatherObject.get("description");
+                    JSONObject windObject = (JSONObject) forecastObject.get("wind");
+                    Double windSpeed = (Double) windObject.get("speed");
+
+					
+                    // Convert temperature from Kelvin to Celsius
+                    Double tempCelsius = temp.doubleValue() - 273.15;
+                	Double feelsLikeCelsius = feelsLike.doubleValue() - 273.15;
+                	Double minTempCelsius = minTemp.doubleValue() - 273.15;
+                	Double maxTempCelsius = maxTemp.doubleValue() - 273.15;
+
+                    String formattedTemp = String.format("%.2f", tempCelsius);
+                    String formattedFeelsLike = String.format("%.2f", feelsLikeCelsius);
+                    String formattedMinTemp = String.format("%.2f", minTempCelsius);
+                    String formattedMaxTemp = String.format("%.2f", maxTempCelsius);
+
+                    // Populate the list with extracted data
+                    forecastInfoList.add(dateTime);
+                    forecastInfoList.add(formattedTemp);
+                    forecastInfoList.add(formattedFeelsLike);
+                    forecastInfoList.add(formattedMinTemp);
+                    forecastInfoList.add(formattedMaxTemp);
+                    forecastInfoList.add(weather);
+                    forecastInfoList.add(weatherDescription);
+                    forecastInfoList.add(String.valueOf(windSpeed));
+                }
+
+            }
+
+            for (String info : forecastInfoList) {
+                System.out.println(info);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return forecastInfoList.toArray(new String[0]);
     }
 
     // Method to return the API key
