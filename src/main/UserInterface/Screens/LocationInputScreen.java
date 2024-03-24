@@ -50,18 +50,34 @@ public class LocationInputScreen extends JFrame {
     }
 
     // ActionListener to handle Enter key press
-    private class EnterListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // Return the data
-            enteredLocations = new String[3];
-            for (int i = 0; i < 3; i++) {
-                enteredLocations[i] = locationFields[i].getText().trim();
+    // ActionListener to handle Enter key press
+private class EnterListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Count the number of sets with data
+        int setsWithData = 0;
+        for (int i = 0; i < 3; i++) {
+            if (!locationFields[i].getText().trim().isEmpty()) {
+                setsWithData++;
             }
-            dispose();
-            sessionInstance.getWeatherLocationProcess(enteredLocations); // temporary test call
-             // Close the current JFrame
-             return;
         }
+        
+        // Initialize the enteredLocations array with the correct size
+        enteredLocations = new String[setsWithData];
+
+        // Fill the enteredLocations array with non-empty values
+        int index = 0;
+        for (int i = 0; i < 3; i++) {
+            String location = locationFields[i].getText().trim();
+            if (!location.isEmpty()) {
+                enteredLocations[index++] = location;
+            }
+        }
+
+        // Pass the enteredLocations to the sessionInstance
+        dispose(); // Close the current JFrame
+        sessionInstance.getWeatherLocationProcess(enteredLocations);
     }
+}
+
 }

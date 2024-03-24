@@ -18,7 +18,7 @@ public class terminal implements UserInterface
     {
          //take 3 longitudes and 3 latitudes as input
         Scanner sc = new Scanner(System.in);
-        int[][] dataarr = new int[3][2];
+        double[][] dataarr = new double[3][2];
         for(int i = 0; i < 3; i++)
         {
             System.out.println("Enter the latitude of location " + (i+1));
@@ -38,7 +38,7 @@ public class terminal implements UserInterface
     }
 
     @Override
-    public void displayscreen(Session sessionInstance, String[] weatherData) {
+    public void displayscreen(Session sessionInstance, String[][]weatherData,int count) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'displayscreen'");
     }
