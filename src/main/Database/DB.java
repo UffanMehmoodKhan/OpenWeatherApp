@@ -1,4 +1,10 @@
 package main.Database;
 
-public interface DB {}
+public interface DB
+{
+    
+
+
+
+}
 
