@@ -1,6 +1,6 @@
 package main.Session; 
 
-import main.API.API; 
+import main.API.API;
 
 public interface Session { 
     public static API APIInterface = null; 

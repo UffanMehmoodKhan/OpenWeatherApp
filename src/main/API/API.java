@@ -1,16 +1,135 @@
 package main.API;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.net.*;
+import java.text.SimpleDateFormat;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import java.util.TimeZone;
+import java.util.Date;
+
 public class API {
-	private String API_Key;
 
-	public API(){
-		API_Key = "open_weather_api_key_fill";
-		System.out.println(API_Key);
-	}
+    // OpenWeatherMap API key
+    private String API_Key = "bc146deacea7f9cc88cdb8b6bbb5fef9";
 
-	public void returnKey(){
-		System.out.println(API_Key);
-	}
+    // Default constructor
+    public API() {
+    }
+
+    // Method to get weather by city name
+    @SuppressWarnings("deprecation")
+    public String[] getWeather(String cityName) {
+        return getWeatherData("q=" + cityName);
+    }
+
+    // Method to get weather by coordinates
+    @SuppressWarnings("deprecation")
+    public String[] getWeather(double lat, double lon) {
+        return getWeatherData("lat=" + lat + "&lon=" + lon);
+    }
+
+    // Private method to fetch weather data from OpenWeatherMap API
+    @SuppressWarnings("deprecation")
+    private String[] getWeatherData(String queryParameter) {
+        List<String> weatherInfoList = new ArrayList<>();
+        try {
+            // Construct the URL for API request
+            URL url = new URL("https://api.openweathermap.org/data/2.5/weather?" + queryParameter + "&appid=" + returnKey());
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.connect();
+
+            // Check the HTTP response code
+            int responseCode = con.getResponseCode();
+            if (responseCode != 200) {
+                throw new RuntimeException("Failed : HTTP error code : " + responseCode);
+            } else {
+                // Read the API response
+                StringBuilder informationString = new StringBuilder();
+                Scanner scanner = new Scanner(con.getInputStream());
+
+                while (scanner.hasNext()) {
+                    informationString.append(scanner.nextLine());
+                }
+                scanner.close();
+
+                // Parse JSON response
+                JSONParser parser = new JSONParser();
+                JSONObject jsonObject = (JSONObject) parser.parse(informationString.toString());
+
+                // Extract relevant data from JSON object
+                String cityName = (String) jsonObject.get("name");
+                long timeZoneOffset = (long) jsonObject.get("timezone");
+                JSONObject sysObject = (JSONObject) jsonObject.get("sys");
+                String countryName = (String) sysObject.get("country");
+                long sunriseTimeUTC = (long) sysObject.get("sunrise");
+                long sunsetTimeUTC = (long) sysObject.get("sunset");
+                JSONArray weatherArray = (JSONArray) jsonObject.get("weather");
+                JSONObject weatherObject = (JSONObject) weatherArray.get(0);
+                String weather = (String) weatherObject.get("main");
+                String weatherDescription = (String) weatherObject.get("description");
+                JSONObject coordObject = (JSONObject) jsonObject.get("coord");
+                Double latitude = (Double) coordObject.get("lat");
+                Double longitude = (Double) coordObject.get("lon");
+                JSONObject mainObject = (JSONObject) jsonObject.get("main");
+                Double temp = (Double) mainObject.get("temp");
+                Double feelsLike = (Double) mainObject.get("feels_like");
+                Double minTemp = (Double) mainObject.get("temp_min");
+                Double maxTemp = (Double) mainObject.get("temp_max");
+
+                // Convert time from UTC to local time
+                long sunriseTimeLocal = sunriseTimeUTC + timeZoneOffset;
+                long sunsetTimeLocal = sunsetTimeUTC + timeZoneOffset;
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Date sunriseDateLocal = new Date(sunriseTimeLocal * 1000);
+                Date sunsetDateLocal = new Date(sunsetTimeLocal * 1000);
+                dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+                String sunriseTime = dateFormat.format(sunriseDateLocal);
+                String sunsetTime = dateFormat.format(sunsetDateLocal);
+
+                // Convert temperature from Kelvin to Celsius
+                temp = temp - 273.15;
+                feelsLike = feelsLike - 273.15;
+                minTemp = minTemp - 273.15;
+                maxTemp = maxTemp - 273.15;
+
+                String formattedTemp = String.format("%.2f", temp);
+                String formattedFeelsLike = String.format("%.2f", feelsLike);
+                String formattedMinTemp = String.format("%.2f", minTemp);
+                String formattedMaxTemp = String.format("%.2f", maxTemp);
+
+                // Populate the list with extracted data
+                weatherInfoList.add(cityName);
+                weatherInfoList.add(countryName);
+                weatherInfoList.add(sunriseTime);
+                weatherInfoList.add(sunsetTime);
+                weatherInfoList.add(latitude.toString());
+                weatherInfoList.add(longitude.toString());
+                weatherInfoList.add(weather);
+                weatherInfoList.add(weatherDescription);
+                weatherInfoList.add(formattedTemp);
+                weatherInfoList.add(formattedFeelsLike);
+                weatherInfoList.add(formattedMinTemp);
+                weatherInfoList.add(formattedMaxTemp);
+            }
+			for (String info : weatherInfoList) {
+                System.out.println(info);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return weatherInfoList.toArray(new String[0]);
+    }
+
+    // Method to return the API key
+    public String returnKey() {
+        return (API_Key);
+    }
 }
-
-
