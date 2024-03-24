@@ -3,7 +3,8 @@ package main.UserInterface;
 import main.Session.Session;
 import main.UserInterface.Screens.welcomeScreen; 
 import main.UserInterface.Screens.lat_locInputScreen; 
-import main.UserInterface.Screens.LocationInputScreen; 
+import main.UserInterface.Screens.LocationInputScreen;
+import main.UserInterface.Screens.WeatherInfoDisplayScreen; 
 
 
 public class desktop implements UserInterface 
@@ -25,8 +26,7 @@ public class desktop implements UserInterface
     }
 
     @Override
-    public void displayscreen(Session sessionInstance) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'displayscreen'");
+    public void displayscreen(Session sessionInstance,String[]weatherarr) {
+        new WeatherInfoDisplayScreen(sessionInstance, weatherarr);
     } 
 } 

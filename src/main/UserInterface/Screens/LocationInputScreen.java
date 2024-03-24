@@ -58,8 +58,10 @@ public class LocationInputScreen extends JFrame {
             for (int i = 0; i < 3; i++) {
                 enteredLocations[i] = locationFields[i].getText().trim();
             }
-            sessionInstance.test(sessionInstance, enteredLocations); // temporary test call
-            dispose(); // Close the current JFrame
+            dispose();
+            sessionInstance.getWeatherLocationProcess(enteredLocations); // temporary test call
+             // Close the current JFrame
+             return;
         }
     }
 }

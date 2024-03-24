@@ -22,10 +22,7 @@ public class SessionDT implements Session {
     } 
     @Override
     public void test(Session sessionInstance,String[] a ) {
-        for (int i = 0; i < a.length; i++) {
-            System.out.println(a[i]);
-            System.out.println();
-        }
+       
     }
     @Override
     public void getWeatherLoc_LatInput(Session sessionInstance) {
@@ -35,12 +32,35 @@ public class SessionDT implements Session {
     public void getWeatherLoc_LatProcess(int [][] dataarr)
     {
         // this is where the data will be processed 
-        // the return type of this method is also subject to change
-        // after processing the data we will call UIinterface.displayscreen yet to be implemtned
+        // api call will be made here
+        String[] weatherData = {
+            "New York", "USA", "06:30 AM", "06:00 PM", "40.7128", "-74.0060",
+            "Sunny", "Clear sky", "25°C", "28°C", "30°C", "20°C"
+        };
+        displayscreen(this, weatherData);
     }
     @Override
     public void getWeatherLocationInput(Session sessionInstance) {
        UIInterface.locationInputScreen(sessionInstance);
+    }
+    @Override
+    public void getWeatherLocationProcess(String[] dataarra) {
+        
+        // will process the data and then call the display screen
+        
+        String[] weatherData = {
+            "New York", "USA", "06:30 AM", "06:00 PM", "40.7128", "-74.0060",
+            "Sunny", "Clear sky", "25°C", "28°C", "30°C", "20°C"
+        };
+        // Api call will be made here
+
+        this.displayscreen(this, weatherData);
+
+
+    }
+    @Override
+    public void displayscreen(Session sessionInstance,String[]weatherarr) {
+        UIInterface.displayscreen(sessionInstance,weatherarr);
     }
  
 }

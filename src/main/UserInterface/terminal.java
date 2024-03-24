@@ -26,6 +26,7 @@ public class terminal implements UserInterface
             System.out.println("Enter the longitude of location " + (i+1));
             dataarr[i][1] = sc.nextInt();
         }
+        sc.close();
         
         sessionInstance.getWeatherLoc_LatProcess(dataarr);  
     }
@@ -37,7 +38,7 @@ public class terminal implements UserInterface
     }
 
     @Override
-    public void displayscreen(Session sessionInstance) {
+    public void displayscreen(Session sessionInstance, String[] weatherData) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'displayscreen'");
     }

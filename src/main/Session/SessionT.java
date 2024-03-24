@@ -43,6 +43,19 @@ public class SessionT implements Session
     public void getWeatherLocationInput(Session sessionInstance) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getWeatherLocationInput'");
+    }
+
+    @Override
+    public void getWeatherLocationProcess(String[] dataarra) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getWeatherLocationProcess'");
+       // will process the data and then call the display screen
+    }
+
+    @Override
+    public void displayscreen(Session sessionInstance, String[] arr) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'displayscreen'");
     } 
 
 

@@ -67,8 +67,8 @@ public class lat_locInputScreen extends JFrame {
                     enteredData[i][1] = Integer.parseInt(longitudeFields[i].getText());
                 }
             }
-            //  sessionInstance.getWeatherLoc_LatProcess(enteredData); //// orignal call will be this 
-            //sessionInstance.test(sessionInstance, enteredData); // temporary test call
+              sessionInstance.getWeatherLoc_LatProcess(enteredData); //// orignal call will be this 
+            
             dispose(); // Close the current JFrame
         }
     }
