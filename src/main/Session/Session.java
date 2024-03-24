@@ -7,4 +7,5 @@ public interface Session {
 	
 	API OpenAI = new API();
 	public void printSessionType(UserInterface userInterface);
+}
 	
