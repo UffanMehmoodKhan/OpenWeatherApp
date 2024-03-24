@@ -9,7 +9,11 @@
   "exclude": [
     "lib/mssql-jdbc-12.6.1.jre11-javadoc.jar",
     "lib/mssql-jdbc-12.6.1.jre8.jar",
-    "lib/mssql-jdbc-12.6.1.jre8-javadoc.jar"
+    "lib/mssql-jdbc-12.6.1.jre8-javadoc.jar",
+    "lib/mssql-jdbc-12.6.1.jre11.jar",
+    "lib/enu/jars/mssql-jdbc-12.6.1.jre8.jar",
+    "lib/enu/jars/mssql-jdbc-12.6.1.jre8-javadoc.jar",
+    "lib/enu/jars/mssql-jdbc-12.6.1.jre11-javadoc.jar"
   ]
 }
 }
