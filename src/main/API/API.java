@@ -118,9 +118,10 @@ public class API {
                 weatherInfoList.add(formattedMinTemp);
                 weatherInfoList.add(formattedMaxTemp);
             }
-			for (String info : weatherInfoList) {
-                System.out.println(info);
-            }
+			// for (String info : weatherInfoList) {
+            //     System.out.println(info);
+            // }
+            // to display on the terminal
 
         } catch (Exception e) {
             e.printStackTrace();

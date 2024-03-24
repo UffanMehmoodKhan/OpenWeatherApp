@@ -33,10 +33,8 @@ public class SessionDT implements Session {
     {
         // this is where the data will be processed 
         // api call will be made here
-        String[] weatherData = {
-            "New York", "USA", "06:30 AM", "06:00 PM", "40.7128", "-74.0060",
-            "Sunny", "Clear sky", "25°C", "28°C", "30°C", "20°C"
-        };
+        String[] weatherData ;
+        weatherData = APIInterface.getWeather(0.0, 0.0); // Sample data
         displayscreen(this, weatherData);
     }
     @Override
@@ -48,12 +46,10 @@ public class SessionDT implements Session {
         
         // will process the data and then call the display screen
         
-        String[] weatherData = {
-            "New York", "USA", "06:30 AM", "06:00 PM", "40.7128", "-74.0060",
-            "Sunny", "Clear sky", "25°C", "28°C", "30°C", "20°C"
-        };
-        // Api call will be made here
-
+         String[] weatherData; 
+        // Api call 
+        weatherData = APIInterface.getWeather("Lahore");
+        // System.err.println("Data received from API: ");
         this.displayscreen(this, weatherData);
 
 

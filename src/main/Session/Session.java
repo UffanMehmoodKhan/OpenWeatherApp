@@ -3,7 +3,7 @@ package main.Session;
 import main.API.API;
 
 public interface Session { 
-    public static API APIInterface = null; 
+    public static API APIInterface = new API(); 
     //------------------------
     public void getWelcomeScreen(); 
     //------------------------
