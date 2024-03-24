@@ -51,8 +51,8 @@ public class API {
 				long timeZoneOffset = (long) jsonObject.get("timezone");
 				JSONObject sysObject = (JSONObject) jsonObject.get("sys");
 				String countryName = (String) sysObject.get("country");
-				long sunriseTime = (long) sysObject.get("sunrise");
-				long sunsetTime = (long) sysObject.get("sunset");
+				long sunriseTimeUTC = (long) sysObject.get("sunrise");
+				long sunsetTimeUTC = (long) sysObject.get("sunset");
 				JSONArray weatherArray = (JSONArray) jsonObject.get("weather");
 				JSONObject weatherObject = (JSONObject) weatherArray.get(0);
 				String weather = (String) weatherObject.get("main");
@@ -66,6 +66,31 @@ public class API {
 				Double minTemp = (Double) mainObject.get("temp_min");
 				Double maxTemp = (Double) mainObject.get("temp_max");
 
+				// Changing Time Format from UTC to Local
+
+				long sunriseTimeLocal = sunriseTimeUTC + timeZoneOffset;
+                long sunsetTimeLocal = sunsetTimeUTC + timeZoneOffset;
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                Date sunriseDateLocal = new Date(sunriseTimeLocal * 1000);  // Convert seconds to milliseconds
+                Date sunsetDateLocal = new Date(sunsetTimeLocal * 1000);  // Convert seconds to milliseconds
+                dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+                String sunriseTime = dateFormat.format(sunriseDateLocal);
+                String sunsetTime = dateFormat.format(sunsetDateLocal);
+
+				// Changing Temperature Format from Kelvin to Celcius
+
+				temp = temp - 273.15;
+				feelsLike = feelsLike - 273.15;
+				minTemp = minTemp - 273.15;
+				maxTemp = maxTemp - 273.15;
+
+				String formattedTemp = String.format("%.2f", temp);
+				String formattedFeelsLike = String.format("%.2f", feelsLike);
+				String formattedMinTemp = String.format("%.2f", minTemp);
+				String formattedMaxTemp = String.format("%.2f", maxTemp);
+
 
 				System.out.println("City: " + cityName);
 				System.out.println("Country: " + countryName);
@@ -75,10 +100,10 @@ public class API {
 				System.out.println("Longitude: " + longitude);
 				System.out.println("Weather: " + weather);
 				System.out.println("Weather Description: " + weatherDescription);
-				System.out.println("Temperature: " + temp);
-				System.out.println("Feels Like: " + feelsLike);
-				System.out.println("Minimum Temperature: " + minTemp);
-				System.out.println("Maximum Temperature: " + maxTemp);
+				System.out.println("Temperature: " + formattedTemp);
+				System.out.println("Feels Like: " + formattedFeelsLike);
+				System.out.println("Minimum Temperature: " + formattedMinTemp);
+				System.out.println("Maximum Temperature: " + formattedMaxTemp);
 
             }
 
