@@ -1,4 +1,4 @@
-package main.UserInterface;
+package main.UserInterface; 
 
 public interface UserInterface {
 
@@ -6,5 +6,3 @@ public interface UserInterface {
 	
 	//TODO: implement remaining methods
 }
-
-
