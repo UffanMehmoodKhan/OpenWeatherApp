@@ -26,7 +26,7 @@ public class desktop implements UserInterface
     }
 
     @Override
-    public void displayscreen(Session sessionInstance,String[]weatherarr) {
-        new WeatherInfoDisplayScreen(sessionInstance, weatherarr);
+    public void displayscreen(Session sessionInstance,String[][]weatherarr,int count) {
+        new WeatherInfoDisplayScreen(sessionInstance, weatherarr,count);
     } 
 } 

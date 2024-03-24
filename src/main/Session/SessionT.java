@@ -29,7 +29,7 @@ public class SessionT implements Session
     }
 
     @Override
-    public void getWeatherLoc_LatProcess(int [][] dataarr)
+    public void getWeatherLoc_LatProcess(double [][] dataarr)
     {
         //display the data in the terminal
         for(int i = 0; i < 3; i++)
@@ -53,7 +53,7 @@ public class SessionT implements Session
     }
 
     @Override
-    public void displayscreen(Session sessionInstance, String[] arr) {
+    public void displayscreen(Session sessionInstance, String[][] arr,int count) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'displayscreen'");
     } 

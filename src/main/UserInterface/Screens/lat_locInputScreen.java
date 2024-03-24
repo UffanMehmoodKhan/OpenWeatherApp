@@ -12,7 +12,7 @@ public class lat_locInputScreen extends JFrame {
     private JPanel inputPanel;
     private JTextField[] latitudeFields;
     private JTextField[] longitudeFields;
-    private int[][] enteredData;
+    private double[][] enteredData; // Modified to double[][]
     Session sessionInstance;
 
     public lat_locInputScreen(Session SI) {
@@ -56,22 +56,37 @@ public class lat_locInputScreen extends JFrame {
     }
 
     // ActionListener to handle Enter key press
-    private class EnterListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // Return the data
-            enteredData = new int[3][2];
-            for (int i = 0; i < 3; i++) {
-                if (!latitudeFields[i].getText().isEmpty() && !longitudeFields[i].getText().isEmpty()) {
-                    enteredData[i][0] = Integer.parseInt(latitudeFields[i].getText());
-                    enteredData[i][1] = Integer.parseInt(longitudeFields[i].getText());
-                }
+    // ActionListener to handle Enter key press
+private class EnterListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Count the number of sets with data
+        int setsWithData = 0;
+        for (int i = 0; i < 3; i++) {
+            if (!latitudeFields[i].getText().isEmpty() && !longitudeFields[i].getText().isEmpty()) {
+                setsWithData++;
             }
-              sessionInstance.getWeatherLoc_LatProcess(enteredData); //// orignal call will be this 
-            
-            dispose(); // Close the current JFrame
         }
-    }
+        
+        // Initialize the enteredData array with the correct size
+        enteredData = new double[setsWithData][2];
 
-   
+        // Fill the enteredData array with non-zero values
+        int index = 0;
+        for (int i = 0; i < 3; i++) {
+            if (!latitudeFields[i].getText().isEmpty() && !longitudeFields[i].getText().isEmpty()) {
+                enteredData[index][0] = Double.parseDouble(latitudeFields[i].getText());
+                enteredData[index][1] = Double.parseDouble(longitudeFields[i].getText());
+                index++;
+            }
+        }
+
+        // Pass the enteredData to the sessionInstance
+        sessionInstance.getWeatherLoc_LatProcess(enteredData);
+        
+        // Close the current JFrame
+        dispose();
+    }
+}
+
 }
