@@ -54,20 +54,22 @@ public class WeatherInfoDisplayScreen extends JFrame {
     }
 
     // Create a weather panel for a location
-    private JPanel createWeatherPanel(String[] locationData) {
-        JPanel weatherPanel = new JPanel(new GridLayout(13, 2));
-        weatherPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+private JPanel createWeatherPanel(String[] locationData) {
+    JPanel weatherPanel = new JPanel(new GridLayout(14, 2)); // Increase the row count for the timestamp
+    weatherPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        String[] labels = {"City Name:", "Country Name:", "Sunrise Time:", "Sunset Time:", "Latitude:", "Longitude:",
-                "Weather:", "Weather Description:", "Temperature:", "Feels Like:", "Max Temperature:", "Min Temperature:"};
-        for (int i = 0; i < labels.length; i++) {
-            JLabel label = new JLabel(labels[i]);
-            JLabel value = new JLabel(locationData[i]);
-            weatherPanel.add(label);
-            weatherPanel.add(value);
-        }
-        return weatherPanel;
+    String[] labels = {"City Name:", "Country Name:", "Timestamp:", "Sunrise Time:", "Sunset Time:", "Latitude:", "Longitude:",
+            "Weather:", "Weather Description:", "Temperature:", "Feels Like:", "Max Temperature:", "Min Temperature:"}; // Add the timestamp label
+    for (int i = 0; i < labels.length; i++) {
+        JLabel label = new JLabel(labels[i]);
+        JLabel value = new JLabel(locationData[i]);
+        weatherPanel.add(label);
+        weatherPanel.add(value);
     }
+    return weatherPanel;
+}
+
+    
 
     // ActionListener for return button
     private class ReturnButtonListener implements ActionListener {
