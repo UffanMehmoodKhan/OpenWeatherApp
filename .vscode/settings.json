@@ -1,5 +1,11 @@
 {
  "java.project.sourcePaths": [
-  "src"
+  "src/"
+  
+ ],
+ "java.project.referencedLibraries": [
+  "lib/**/*.jar",
+  "e:\\projects\\java\\json-simple-1.1.1.jar"
  ]
 }
+
