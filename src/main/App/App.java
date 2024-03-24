@@ -4,8 +4,6 @@ import main.Session.Session;
 import main.Session.SessionT;
 import main.Session.SessionDT;
 
-
-
 public class App{
 
 	Session session;
