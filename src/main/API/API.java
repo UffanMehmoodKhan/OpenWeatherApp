@@ -1,12 +1,13 @@
 package main.API;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.net.*;
 import java.text.SimpleDateFormat;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import java.util.Scanner;
 import java.util.TimeZone;
 import java.util.Date;
 
@@ -19,7 +20,8 @@ public class API {
     }
 
     @SuppressWarnings("deprecation")
-    public void testAPI(){
+    public String[] testAPI(){
+		List<String> weatherInfoList = new ArrayList<>();
         try {
             URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=Lahore&appid=" + returnKey());
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -91,25 +93,42 @@ public class API {
 				String formattedMinTemp = String.format("%.2f", minTemp);
 				String formattedMaxTemp = String.format("%.2f", maxTemp);
 
+				// Add information to Array
 
-				System.out.println("City: " + cityName);
-				System.out.println("Country: " + countryName);
-				System.out.println("Sunrise Time: " + sunriseTime);
-				System.out.println("Sunset Time: " + sunsetTime);
-				System.out.println("Latitude: " + latitude);
-				System.out.println("Longitude: " + longitude);
-				System.out.println("Weather: " + weather);
-				System.out.println("Weather Description: " + weatherDescription);
-				System.out.println("Temperature: " + formattedTemp);
-				System.out.println("Feels Like: " + formattedFeelsLike);
-				System.out.println("Minimum Temperature: " + formattedMinTemp);
-				System.out.println("Maximum Temperature: " + formattedMaxTemp);
+				weatherInfoList.add(cityName);
+                weatherInfoList.add(countryName);
+                weatherInfoList.add(sunriseTime);
+                weatherInfoList.add(sunsetTime);
+                weatherInfoList.add(latitude.toString());
+                weatherInfoList.add(longitude.toString());
+                weatherInfoList.add(weather);
+                weatherInfoList.add(weatherDescription);
+                weatherInfoList.add(formattedTemp);
+                weatherInfoList.add(formattedFeelsLike);
+                weatherInfoList.add(formattedMinTemp);
+                weatherInfoList.add(formattedMaxTemp);
 
+
+
+				// System.out.println("City: " + cityName);
+				// System.out.println("Country: " + countryName);
+				// System.out.println("Sunrise Time: " + sunriseTime);
+				// System.out.println("Sunset Time: " + sunsetTime);
+				// System.out.println("Latitude: " + latitude);
+				// System.out.println("Longitude: " + longitude);
+				// System.out.println("Weather: " + weather);
+				// System.out.println("Weather Description: " + weatherDescription);
+				// System.out.println("Temperature: " + formattedTemp);
+				// System.out.println("Feels Like: " + formattedFeelsLike);
+				// System.out.println("Minimum Temperature: " + formattedMinTemp);
+				// System.out.println("Maximum Temperature: " + formattedMaxTemp);
+				
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+		return weatherInfoList.toArray(new String[0]);
     }
 
     public String returnKey(){
