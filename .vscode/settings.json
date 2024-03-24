@@ -7,7 +7,9 @@
     "lib/**/*.jar",
     "e:\\projects\\java\\json-simple-1.1.1.jar",
     "d:\\json-simple-1.1.1.jar",
-    "d:\\org.json-chargebee-1.0.jar"
+    "d:\\org.json-chargebee-1.0.jar",
+    "Dependecies/org.json-chargebee-1.0.jar",
+    "Dependecies/json-simple-1.1.1.jar"
 ]
 }
 
