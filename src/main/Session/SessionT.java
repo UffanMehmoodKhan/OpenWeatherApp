@@ -1,4 +1,6 @@
 package main.Session; 
+import main.Database.SQL;
+import main.Database.txt;
 import main.UserInterface.UserInterface; 
 import main.UserInterface.terminal; 
 public class SessionT implements Session 
@@ -8,6 +10,8 @@ public class SessionT implements Session
     { 
         System.out.println("Terminal is Operational"); 
         this.getWelcomeScreen();
+        System.out.println("Terminal is Operational");
+		OW_DB[0] = new SQL(); OW_DB[1] = new txt();
     } 
 
     @Override 
