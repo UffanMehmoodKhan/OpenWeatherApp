@@ -26,13 +26,11 @@ public class SQL implements DB
 		}
 		return conn;
 	}
-	public void insertWeather(String[] data) 
+	public void Insert(String query,Connection conn,String[] data)
 	{
-		Connection conn = connect();
 		try
 		{
 			//changing expeccted here	
-			String query = "INSERT INTO weather (city, country, sunrise, sunset, latitude, longitude, weather, weather_description, formatted_temp, feel_like, min_temp, max_temp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement statement = conn.prepareStatement(query);
 			for(int i=0; i<data.length; i++)
 			{
@@ -58,20 +56,26 @@ public class SQL implements DB
 				System.out.println(e.getMessage());
 			}
 		}
-		
-	}	
-	
-	public void insertWeatherInfo(String[] data)
-	{
-
 	}
     public void insertForecastInfo(String[] data)
 	{
+		Connection conn = connect();
+		String query = "INSERT INTO forecast (city, country, sunrise, sunset, latitude, longitude, weather, weather_description, formatted_temp, feel_like, min_temp, max_temp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+		Insert(query,conn,data);
 
+	}
+	public void insertWeatherInfo(String[] data)
+	{
+		Connection conn = connect();
+		String query = "INSERT INTO weather (city, country, sunrise, sunset, latitude, longitude, weather, weather_description, formatted_temp, feel_like, min_temp, max_temp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+		Insert(query,conn,data);
+		
 	}
     public void insertAirInfo(String[] data)
 	{
-
+		Connection conn = connect();
+		String query = "INSERT INTO airinfo (city, country, sunrise, sunset, latitude, longitude, weather, weather_description, formatted_temp, feel_like, min_temp, max_temp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+		Insert(query,conn,data);
 	}
 
     //
