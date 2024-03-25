@@ -103,7 +103,7 @@ public class SessionDT implements Session {
         System.out.println(count);
         String[][] arr = new String[count][];
         for (int x = 0; x < count; x++) {   
-            String[] airPollutionData = APIInterface.getAirQuality(50.12,0.12);
+            String[] airPollutionData = APIInterface.getAirQuality(dataarr[x][0],dataarr[x][1]);
             arr[x] = airPollutionData;
         }
         for (int i = 0; i < count; i++) {
@@ -115,21 +115,21 @@ public class SessionDT implements Session {
         this.displayAirPollutionScreen(this, arr, count);
     }
 
-    @Override
-    public void getAirPollutionLocationProcess(String [] dataarr) {
+//     @Override
+//     public void getAirPollutionLocationProcess(String [] dataarr) {
     
-        if (dataarr == null || dataarr.length == 0) {
-            // Handle null or empty input array
-            return;
-        }
+//         if (dataarr == null || dataarr.length == 0) {
+//             // Handle null or empty input array
+//             return;
+//         }
 
-        int count = dataarr.length;
+//         int count = dataarr.length;
       
-        String[][] arr = new String[count][];
-        for (int x = 0; x < count; x++) {   
-            String[] airPollutionData = APIInterface.getAirQuality(dataarr[x]);
-            arr[x] = airPollutionData;
-        }
-        this.displayAirPollutionScreen(this, arr, count);
-}
+//         String[][] arr = new String[count][];
+//         for (int x = 0; x < count; x++) {   
+//             String[] airPollutionData = APIInterface.getAirQuality(dataarr[x]);
+//             arr[x] = airPollutionData;
+//         }
+//         this.displayAirPollutionScreen(this, arr, count);
+// }
 } 

@@ -20,7 +20,7 @@ public interface Session {
     public void displayAirPollutionScreen(Session sessionInstance,String[][]arr,int count);
     //------------------------
     public void getAirPollutionLoc_LatProcess(double[][] dataarr);
-    public void getAirPollutionLocationProcess(String [] dataarr);
+    
     
 
     //Methods for API calls ----> made to DB first ----> then to API calls ----> then back ----------------< 

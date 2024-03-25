@@ -71,11 +71,7 @@ public class SessionT implements Session
         throw new UnsupportedOperationException("Unimplemented method 'displayAirPollutionScreen'");
     }
 
-    @Override
-    public void getAirPollutionLocationProcess(String[] dataarr) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAirPollutionLocationProcess'");
-    } 
+   
 
 
     } 
