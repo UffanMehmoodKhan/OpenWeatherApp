@@ -1,12 +1,30 @@
 package main.Database;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class txt implements DB
 {
 	public void insertWeatherInfo(String[] data)
 	{
-
+      File f1=new File("weather.txt");
+	  try{
+		FileWriter fw1=new FileWriter("weather.txt");
+		for(int i=0;i<data.length;i++){
+		fw1.write(data[i]);
+		fw1.write(" ");
 	}
-    public void insertForecastInfo(String[] data)
+	//fw1.flush();
+	//fw1.close();
+	  }
+	  catch(IOException e){
+		e.getMessage();
+	  }
+	}
+
+	
+	public void insertForecastInfo(String[] data)
 	{
 
 	}
@@ -14,52 +32,18 @@ public class txt implements DB
 	{
 
 	}
-
-    //
-    public String retrieveWeatherInfo(double lat,double lon)
+    public void retrieveWeatherInfo(String[] data)
 	{
 
 	}
-    public String retrieveWeatherInfo(String city,String country)
+    public void retrieveForecastInfo(String[] data)
 	{
 
 	}
-
-    public String retrieveForecastInfo(double lat,double lon)
-	{
-
-	}
-    public String retrieveForecastInfo(String city,String country)
-	{
-
-	}
-
-    public String retrieveAirInfo(double lat,double lon)
-	{
-
-	}
-
-
-    //Session methods
-    public String GetWeather(double lat,double lon)
-	{
-
-	}
-    public String GetWeather(String city,String country)
-	{
-
-	}
-    public String GetForecast(double lat,double  lon)
-	{
-
-	}
-    public String GetForecast(String city,String country)
-	{
-
-	}
-    public String GetAirPoll(double lat,double lon)
+    public void retrieveAirInfo(String[] data)
 	{
 		
 	}
+	
 
 }
