@@ -3,10 +3,10 @@ package main.Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+//import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.sql.Connection; 
+//import java.sql.Connection; 
 
 public class SQL implements DB
 {
@@ -79,50 +79,60 @@ public class SQL implements DB
 	}
 
     //
-    public String retrieveWeatherInfo(double lat,double lon)
+    public String[] retrieveWeatherInfo(double lat,double lon)
 	{
-
+		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
+		return data;
 	}
-    public String retrieveWeatherInfo(String city,String country)
+    public String[] retrieveWeatherInfo(String city)
 	{
-
-	}
-
-    public String retrieveForecastInfo(double lat,double lon)
-	{
-
-	}
-    public String retrieveForecastInfo(String city,String country)
-	{
-
+		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
+		return data;
 	}
 
-    public String retrieveAirInfo(double lat,double lon)
+    public String[] retrieveForecastInfo(double lat,double lon)
 	{
+		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
+		return data;
+	}
+    public String[] retrieveForecastInfo(String city)
+	{
+		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
+		return data;
+	}
 
+    public String[] retrieveAirInfo(double lat,double lon)
+	{
+		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
+		return data;
 	}
 
 
     //Session methods
-    public String GetWeather(double lat,double lon)
+    public String[] GetWeather(double lat,double lon)
 	{
-
+		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
+		return data;
 	}
-    public String GetWeather(String city,String country)
+    public String[] GetWeather(String city)
 	{
-
+		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
+		return data;
 	}
-    public String GetForecast(double lat,double  lon)
+    public String[] GetForecast(double lat,double  lon)
 	{
-
+		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
+		return data;
 	}
-    public String GetForecast(String city,String country)
+    public String[] GetForecast(String city)
 	{
-
+		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
+		return data;
 	}
-    public String GetAirPoll(double lat,double lon)
+    public String[] GetAirPoll(double lat,double lon)
 	{
-		
+		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
+		return data;
 	}
 	public static void main(String[] args)
 	{
