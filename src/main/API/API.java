@@ -39,11 +39,6 @@ public class API {
 	}
 
 
-	// Method to get Air Quality by city name
-	public String[] getAirQuality(String cityName) {
-		return airPoll.getAirQualityData("q=" + cityName, API_Key);
-	}
-
 	// Method to get Air Quality by coordinates
 	public String[] getAirQuality(double lat, double lon) {
 		return airPoll.getAirQualityData("lat=" + lat + "&lon=" + lon, API_Key);
