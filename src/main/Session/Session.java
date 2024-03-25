@@ -1,18 +1,11 @@
-package main.Session;
+package main.Session; 
 
-import main.UserInterface.UserInterface;
-import main.API.API;
+import main.API.API; 
 
+public interface Session { 
+    public static API APIInterface = null; 
+    public void getWelcomeScreen(); 
+    public void process(); 
+    //Methods for API calls ----> made to DB first ----> then to API calls ----> then back ----------------< 
 
-
-public class Session {
-	UserInterface UI = null;
-	
-
-	public Session(String UI_type){
-		System.out.println("Session Started!");
-		UI = new UserInterface(UI_type);
-		
-	}
-
-}
+} 
