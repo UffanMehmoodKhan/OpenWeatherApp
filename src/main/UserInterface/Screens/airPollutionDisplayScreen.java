@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WeatherInfoDisplayScreen extends JFrame {
+public class airPollutionDisplayScreen extends JFrame {
     Session sessionInstance;
     private JPanel cardPanel;
     private CardLayout cardLayout;
@@ -15,9 +15,9 @@ public class WeatherInfoDisplayScreen extends JFrame {
     private JButton nextLocationButton;
     private int currentLocationIndex = 0;
 
-    public WeatherInfoDisplayScreen(Session Si, String[][] weatherData, int noOfLocations) {
+    public airPollutionDisplayScreen(Session Si, String[][] pollutionData, int noOfLocations) {
         this.sessionInstance = Si;
-        setTitle("Weather Information");
+        setTitle("Air Pollution Information");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 500);
         setLocationRelativeTo(null);
@@ -35,10 +35,10 @@ public class WeatherInfoDisplayScreen extends JFrame {
         buttonPanel.add(returnButton);
         add(buttonPanel, BorderLayout.NORTH);
 
-        // Populate card panel with weather data panels
+        // Populate card panel with air pollution data panels
         for (int locIndex = 0; locIndex < noOfLocations; locIndex++) {
-            JPanel weatherPanel = createWeatherPanel(weatherData[locIndex]);
-            cardPanel.add(weatherPanel, "Location " + (locIndex + 1));
+            JPanel pollutionPanel = createPollutionPanel(pollutionData[locIndex]);
+            cardPanel.add(pollutionPanel, "Location " + (locIndex + 1));
         }
 
         // Add next location button if noOfLocations is greater than 1
@@ -53,23 +53,40 @@ public class WeatherInfoDisplayScreen extends JFrame {
         setVisible(true);
     }
 
-    // Create a weather panel for a location
-    private JPanel createWeatherPanel(String[] locationData) {
-    JPanel weatherPanel = new JPanel(new GridLayout(14, 2)); // Increase the row count for the timestamp
-    weatherPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+    // Create an air pollution panel for a location
+private JPanel createPollutionPanel(String[] locationData) {
+    JPanel pollutionPanel = new JPanel(new GridLayout(14, 2)); // Adjust as per your data structure
+    pollutionPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-    String[] labels = {"City Name:", "Country Name:", "Timestamp:", "Sunrise Time:", "Sunset Time:", "Latitude:", "Longitude:",
-            "Weather:", "Weather Description:", "Temperature:", "Feels Like:", "Max Temperature:", "Min Temperature:"}; // Add the timestamp label
+    String[] labels = {"Latitude:", "Longitude:", "Local Time:", "AQI Value:", "CO Value:", "NO Value:", "NO2 Value:",
+            "O3 Value:", "SO2 Value:", "PM2.5 Value:", "PM10 Value:", "NH3 Value:"}; // Field names from air pollution class
     for (int i = 0; i < labels.length; i++) {
         JLabel label = new JLabel(labels[i]);
-        JLabel value = new JLabel(locationData[i]);
-        weatherPanel.add(label);
-        weatherPanel.add(value);
+        JLabel value = new JLabel(parseNumericValue(locationData[i])); // Parse the numeric value
+        pollutionPanel.add(label);
+        pollutionPanel.add(value);
     }
-    return weatherPanel;
+    return pollutionPanel;
 }
 
-    
+// Parse numeric value from string and return as string
+private String parseNumericValue(String value) {
+    try {
+        // Try parsing as Double first
+        Double doubleValue = Double.parseDouble(value);
+        return String.valueOf(doubleValue);
+    } catch (NumberFormatException e) {
+        // If parsing as Double fails, try parsing as Long
+        try {
+            Long longValue = Long.parseLong(value);
+            return String.valueOf(longValue);
+        } catch (NumberFormatException ex) {
+            // If parsing as Long also fails, return the original string
+            return value;
+        }
+    }
+}
+
 
     // ActionListener for return button
     private class ReturnButtonListener implements ActionListener {

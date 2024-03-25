@@ -10,11 +10,12 @@ public class terminal implements UserInterface
     { 
         System.out.println("Welcome to the Weather App");
         System.out.println("Please enter the location and latitude of the place you want to know the weather of");
-        sessionInstance.getWeatherLoc_LatInput(sessionInstance);
+        // complete if else will be implemtned 
+        // sessionInstance.getLoc_LatInpu(sessionInstance,0);
     }
 
     @Override
-    public void lat_locInputScreen(Session sessionInstance) 
+    public void lat_locInputScreen(Session sessionInstance,int choice) 
     {
          //take 3 longitudes and 3 latitudes as input
         Scanner sc = new Scanner(System.in);
@@ -41,6 +42,11 @@ public class terminal implements UserInterface
     public void displayscreen(Session sessionInstance, String[][]weatherData,int count) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'displayscreen'");
+    }
+    @Override
+    public void displayAirPollutionScreen(Session sessionInstance, String[][] arr, int count) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'displayAirPollutionScreen'");
     }
     
     
