@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public class welcomeScreen extends JFrame implements ActionListener { 
     Session sessionInstance;
     private JButton[] buttons; 
-    private String[] buttonLabels = {"Check Weather Via longitude,Latitude", "Check Weather by Location", "Button 3", "Button 4", "Button 5", "Button 6"}; 
+    private String[] buttonLabels = {"Check Weather Via longitude,Latitude", "Check Weather by Location", "check AirQuality by Lon,Lat", "Button 4", "Button 5", "Button 6"}; 
     
     public welcomeScreen(Session SI) { 
         sessionInstance = SI;
@@ -57,7 +57,7 @@ public class welcomeScreen extends JFrame implements ActionListener {
             if (e.getSource() == buttons[0]) { 
                 // Close the welcome screen
                 dispose(); // Close the current JFrame
-                sessionInstance.getWeatherLoc_LatInput(sessionInstance);
+                sessionInstance.getLoc_LatInpu(sessionInstance,1);
                 return;
             }
             else if (e.getSource() == buttons[1]) {
@@ -65,6 +65,21 @@ public class welcomeScreen extends JFrame implements ActionListener {
                 sessionInstance.getWeatherLocationInput(sessionInstance);
                 return;
             } 
+            else if (e.getSource() == buttons[2]) { 
+                dispose();
+                sessionInstance.getLoc_LatInpu(sessionInstance,2);
+                return;
+            } 
+            else if (e.getSource() == buttons[3]) { 
+                // Handle button 4 click 
+            } 
+            else if (e.getSource() == buttons[4]) { 
+                // Handle button 5 click 
+            } 
+            else if (e.getSource() == buttons[5]) { 
+                // Handle button 6 click
+                
+            }
         } 
     } 
 } 

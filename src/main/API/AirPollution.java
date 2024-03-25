@@ -59,7 +59,7 @@ public class AirPollution {
 
 				// Extract air quality data
 				Double co = (Double) componentsObject.get("co");
-				Double no = (Double) componentsObject.get("no");
+				Long no = (Long) componentsObject.get("no");
 				Double no2 = (Double) componentsObject.get("no2");
 				Double o3 = (Double) componentsObject.get("o3");
 				Double so2 = (Double) componentsObject.get("so2");
