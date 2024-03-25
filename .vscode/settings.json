@@ -9,7 +9,23 @@
   "exclude": [
     "lib/mssql-jdbc-12.6.1.jre11-javadoc.jar",
     "lib/mssql-jdbc-12.6.1.jre8.jar",
-    "lib/mssql-jdbc-12.6.1.jre8-javadoc.jar"
+    "lib/mssql-jdbc-12.6.1.jre8-javadoc.jar",
+    "lib/mssql-jdbc-12.6.1.jre11.jar",
+    "lib/enu/jars/mssql-jdbc-12.6.1.jre8.jar",
+    "lib/enu/jars/mssql-jdbc-12.6.1.jre8-javadoc.jar",
+    "lib/enu/jars/mssql-jdbc-12.6.1.jre11-javadoc.jar"
   ]
 }
+  "src/"
+  
+ ],
+ "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "e:\\projects\\java\\json-simple-1.1.1.jar",
+    "d:\\json-simple-1.1.1.jar",
+    "d:\\org.json-chargebee-1.0.jar",
+    "Dependecies/org.json-chargebee-1.0.jar",
+    "Dependecies/json-simple-1.1.1.jar"
+]
 }
+

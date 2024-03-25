@@ -1,39 +1,60 @@
 package main.API;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.io.IOException;
 
-public class API {
-	private String API_Key;
-private HttpResponse<String> response ;
 
-	public API(double latitude, double longitude){
-			             String apiKey = "abd8b18b14cccdad663c3f5e6c462ab0";
-//        double latitude = 32.166351;
-//        double longitude = 74.195900;
+public class API { 
 
-       String url = "https://api.openweathermap.org/data/2.5/weather"
-               + "?lat=" + latitude
-               + "&lon=" + longitude
-               + "&appid=" + apiKey;
+    // OpenWeatherMap API key
+    private String API_Key = "bc146deacea7f9cc88cdb8b6bbb5fef9";
 
-       HttpRequest request = HttpRequest.newBuilder()
-               .uri(URI.create(url))
-               .GET()
-               .build();
+    //WeatherMap API key
+    Weather weather = new Weather();
+    //ForecastMap API key
+    Forecast forecast = new Forecast();
+    //AirPollution API key
+    AirPollution airPoll = new AirPollution();
 
-       try {
-           response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-             System.out.println(response.body());
-       } catch (IOException | InterruptedException e) {
-           e.printStackTrace();
-       }
+    // Default constructor
+    public API() {}
+
+    //Method to get weather by city name
+    public String[] getCurrentWeather(String cityName) {
+        return weather.getCurrentWeatherData("q=" + cityName, API_Key);
+    }
+
+    // Method to get weather by coordinates
+    public String[] getCurrentWeather(double lat, double lon) {
+        return weather.getCurrentWeatherData("lat=" + lat + "&lon=" + lon, API_Key);
+    }
+
+    
+
+	// Method to get 5-day weather by city name
+	public String[] get5DayForecast(String cityName){
+		return forecast.get5DayForecastData("q=" + cityName, API_Key);
 	}
-	// public void returnKey(){
-	// 	System.out.println(API_Key);
-	// }
+
+	// Method to get 5-day weather by coordinates
+	public String[] get5DayForecast(double lat, double lon){
+		return forecast.get5DayForecastData("lat=" + lat + "&lon=" + lon, API_Key);
+	}
+
+
+	// Method to get Air Quality by city name
+	public String[] getAirQuality(String cityName) {
+		return airPoll.getAirQualityData("q=" + cityName, API_Key);
+	}
+
+	// Method to get Air Quality by coordinates
+	public String[] getAirQuality(double lat, double lon) {
+		return airPoll.getAirQualityData("lat=" + lat + "&lon=" + lon, API_Key);
+	}
+
+	
+
+	
+
+    // Method to return the API key
+    public String returnKey() {
+        return (API_Key);
+    }
 }
-
-
