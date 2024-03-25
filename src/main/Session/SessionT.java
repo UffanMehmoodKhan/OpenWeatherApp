@@ -27,11 +27,10 @@ public class SessionT implements Session
         throw new UnsupportedOperationException("Unimplemented method 'test'");
     }
     @Override
-    public void getWeatherLoc_LatInput(Session sessionInstance) 
+    public void getLoc_LatInpu(Session sessionInstance, int choice) 
     {
-        UIInterface.lat_locInputScreen(sessionInstance);
+        UIInterface.lat_locInputScreen(sessionInstance, choice);
     }
-
     @Override
     public void getWeatherLoc_LatProcess(double [][] dataarr)
     {
@@ -57,10 +56,26 @@ public class SessionT implements Session
     }
 
     @Override
-    public void displayscreen(Session sessionInstance, String[][] arr,int count) {
+    public void displayWeatherscreen(Session sessionInstance, String[][] arr,int count) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'displayscreen'");
-    } 
+    }
+
+   
+
+    @Override
+    public void getAirPollutionLoc_LatProcess(double[][] dataarr) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAirPollutionLoc_LatProcess'");
+    }
+
+    @Override
+    public void displayAirPollutionScreen(Session sessionInstance, String[][] arr, int count) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'displayAirPollutionScreen'");
+    }
+
+   
 
 
     } 

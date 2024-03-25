@@ -14,9 +14,11 @@ public class lat_locInputScreen extends JFrame {
     private JTextField[] longitudeFields;
     private double[][] enteredData; // Modified to double[][]
     Session sessionInstance;
+    private int choice =0;
 
-    public lat_locInputScreen(Session SI) {
+    public lat_locInputScreen(Session SI,int choice) {
         this.sessionInstance = SI;
+        this.choice = choice;
         setTitle("Weather App - Location Input");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 500); // Set size to width 700 and height 500
@@ -82,8 +84,13 @@ private class EnterListener implements ActionListener {
         }
 
         // Pass the enteredData to the sessionInstance
-        sessionInstance.getWeatherLoc_LatProcess(enteredData);
-        
+        if (choice == 1)
+        {sessionInstance.getWeatherLoc_LatProcess(enteredData);
+        }
+        else if (choice == 2)
+        {
+            sessionInstance.getAirPollutionLoc_LatProcess(enteredData);
+        }
         // Close the current JFrame
         dispose();
     }

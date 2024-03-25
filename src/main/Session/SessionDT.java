@@ -29,8 +29,8 @@ public class SessionDT implements Session {
     }
 
     @Override
-    public void getWeatherLoc_LatInput(Session sessionInstance) {
-        UIInterface.lat_locInputScreen(sessionInstance);
+    public void getLoc_LatInpu(Session sessionInstance, int choice) {
+        UIInterface.lat_locInputScreen(sessionInstance, choice);
     }
 
     @Override
@@ -51,10 +51,10 @@ public class SessionDT implements Session {
 
         String[][] arr = new String[count][];
         for (int x = 0; x < count; x++) {   
-            String[] weatherData = APIInterface.getWeather(dataarr[x][0],dataarr[x][1]);
+            String[] weatherData = APIInterface.getCurrentWeather(dataarr[x][0],dataarr[x][1]);
             arr[x] = weatherData;
         }
-        this.displayscreen(this, arr, count);
+        this.displayWeatherscreen(this, arr, count);
     }
 
     @Override
@@ -68,7 +68,6 @@ public class SessionDT implements Session {
             // Handle null or empty input array
             return;
         }
-
         int count = dataarra.length;
         System.out.println(count);
         for(int z = 0; z < count; z++) {
@@ -77,18 +76,65 @@ public class SessionDT implements Session {
         String[][] arr = new String[count][];
         // This is where the data will be processed
         // API call will be made here
-        for (int i = 0; i < count ; i++) {
-            String[] weatherData = APIInterface.getWeather(dataarra[i]);
-
+        for (int i = 0; i < count ; i++) 
+        {
+            String[] weatherData = APIInterface.getCurrentWeather(dataarra[i]);
             arr[i] = weatherData;
         }
 
        
-        this.displayscreen(this, arr, count);
+        this.displayWeatherscreen(this, arr, count);
     }
       
     @Override
-    public void displayscreen(Session sessionInstance,String[][] weatherarr,int count){
+    public void displayWeatherscreen(Session sessionInstance,String[][] weatherarr,int count){
         UIInterface.displayscreen(sessionInstance,weatherarr,count);
     }
-}
+
+    @Override
+    public void displayAirPollutionScreen(Session sessionInstance, String[][]arr,int count) {
+     UIInterface.displayAirPollutionScreen(sessionInstance, arr,count);   
+    }
+
+    @Override
+    public void getAirPollutionLoc_LatProcess(double[][] dataarr) {
+       
+        if (dataarr == null || dataarr.length == 0) {
+            // Handle null or empty input array
+            return;
+        }
+
+        int count = dataarr.length;
+        System.out.println(count);
+        String[][] arr = new String[count][];
+        for (int x = 0; x < count; x++) {   
+            String[] airPollutionData = APIInterface.getAirQuality(dataarr[x][0],dataarr[x][1]);
+            arr[x] = airPollutionData;
+        }
+        for (int i = 0; i < count; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+        this.displayAirPollutionScreen(this, arr, count);
+    }
+
+//     @Override
+//     public void getAirPollutionLocationProcess(String [] dataarr) {
+    
+//         if (dataarr == null || dataarr.length == 0) {
+//             // Handle null or empty input array
+//             return;
+//         }
+
+//         int count = dataarr.length;
+      
+//         String[][] arr = new String[count][];
+//         for (int x = 0; x < count; x++) {   
+//             String[] airPollutionData = APIInterface.getAirQuality(dataarr[x]);
+//             arr[x] = airPollutionData;
+//         }
+//         this.displayAirPollutionScreen(this, arr, count);
+// }
+} 
