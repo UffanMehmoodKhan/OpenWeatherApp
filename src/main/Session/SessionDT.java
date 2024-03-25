@@ -1,5 +1,7 @@
 package main.Session; 
 
+import main.Database.SQL;
+import main.Database.txt;
 import main.UserInterface.UserInterface; 
 import main.UserInterface.desktop; 
 
@@ -7,10 +9,13 @@ public class SessionDT implements Session {
 
     UserInterface UIInterface; 
 
-    public SessionDT(){ 
+    public SessionDT()
+    { 
         System.out.println("Desktop is Operational"); 
         UIInterface = new desktop();
         this.getWelcomeScreen();
+        System.out.println("Desktop is Operational");
+		OW_DB[0] = new SQL(); OW_DB[1] = new txt();
     }    
 
     @Override 
