@@ -3,21 +3,21 @@ package main.Session;
 import main.Database.DB;
 import main.Database.SQL;
 import main.Database.txt;
-import main.UserInterface.UserInterface; 
-import main.UserInterface.desktop; 
-
+import main.UserInterface.*; 
 public class SessionDT implements Session { 
 
     UserInterface UIInterface; 
     DB SQL_cache; DB txt_cache;
+
     public SessionDT()
     { 
         System.out.println("Desktop is Operational"); 
         UIInterface = new desktop(); SQL_cache = new SQL(); txt_cache = new txt();
+        UIInterface = new desktop();
         this.getWelcomeScreen();
         System.out.println("Desktop is Operational");
-		//OW_DB[0] = new SQL(); OW_DB[1] = new txt();
-    }    
+		
+    }   
 
     @Override 
     public void getWelcomeScreen() { 
@@ -80,7 +80,8 @@ public class SessionDT implements Session {
         // API call will be made here
         for (int i = 0; i < count ; i++) 
         {
-            String[] weatherData = APIInterface.getCurrentWeather(dataarra[i]);
+           // String[] weatherData = APIInterface.getCurrentWeather(dataarra[i]);
+            String[] weatherData = SQL_cache.GetWeather(dataarra[i]);
             arr[i] = weatherData;
         }
 
@@ -110,7 +111,7 @@ public class SessionDT implements Session {
         System.out.println(count);
         String[][] arr = new String[count][];
         for (int x = 0; x < count; x++) {   
-            String[] airPollutionData = APIInterface.getAirQuality(dataarr[x][0],dataarr[x][1]);
+            String[] airPollutionData = SQL_cache.GetAirPoll(dataarr[x][0],dataarr[x][1]);
             arr[x] = airPollutionData;
         }
         for (int i = 0; i < count; i++) {

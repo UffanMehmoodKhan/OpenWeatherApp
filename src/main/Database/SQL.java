@@ -29,37 +29,6 @@ public class SQL implements DB
 		}
 		return conn;
 	}
-	public void Insert(String query,Connection conn,String[] data)
-	{
-		try
-		{
-			//changing expected here	
-			PreparedStatement statement = conn.prepareStatement(query);
-			for(int i=0; i<data.length; i++)
-			{
-				statement.setString(i+1, data[i]);
-			}
-			statement.executeUpdate();
-			System.err.println("Data has been inserted successfully");
-		}
-		catch (SQLException e) 
-		{
-			System.out.println("connection failed");
-			System.out.println(e.getMessage());
-		}
-		finally
-		{
-			try
-			{
-				conn.close();
-			}
-			catch (SQLException e) 
-			{
-				System.out.println("connection failed");
-				System.out.println(e.getMessage());
-			}
-		}
-	}
 	public void insertWeatherInfo(String[] data)
 	{
 		String cityName = data[0];
@@ -123,15 +92,16 @@ public class SQL implements DB
     }
 		
 	
-    
+    //to be implemented
     public void insertForecastInfo(String[] data)
 	{
-		Connection conn = connect();
-		String query = "INSERT INTO forecast (city, country, sunrise, sunset, latitude, longitude, weather, weather_description, formatted_temp, feel_like, min_temp, max_temp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-		Insert(query,conn,data);
+		// Connection conn = connect();
+		// String query = "INSERT INTO forecast (city, country, sunrise, sunset, latitude, longitude, weather, weather_description, formatted_temp, feel_like, min_temp, max_temp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+		// //Insert(query,conn,data);
 
 	}
-	public void insertAirInfo(String[] data)
+	
+    public void insertAirInfo(String[] data)
 	{
 		String latitude = data[0];
         String longitude = data[1];
@@ -238,10 +208,49 @@ public class SQL implements DB
 	}
     public String[] retrieveWeatherInfo(String city)
 	{
-		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
-		return data;
+        String[] weatherInfo = new String[13]; // Array to store weather information
+
+        try (Connection connection = connect()) {
+            if (connection != null) {
+                // Query to retrieve weather data based on city name
+                String query = "SELECT Locations.name, Locations.country, weather.localTime, weather.sunriseTime, " +
+                        "weather.sunsetTime, Locations.latitude, Locations.longitude, weather.weather, " +
+                        "weather.weatherDescription, weather.Temp, weather.FeelsLike, weather.MinTemp, weather.MaxTemp " +
+                        "FROM Locations INNER JOIN weather ON Locations.id = weather.location_id " +
+                        "WHERE Locations.name = ?";
+                
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+                    statement.setString(1, city);
+
+                    try (ResultSet resultSet = statement.executeQuery()) {
+                        if (resultSet.next()) {
+                            // Extract data from the result set and store in the array
+                            weatherInfo[0] = resultSet.getString("name");
+                            weatherInfo[1] = resultSet.getString("country");
+                            weatherInfo[2] = resultSet.getString("localTime");
+                            weatherInfo[3] = resultSet.getString("sunriseTime");
+                            weatherInfo[4] = resultSet.getString("sunsetTime");
+                            weatherInfo[5] = resultSet.getString("latitude");
+                            weatherInfo[6] = resultSet.getString("longitude");
+                            weatherInfo[7] = resultSet.getString("weather");
+                            weatherInfo[8] = resultSet.getString("weatherDescription");
+                            weatherInfo[9] = resultSet.getString("Temp");
+                            weatherInfo[10] = resultSet.getString("FeelsLike");
+                            weatherInfo[11] = resultSet.getString("MinTemp");
+                            weatherInfo[12] = resultSet.getString("MaxTemp");
+                        }
+                    }
+                }
+            } else {
+                System.out.println("Failed to make connection to the database.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return weatherInfo;
 	}
 
+    //    //to be implemented
     public String[] retrieveForecastInfo(double lat,double lon)
 	{
 		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
@@ -253,10 +262,44 @@ public class SQL implements DB
 		return data;
 	}
 
+
     public String[] retrieveAirInfo(double lat,double lon)
 	{
-		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
-		return data;
+        String[] airInfo = new String[10]; // Array to store air quality information
+        try (Connection connection = connect()) {
+            if (connection != null) {
+                // Query to retrieve air quality data based on latitude and longitude
+                String query = "SELECT localTime, aqi, Dco, Dno, Dno2, Do3, Dso2, Dpm2_5, Dpm10, Dnh3 " +
+                               "FROM AirQuality INNER JOIN Locations ON AirQuality.location_id = Locations.id " +
+                               "WHERE Locations.latitude = ? AND Locations.longitude = ?";
+                
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+                    statement.setDouble(1, lat);
+                    statement.setDouble(2, lon);
+
+                    try (ResultSet resultSet = statement.executeQuery()) {
+                        if (resultSet.next()) {
+                            // Extract data from the result set and store in the array
+                            airInfo[0] = resultSet.getString("localTime");
+                            airInfo[1] = resultSet.getString("aqi");
+                            airInfo[2] = resultSet.getString("Dco");
+                            airInfo[3] = resultSet.getString("Dno");
+                            airInfo[4] = resultSet.getString("Dno2");
+                            airInfo[5] = resultSet.getString("Do3");
+                            airInfo[6] = resultSet.getString("Dso2");
+                            airInfo[7] = resultSet.getString("Dpm2_5");
+                            airInfo[8] = resultSet.getString("Dpm10");
+                            airInfo[9] = resultSet.getString("Dnh3");
+                        }
+                    }
+                }
+            } else {
+                System.out.println("Failed to make connection to the database.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return airInfo;
 	}
 
 	//boolean functions to check data existance 
@@ -279,8 +322,45 @@ public class SQL implements DB
         }
         return exists;
     }
-
-    //Session methods
+    public boolean checkIfWeatherExists(String city) {
+        boolean exists = false;
+        String query = "SELECT COUNT(*) FROM Locations WHERE name = ?";
+        try (Connection connection = connect();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, city);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    exists = count > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exists;
+    }
+    public boolean checkIfAirpollExists(double lat, double lon) {
+        boolean exists = false;
+        String query = "SELECT COUNT(*) FROM AirQuality INNER JOIN Locations ON AirQuality.location_id = Locations.id " +
+                       "WHERE Locations.latitude = ? AND Locations.longitude = ?";
+        try (Connection connection = connect();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setDouble(1, lat);
+            statement.setDouble(2, lon);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    exists = count > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exists;
+    }
+    
+    
+    //Session methods for weather
     public String[] GetWeather(double lat,double lon)
 	{
 		if (checkIfWeatherExists(lat, lon)) {
@@ -292,15 +372,19 @@ public class SQL implements DB
 			return data;
         }
     }
-
-		
-
-	
     public String[] GetWeather(String city)
 	{
-		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
-		return data;
+		if (checkIfWeatherExists(city)) {
+            return retrieveWeatherInfo(city);
+        } else {
+            String[] data = APIInterface.getCurrentWeather(city);
+            //api call and insert method will be called here
+            insertWeatherInfo(data);
+            return data;
+        }
 	}
+   
+    //session methods for forecast,     //to be implemented
     public String[] GetForecast(double lat,double  lon)
 	{
 		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
@@ -311,18 +395,18 @@ public class SQL implements DB
 		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
 		return data;
 	}
+    
+    //session methods for air quality
     public String[] GetAirPoll(double lat,double lon)
 	{
-		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
-		return data;
-	}
-	public static void main(String[] args)
-	{
-		SQL sql = new SQL();
-		//String[] data = {"Karachi", "Pakistan", "6:00 AM", "6:00 PM", "31.5497", "74.3436", "Clear", "Clear Sky", "30", "30", "30", "30"};
-		//give another city data like toronto
-		String[] data = {"Toronto", "Canada", "6:00 AM", "6:00 PM", "43.65107", "-79.347015", "Clear", "Clear Sky", "30", "30", "30", "30"};
-		sql.insertWeatherInfo(data);
+		if (checkIfAirpollExists(lat, lon)) {
+            return retrieveAirInfo(lat, lon);
+        } else {
+			String[] data = APIInterface.getAirQuality(lat,lon);
+            //api call and insert method will be called here
+			insertAirInfo(data);
+			return data;
+        }
 	}
 
 }
