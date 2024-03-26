@@ -2,6 +2,9 @@ package main.Database;
 
 public class txt implements DB
 {
+	public txt(){
+		
+	}
 	public void insertWeatherInfo(String[] data)
 	{
 

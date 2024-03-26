@@ -1,5 +1,6 @@
 package main.Session; 
 
+import main.Database.DB;
 import main.Database.SQL;
 import main.Database.txt;
 import main.UserInterface.UserInterface; 
@@ -8,14 +9,14 @@ import main.UserInterface.desktop;
 public class SessionDT implements Session { 
 
     UserInterface UIInterface; 
-
+    DB SQL_cache; DB txt_cache;
     public SessionDT()
     { 
         System.out.println("Desktop is Operational"); 
-        UIInterface = new desktop();
+        UIInterface = new desktop(); SQL_cache = new SQL(); txt_cache = new txt();
         this.getWelcomeScreen();
         System.out.println("Desktop is Operational");
-		OW_DB[0] = new SQL(); OW_DB[1] = new txt();
+		//OW_DB[0] = new SQL(); OW_DB[1] = new txt();
     }    
 
     @Override 
@@ -52,7 +53,7 @@ public class SessionDT implements Session {
         String[][] arr = new String[count][];
         for (int x = 0; x < count; x++) 
         {   
-            String[] weatherData = OW_DB[1].GetWeather(dataarr[x][0],dataarr[x][1]);
+            String[] weatherData = SQL_cache.GetWeather(dataarr[x][0],dataarr[x][1]);
             arr[x] = weatherData;
         }
         this.displayWeatherscreen(this, arr, count);

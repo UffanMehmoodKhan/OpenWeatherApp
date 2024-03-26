@@ -10,6 +10,9 @@ import java.sql.SQLException;
 //import java.sql.Connection; 
 public class SQL implements DB
 {
+    public SQL(){
+
+    }
 	public Connection connect()
 	{
 		Connection conn = null;

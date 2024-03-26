@@ -1,14 +1,13 @@
 package main.Session; 
 
 import main.API.API;
- import main.Database.DB;
-// import main.Database.SQL;
+
 public interface Session
 { 
 
     public static API APIInterface = new API();  
     API OpenAI = new API();
-	DB OW_DB[] = null;
+	
     //------------------------
     public void getWelcomeScreen(); 
     //------------------------
