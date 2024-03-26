@@ -25,9 +25,9 @@ public class SessionT implements Session {
 		//String CoordWeather[] = OpenAI.getCurrentWeather(90.0, 180.0);
 		
 		//String CityWeather[] = OpenAI.getCurrentWeather("London");
-		//String OpenForecast[] = OpenAI.get5DayForecast("Lahore");
-		String AirQuality[] = OpenAI.getAirQuality(31.5467, 74.3401);
-		for (String s : AirQuality) {
+		String OpenForecast[] = OpenAI.get5DayForecast("Lahore");
+		// String AirQuality[] = OpenAI.getAirQuality(31.5467, 74.3401);
+		for (String s : OpenForecast) {
 			System.out.println(s);
 		}
 		
