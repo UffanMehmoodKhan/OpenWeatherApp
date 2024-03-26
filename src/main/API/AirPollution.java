@@ -79,7 +79,6 @@ public class AirPollution {
 				// Populate the list with extracted data
 				airQualityInfoList.add(latitude.toString());
 				airQualityInfoList.add(longitude.toString());
-				
 				airQualityInfoList.add(localTime);
 				Double aqiDouble = aqi.doubleValue();
 				airQualityInfoList.add(aqiDouble.toString());

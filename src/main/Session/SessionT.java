@@ -1,24 +1,30 @@
 package main.Session; 
-import main.UserInterface.UserInterface; 
+
+
+import main.Database.*;
+import main.UserInterface.UserInterface;
+import main.UserInterface.desktop;
 import main.UserInterface.terminal; 
+
 public class SessionT implements Session 
 { 
-    UserInterface UIInterface = new terminal(); 
+	UserInterface UIInterface; 
+    DB SQL_cache; DB txt_cache;
     public SessionT()
     { 
+		UIInterface = new terminal(); UIInterface = new desktop(); SQL_cache = new SQL(); txt_cache = new txt();
         System.out.println("Terminal is Operational"); 
         this.getWelcomeScreen();
+        System.out.println("Terminal is Operational");
     } 
 
     @Override 
-    public void getWelcomeScreen()
-    { 
+    public void getWelcomeScreen(){ 
       UIInterface.welcomeScreen(this);
     } 
 
     @Override
-    public void test(Session sessionInstance,String[] a)
-    {
+    public void test(Session sessionInstance,String[] a){
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'test'");
     }
@@ -31,8 +37,7 @@ public class SessionT implements Session
     public void getWeatherLoc_LatProcess(double [][] dataarr)
     {
         //display the data in the terminal
-        for(int i = 0; i < 3; i++)
-        {
+        for(int i = 0; i < 3; i++){
             System.out.println("Latitude of location " + (i+1) + " is " + dataarr[i][0]);
             System.out.println("Longitude of location " + (i+1) + " is " + dataarr[i][1]);
         }
@@ -56,8 +61,6 @@ public class SessionT implements Session
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'displayscreen'");
     }
-
-   
 
     @Override
     public void getAirPollutionLoc_LatProcess(double[][] dataarr) {

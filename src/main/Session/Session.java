@@ -2,8 +2,12 @@ package main.Session;
 
 import main.API.API;
 
-public interface Session { 
-    public static API APIInterface = new API(); 
+public interface Session
+{ 
+
+    public static API APIInterface = new API();  
+    API OpenAI = new API();
+	
     //------------------------
     public void getWelcomeScreen(); 
     //------------------------

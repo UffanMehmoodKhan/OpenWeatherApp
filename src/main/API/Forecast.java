@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.HashSet;
 
 public class Forecast {
-    // Method to get 5 day forcast data
+    // Method to get 5 day forecast data
 	@SuppressWarnings("deprecation")
     public String[] get5DayForecastData(String queryParameter, String apiKey) {
         List<String> forecastInfoList = new ArrayList<>();
