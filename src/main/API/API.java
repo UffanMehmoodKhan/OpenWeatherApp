@@ -41,11 +41,6 @@ public class API {
 	public String[] getAirQuality(double lat, double lon) {
 		return airPoll.getAirQualityData("lat=" + lat + "&lon=" + lon, API_Key);
 	}
-
-	
-
-	
-
     // Method to return the API key
     public String returnKey() {
         return (API_Key);

@@ -74,8 +74,21 @@ public class SessionT implements Session
         throw new UnsupportedOperationException("Unimplemented method 'displayAirPollutionScreen'");
     }
 
-   
+    @Override
+    public void get5DayForecastDataProcess(double[][] dataarr) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'get5DayForecastDataProcess'");
+    } 
+    @Override
+    public void get5DayForecastDataProcess(String cityName) {
 
-} 
+    }
+    @Override
+    public void display5DayForecastScreen(Session sessionInstance, String[][] arr, int count) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'display5DayForecastScreen'");
+    }
+}
+>>>>>>> 4a03c5181531b087ce6beff48eb41411e1bc5521
 
     
