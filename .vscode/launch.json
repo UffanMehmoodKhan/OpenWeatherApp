@@ -23,7 +23,7 @@
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}",
-            "console": "externalTerminal"
+           // "console": "externalTerminal"
         },
         {
             "type": "java",
@@ -31,7 +31,7 @@
             "request": "launch",
             "mainClass": "main.App.App",
             "projectName": "OpenWeatherApp_a03172b3",
-            "console": "externalTerminal"
+            //"console": "externalTerminal"
         },
         {
             "type": "java",
@@ -39,7 +39,7 @@
             "request": "launch",
             "mainClass": "test.test",
             "projectName": "OpenWeatherApp_a03172b3",
-            "console": "externalTerminal"
+           // "console": "externalTerminal"
         }
     ]
 }

@@ -1,7 +1,11 @@
 package main.Database;
 
+import main.API.API;
+
 public interface DB
 {
+    public static API APIInterface = new API();  
+    API OpenAI = new API();
     public void insertWeatherInfo(String[] data);
     public void insertForecastInfo(String[] data);
     public void insertAirInfo(String[] data);

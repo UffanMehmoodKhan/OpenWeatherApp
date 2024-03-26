@@ -50,8 +50,9 @@ public class SessionDT implements Session {
         }
 
         String[][] arr = new String[count][];
-        for (int x = 0; x < count; x++) {   
-            String[] weatherData = APIInterface.getCurrentWeather(dataarr[x][0],dataarr[x][1]);
+        for (int x = 0; x < count; x++) 
+        {   
+            String[] weatherData = OW_DB[1].GetWeather(dataarr[x][0],dataarr[x][1]);
             arr[x] = weatherData;
         }
         this.displayWeatherscreen(this, arr, count);
