@@ -29,5 +29,4 @@ public class App{
 		App OpenWeatherMap = new App(args[0]); //Initialize OpenWeatherMap App object
 		OpenWeatherMap.getSession();
     }
-	
 }
