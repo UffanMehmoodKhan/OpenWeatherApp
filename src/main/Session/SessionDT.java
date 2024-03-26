@@ -99,7 +99,7 @@ public class SessionDT implements Session {
             return;
         }
 
-        int count = 1; // only for the first location
+        int count = dataarr.length; // only for the first location
         System.out.println(count);
         String[][] arr = new String[count][];
         for (int x = 0; x < count; x++) {   
