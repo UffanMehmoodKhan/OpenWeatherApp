@@ -129,7 +129,8 @@ public class SessionDT implements Session {
             // Handle null or empty input array
             return;
         }
-        String[] forecastData = APIInterface.get5DayForecast(dataarr[0][0],dataarr[0][1]);
+        //String[] forecastData = APIInterface.get5DayForecast(dataarr[0][0],dataarr[0][1]);
+        String[] forecastData = SQL_cache.GetForecast(dataarr[0][0],dataarr[0][1]);
         String[][] Weatherarr = new String[7][]; // Initialize the 2D array with 7 rows
         int x = 0;
         // Initialize the first row with 4 elements
@@ -150,7 +151,8 @@ public class SessionDT implements Session {
     @Override
     public void get5DayForecastDataProcess(String cityName) {
     
-            String[] forecastData = APIInterface.get5DayForecast(cityName);
+            //String[] forecastData = APIInterface.get5DayForecast(cityName);
+            String[] forecastData = SQL_cache.GetForecast(cityName);
             String[][] Weatherarr = new String[7][]; // Initialize the 2D array with 7 rows
             int x = 0;
             // Initialize the first row with 4 elements
