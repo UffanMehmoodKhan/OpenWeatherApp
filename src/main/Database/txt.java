@@ -255,9 +255,6 @@ public class txt implements DB
 		else{
 			return line;
 		}
-		else{
-			return line;
-		}
 	}
 
 }
