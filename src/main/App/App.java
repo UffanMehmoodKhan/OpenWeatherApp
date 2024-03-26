@@ -26,12 +26,12 @@ public class App{
     }
 
     public static void main(String[] args) {
-        txt t1=new txt();
-		 String [] arr={"my","hello"};
-		// t1.insertWeatherInfo(arr);
-		t1.insertForecastInfo(arr);
-		t1.insertAirInfo(arr);
-		t1.retrieveWeatherInfo(0, 0);
+        // txt t1=new txt();
+		//  String [] arr={"my","hello"};
+		// // t1.insertWeatherInfo(arr);
+		// t1.insertForecastInfo(arr);
+		// t1.insertAirInfo(arr);
+		// t1.retrieveWeatherInfo(0, 0);
     }
 	
 }

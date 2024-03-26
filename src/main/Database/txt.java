@@ -170,6 +170,7 @@ public class txt implements DB {
         }
     }
 
+
     //Session methods
     public String[] GetWeather(double lat, double lon) {
         String[] lines = retrieveWeatherInfo(lat, lon);
