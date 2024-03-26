@@ -13,10 +13,8 @@ public class SessionDT implements Session {
     { 
         System.out.println("Desktop is Operational"); 
         UIInterface = new desktop(); SQL_cache = new SQL(); txt_cache = new txt();
-        UIInterface = new desktop();
         this.getWelcomeScreen();
         System.out.println("Desktop is Operational");
-		
     }   
 
     @Override 

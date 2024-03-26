@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import main.API.API;
+
 
 public class txt implements DB {
     public void insertWeatherInfo(String[] data) {

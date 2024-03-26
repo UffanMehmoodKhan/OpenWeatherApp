@@ -3,7 +3,6 @@ package main.Session;
 
 import main.Database.*;
 import main.UserInterface.UserInterface;
-import main.UserInterface.desktop;
 import main.UserInterface.terminal; 
 
 public class SessionT implements Session 
@@ -12,7 +11,8 @@ public class SessionT implements Session
     DB SQL_cache; DB txt_cache;
     public SessionT()
     { 
-		UIInterface = new terminal(); UIInterface = new desktop(); SQL_cache = new SQL(); txt_cache = new txt();
+		UIInterface = new terminal(); 
+		SQL_cache = new SQL(); txt_cache = new txt();
         System.out.println("Terminal is Operational"); 
         this.getWelcomeScreen();
         System.out.println("Terminal is Operational");
@@ -20,11 +20,11 @@ public class SessionT implements Session
 
     @Override 
     public void getWelcomeScreen(){ 
-      UIInterface.welcomeScreen(this);
+		UIInterface.welcomeScreen(this);
     } 
 
     @Override
-    public void test(Session sessionInstance,String[] a){
+    public void test(Session sessionInstance, String[] a){
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'test'");
     }
@@ -76,7 +76,6 @@ public class SessionT implements Session
 
    
 
-
-    } 
+} 
 
     
