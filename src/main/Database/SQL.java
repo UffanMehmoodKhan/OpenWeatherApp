@@ -30,7 +30,7 @@ public class SQL implements DB
 	{
 		try
 		{
-			//changing expeccted here	
+			//changing expected here	
 			PreparedStatement statement = conn.prepareStatement(query);
 			for(int i=0; i<data.length; i++)
 			{
