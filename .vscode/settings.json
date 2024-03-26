@@ -4,8 +4,10 @@
   
  ],
  "java.project.referencedLibraries": [
-  "lib/**/*.jar",
-  "e:\\projects\\java\\json-simple-1.1.1.jar"
- ]
+    "lib/**/*.jar",
+    "e:\\projects\\java\\json-simple-1.1.1.jar",
+    "d:\\json-simple-1.1.1.jar",
+    "d:\\org.json-chargebee-1.0.jar"
+]
 }
 

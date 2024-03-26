@@ -1,70 +1,58 @@
 package main.API;
-import java.net.*;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
-import java.util.Scanner;
 
-public class API {
+public class API { 
 
-	float LatCord; float LongCord;
-	String city, country, location;
+    // OpenWeatherMap API key
+    private String API_Key = "bc146deacea7f9cc88cdb8b6bbb5fef9";
 
-	private String API_Key = "bc146deacea7f9cc88cdb8b6bbb5fef9";
+    //WeatherMap API key
+    Weather weather = new Weather();
+    //ForecastMap API key
+    Forecast forecast = new Forecast();
+    //AirPollution API key
+    AirPollution airPoll = new AirPollution();
 
-	public API(){
+    // Default constructor
+    public API() {}
 
+    //Method to get weather by city name
+    public String[] getCurrentWeather(String cityName) {
+        return weather.getCurrentWeatherData("q=" + cityName, API_Key);
+    }
+
+    // Method to get weather by coordinates
+    public String[] getCurrentWeather(double lat, double lon) {
+        return weather.getCurrentWeatherData("lat=" + lat + "&lon=" + lon, API_Key);
+    }
+
+    
+
+	// Method to get 5-day weather by city name
+	public String[] get5DayForecast(String cityName){
+		return forecast.get5DayForecastData("q=" + cityName, API_Key);
 	}
+
+	// Method to get 5-day weather by coordinates
+	public String[] get5DayForecast(double lat, double lon){
+		return forecast.get5DayForecastData("lat=" + lat + "&lon=" + lon, API_Key);
+	}
+
+
+	// Method to get Air Quality by city name
+	public String[] getAirQuality(String cityName) {
+		return airPoll.getAirQualityData("q=" + cityName, API_Key);
+	}
+
+	// Method to get Air Quality by coordinates
+	public String[] getAirQuality(double lat, double lon) {
+		return airPoll.getAirQualityData("lat=" + lat + "&lon=" + lon, API_Key);
+	}
+
 	
-	@SuppressWarnings("deprecation")
-	public void testAPI(){
-		try {
-			URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=Lahore&appid=" + returnKey());
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-			con.setRequestMethod("GET");
-			con.connect();
 
-			//If connection is made;
-			int responseCode = con.getResponseCode();
-			if (responseCode != 200) {
-				throw new RuntimeException("Failed : HTTP error code : "
-                        + responseCode);
-			} else{
-
-				StringBuilder informationString = new StringBuilder();
-                Scanner scanner = new Scanner(url.openStream());
-
-                while (scanner.hasNext()) {
-                    informationString.append(scanner.nextLine());
-                }
-                //Close the scanner
-                scanner.close();
-
-                System.out.println(informationString);
-
-
-                //JSON simple library Setup with Maven is used to convert strings to JSON
-                // JSONParser parse = new JSONParser();
-                // JSONArray dataObject = (JSONArray) parse.parse(String.valueOf(informationString));
-
-                // //Get the first JSON object in the JSON array
-                // System.out.println(dataObject.get(0));
-
-                // JSONObject countryData = (JSONObject) dataObject.get(0);
-
-                // System.out.println(countryData.get("woeid"));
-
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public String returnKey(){
-		return (API_Key);
-	}
+    // Method to return the API key
+    public String returnKey() {
+        return (API_Key);
+    }
 }
-
-
