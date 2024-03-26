@@ -199,8 +199,9 @@ public class txt implements DB
 	{
     String line= retrieveWeatherInfo(lat, lon);
 	if(line=="0"){
-		//call weather ap1;
-		//insertWeatherInfo(line);
+		String info[] = api.getCurrentWeather(lat, lon);
+		insertWeatherInfo(info);
+		return info;
 	}
 	else{
 		return line;
@@ -211,8 +212,9 @@ public class txt implements DB
 	{
       String line=retrieveWeatherInfo(city, country);
 	  if(line=="0"){
-		//call weather ap1;
-		//insertWeatherInfo(line);
+		String info[] = api.getCurrentWeather(city, country);
+		insertWeatherInfo(info);
+		return info;
 	  }
 	  else{
 		return line;
@@ -222,8 +224,9 @@ public class txt implements DB
 	{
         String line=retrieveForecastInfo(lat, lon);
 		if(line=="0"){
-			//call api for forecast;
-			//insertForecastInfo(line);
+			String info[] = api.get5DayForecast(lat, lon);
+			insertForecastInfo(info);
+			return info;
 		}
 		else{
 			return line;
@@ -233,8 +236,9 @@ public class txt implements DB
 	{
 		String line=retrieveForecastInfo(city,country);
 		if(line=="0"){
-			//call api for forecast;
-			//insertForecastInfo(line);
+			String info[] = api.get5DayForecast(city, country);
+			insertForecastInfo(info);
+			return info;
 		}
 		else{
 			return line;
@@ -244,8 +248,12 @@ public class txt implements DB
 	{
 		String line=retrieveAirInfo(lat, lon);
 		if(line=="0"){
-			//call api  for pollution
-			//insertAirInfo(line);
+			String info[] = api.getAirQuality(lat, lon);
+			insertAirInfo(info);
+			return info;
+		}
+		else{
+			return line;
 		}
 		else{
 			return line;
