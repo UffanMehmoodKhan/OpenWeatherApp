@@ -29,6 +29,7 @@ public class SessionT implements Session {
 		//String OpenForecast[] = OpenAI.get5DayForecast("Lahore");
 		String AirQuality[] = OpenAI.getAirQuality(31.5467, 74.3401);
 		for (String s : AirQuality) {
+
 			System.out.println(s);
 		}
 		
