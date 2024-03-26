@@ -21,9 +21,15 @@ public class SessionT implements Session {
 	public static void main() {
 		System.out.println("This will be the control mechanism of the terminal, where all of the tasks will occur");
 		System.out.println("This is the current API Key: " + OpenAI.returnKey());
-		OpenAI.getCurrentWeather(31.5497, 74.3436);
-		OpenAI.get5DayForecast("Lahore");
-		OpenAI.getAirQuality(31.5467, 74.3401);
+		
+		//String CoordWeather[] = OpenAI.getCurrentWeather(90.0, 180.0);
+		
+		//String CityWeather[] = OpenAI.getCurrentWeather("London");
+		String OpenForecast[] = OpenAI.get5DayForecast("Lahore");
+		// String AirQuality[] = OpenAI.getAirQuality(31.5467, 74.3401);
+		for (String s : OpenForecast) {
+			System.out.println(s);
+		}
 		
 		// all methods should be executed here as per user specs, with exception handling
 		// boolean status = true;
