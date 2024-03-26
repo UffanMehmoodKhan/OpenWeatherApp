@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import main.API.API;
+
 public class txt implements DB {
     public void insertWeatherInfo(String[] data) {
         File f1 = new File("weather.txt");
@@ -170,12 +172,11 @@ public class txt implements DB {
         }
     }
 
-
     //Session methods
     public String[] GetWeather(double lat, double lon) {
         String[] lines = retrieveWeatherInfo(lat, lon);
         if (lines[0].equals("0")) {
-            String[] info = api.getCurrentWeather(lat, lon);
+            String[] info = OpenAI.getCurrentWeather(lat, lon);
             insertWeatherInfo(info);
             return info;
         } else {
@@ -186,7 +187,7 @@ public class txt implements DB {
     public String[] GetWeather(String city) {
         String[] lines = retrieveWeatherInfo(city);
         if (lines[0].equals("0")) {
-            String[] info = api.getCurrentWeather(city);
+            String[] info = OpenAI.getCurrentWeather(city);
             insertWeatherInfo(info);
             return info;
         } else {
@@ -197,7 +198,7 @@ public class txt implements DB {
     public String[] GetForecast(double lat, double lon) {
         String[] lines = retrieveForecastInfo(lat, lon);
         if (lines[0].equals("0")) {
-            String[] info = api.get5DayForecast(lat, lon);
+            String[] info = OpenAI.get5DayForecast(lat, lon);
             insertForecastInfo(info);
             return info;
         } else {
@@ -208,7 +209,7 @@ public class txt implements DB {
     public String[] GetForecast(String city) {
         String[] lines = retrieveForecastInfo(city);
         if (lines[0].equals("0")) {
-            String[] info = api.get5DayForecast(city);
+            String[] info = OpenAI.get5DayForecast(city);
             insertForecastInfo(info);
             return info;
         } else {
@@ -219,7 +220,7 @@ public class txt implements DB {
     public String[] GetAirPoll(double lat, double lon) {
         String[] lines = retrieveAirInfo(lat, lon);
         if (lines[0].equals("0")) {
-            String[] info = api.getAirQuality(lat, lon);
+            String[] info = OpenAI.getAirQuality(lat, lon);
             insertAirInfo(info);
             return info;
         } else {
