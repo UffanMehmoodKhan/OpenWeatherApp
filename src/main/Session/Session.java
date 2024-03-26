@@ -16,11 +16,14 @@ public interface Session {
     public void getWeatherLocationProcess(String[] dataarra);
     //------------------------
     public void displayWeatherscreen(Session sessionInstance,String[][]arr,int count); // it will have parameters that consist of data which is to be displayed
-    // display air poolution screen
     public void displayAirPollutionScreen(Session sessionInstance,String[][]arr,int count);
+    public void display5DayForecastScreen(Session sessionInstance,String[][]arr,int count);
     //------------------------
     public void getAirPollutionLoc_LatProcess(double[][] dataarr);
-    
+    //------------------------
+    public void get5DayForecastDataProcess(double[][] dataarr);
+    public void get5DayForecastDataProcess(String cityName);
+
     
 
     //Methods for API calls ----> made to DB first ----> then to API calls ----> then back ----------------< 
