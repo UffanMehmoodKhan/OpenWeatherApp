@@ -43,6 +43,9 @@ public class txt implements DB
 		return data;
 	}
 
+    
+
+
 
 	//Session methods
 	public String[] GetWeather(double lat, double lon)
