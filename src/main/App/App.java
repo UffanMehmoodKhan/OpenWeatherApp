@@ -1,5 +1,6 @@
 package main.App;
 
+import main.Database.txt;
 import main.Session.Session;
 import main.Session.SessionT;
 import main.Session.SessionDT;
@@ -25,10 +26,12 @@ public class App{
     }
 
     public static void main(String[] args) {
-
-        System.out.println("\n" + args[0] + " application config"); 
-		App OpenWeatherMap = new App(args[0]); //Initialize OpenWeatherMap App object
-		OpenWeatherMap.getSession();
+        txt t1=new txt();
+		 String [] arr={"my","hello"};
+		// t1.insertWeatherInfo(arr);
+		t1.insertForecastInfo(arr);
+		t1.insertAirInfo(arr);
+		t1.retrieveWeatherInfo(0, 0);
     }
 	
 }

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "main.App.App",
+            "projectName": "OpenWeatherApp_d5ff6e44"
+        },
+        {
+            "type": "java",
             "name": "SQL",
             "request": "launch",
             "mainClass": "main.Database.SQL",
