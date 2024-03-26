@@ -11,8 +11,6 @@ import org.json.simple.parser.JSONParser;
 import java.util.Date;
 import java.util.HashSet;
 
-
-
 public class Forecast {
     // Method to get 5 day forecast data
 	@SuppressWarnings("deprecation")
@@ -66,9 +64,6 @@ public class Forecast {
 					
 					JSONObject forecastObject = (JSONObject) forecastList.get(i);
                     String dateTime = (String) forecastObject.get("dt_txt");
-                    JSONObject mainObject = (JSONObject) forecastObject.get("main");
-                    Number temp = (Number) mainObject.get("temp");
-                    Number feelsLike = (Number) mainObject.get("feels_like");   
                     String datee = dateTime.split(" ")[0];
 
                     // Skip if date is already added
@@ -78,8 +73,7 @@ public class Forecast {
                     
                     uniqueDates.add(datee);
 
-                    mainObject =  (JSONObject) forecastObject.get("main");
-
+                    JSONObject mainObject = (JSONObject) forecastObject.get("main");
                     Number minTemp = (Number) mainObject.get("temp_min");
                     Number maxTemp = (Number) mainObject.get("temp_max");
                     JSONArray weatherArray = (JSONArray) forecastObject.get("weather");
@@ -89,22 +83,14 @@ public class Forecast {
 
 					
                     // Convert temperature from Kelvin to Celsius
-
-                    Double tempCelsius = temp.doubleValue() - 273.15;
-                	Double feelsLikeCelsius = feelsLike.doubleValue() - 273.15;
                 	Double minTempCelsius = minTemp.doubleValue() - 273.15;
                 	Double maxTempCelsius = maxTemp.doubleValue() - 273.15;
-                    String formattedTemp = String.format("%.2f", tempCelsius);
-                    String formattedFeelsLike = String.format("%.2f", feelsLikeCelsius);
+
                     String formattedMinTemp = String.format("%.2f", minTempCelsius);
                     String formattedMaxTemp = String.format("%.2f", maxTempCelsius);
 
-                    forecastInfoList.add(dateTime);
-                    forecastInfoList.add(formattedTemp);
-                    forecastInfoList.add(formattedFeelsLike);
-
+                    // Populate the list with extracted data
                     forecastInfoList.add(datee);
-
                     forecastInfoList.add(formattedMinTemp);
                     forecastInfoList.add(formattedMaxTemp);
                     forecastInfoList.add(weather);
