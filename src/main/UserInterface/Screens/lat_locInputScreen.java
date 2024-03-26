@@ -91,6 +91,10 @@ private class EnterListener implements ActionListener {
         {
             sessionInstance.getAirPollutionLoc_LatProcess(enteredData);
         }
+        else if (choice == 3)
+        {
+            sessionInstance.get5DayForecastDataProcess(enteredData);
+        }
         // Close the current JFrame
         dispose();
     }

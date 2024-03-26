@@ -6,17 +6,31 @@
     "configurations": [
         {
             "type": "java",
-            "name": "App",
+            "name": "WeatherForecastDisplayScreen",
             "request": "launch",
-            "mainClass": "main.App.App",
-            "projectName": "OpenWeatherApp_b93fec82"
+            "mainClass": "main.UserInterface.Screens.WeatherForecastDisplayScreen",
+            "projectName": "OpenWeatherApp_97f643d1"
         },
         {
             "type": "java",
-            "name": "SQL",
+            "name": "weatherForcastDisplayScreen",
             "request": "launch",
-            "mainClass": "main.Database.SQL",
-            "projectName": "OpenWeatherApp_a03172b3"
+            "mainClass": "main.UserInterface.Screens.weatherForcastDisplayScreen",
+            "projectName": "OpenWeatherApp_97f643d1"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "main.App.App",
+            "projectName": "OpenWeatherApp_97f643d1"
+        },
+        {
+            "type": "java",
+            "name": "Forecast",
+            "request": "launch",
+            "mainClass": "main.API.Forecast",
+            "projectName": "OpenWeatherApp_97f643d1"
         },
         {
             "type": "java",

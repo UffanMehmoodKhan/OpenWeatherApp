@@ -53,9 +53,9 @@ public class Forecast {
 				forecastInfoList.add(countryName);
 				forecastInfoList.add(latitude.toString());
 				forecastInfoList.add(longitude.toString());
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Date date = new Date();  
-				forecastInfoList.add(formatter.format(date).toString());
+				// SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				// Date date = new Date();  
+				// forecastInfoList.add(formatter.format(date).toString());
 
                 // Extract relevant data from JSON object
                 JSONArray forecastList = (JSONArray) jsonObject.get("list");
