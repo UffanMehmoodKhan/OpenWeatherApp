@@ -1,7 +1,7 @@
 package main.Session;
 
-import main.UserInterface.UserInterface;
-import main.UserInterface.desktop;
+import main.Database.*;
+import main.UserInterface.*;
 
 public class SessionDT implements Session {
 
@@ -9,6 +9,7 @@ public class SessionDT implements Session {
 
 		System.out.println("Desktop is Operational");
 		UserInterface UIInterface = new desktop("desktop");
+		OW_DB[0] = new SQL(); OW_DB[1] = new txt();
 		printSessionType(UIInterface);
 		main();
 	}
