@@ -92,12 +92,64 @@ public class SQL implements DB
     }
 		
 	
-    //to be implemented
+    //implemented
     public void insertForecastInfo(String[] data)
 	{
-		// Connection conn = connect();
-		// String query = "INSERT INTO forecast (city, country, sunrise, sunset, latitude, longitude, weather, weather_description, formatted_temp, feel_like, min_temp, max_temp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-		// //Insert(query,conn,data);
+        Connection connection = null;
+        PreparedStatement forecastStatement = null;
+
+        try {
+            // Establish connection
+            connection = connect();
+
+            if (connection != null) {
+                // Insert data into Locations table
+                String insertLocationQuery = "INSERT INTO Locations (name, latitude, longitude, country) VALUES (?, ?, ?, ?)";
+                PreparedStatement locationStatement = connection.prepareStatement(insertLocationQuery, PreparedStatement.RETURN_GENERATED_KEYS);
+                locationStatement.setString(1, data[5]); // City name
+                locationStatement.setString(2, data[7]); // Latitude
+                locationStatement.setString(3, data[8]); // Longitude
+                locationStatement.setString(4, data[6]); // Country name
+                locationStatement.executeUpdate();
+
+                // Retrieve the generated location ID
+                int locationId;
+                try (var generatedKeys = locationStatement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        locationId = generatedKeys.getInt(1);
+                    } else {
+                        throw new SQLException("Failed to retrieve generated keys.");
+                    }
+                }
+
+                // Insert data into Forecast table
+                String insertForecastQuery = "INSERT INTO Forecast (datee, formattedMinTemp, formattedMaxTemp, weather, weatherDescription, cityName, countryName, latitude, longitude, location_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                forecastStatement = connection.prepareStatement(insertForecastQuery);
+                forecastStatement.setString(1, data[0]); // Date
+                forecastStatement.setString(2, data[1]); // Min temp
+                forecastStatement.setString(3, data[2]); // Max temp
+                forecastStatement.setString(4, data[3]); // Weather
+                forecastStatement.setString(5, data[4]); // Weather description
+                forecastStatement.setString(6, data[5]); // City name
+                forecastStatement.setString(7, data[6]); // Country name
+                forecastStatement.setString(8, data[7]); // Latitude
+                forecastStatement.setString(9, data[8]); // Longitude
+                forecastStatement.setInt(10, locationId); // Location ID
+                forecastStatement.executeUpdate();
+            } else {
+                System.out.println("Failed to make connection to the database.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Closing resources
+            try {
+                if (forecastStatement != null) forecastStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
 	}
 	
@@ -250,16 +302,86 @@ public class SQL implements DB
         return weatherInfo;
 	}
 
-    //    //to be implemented
+    //    //timplemented
     public String[] retrieveForecastInfo(double lat,double lon)
 	{
-		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
-		return data;
+		String[] forecastInfo = new String[9]; // Array to store forecast information
+
+        try (Connection connection = connect()) 
+        {
+            if (connection != null) {
+                // Query to retrieve forecast data based on latitude and longitude
+                String query = "SELECT Locations.name, Locations.country, Forecast.datee, Forecast.formattedMinTemp, " +
+                        "Forecast.formattedMaxTemp, Forecast.weather, Forecast.weatherDescription, Locations.latitude, " +
+                        "Locations.longitude " +
+                        "FROM Locations INNER JOIN Forecast ON Locations.id = Forecast.location_id " +
+                        "WHERE Locations.latitude = ? AND Locations.longitude = ?";
+
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+                    statement.setString(1, String.valueOf(lat));
+                    statement.setString(2, String.valueOf(lon));
+
+                    try (ResultSet resultSet = statement.executeQuery()) {
+                        if (resultSet.next()) {
+                            // Extract data from the result set and store in the array
+                            forecastInfo[0] = resultSet.getString("name");
+                            forecastInfo[1] = resultSet.getString("country");
+                            forecastInfo[2] = resultSet.getString("datee");
+                            forecastInfo[3] = resultSet.getString("formattedMinTemp");
+                            forecastInfo[4] = resultSet.getString("formattedMaxTemp");
+                            forecastInfo[5] = resultSet.getString("weather");
+                            forecastInfo[6] = resultSet.getString("weatherDescription");
+                            forecastInfo[7] = resultSet.getString("latitude");
+                            forecastInfo[8] = resultSet.getString("longitude");
+                        }
+                    }
+                }
+            } else {
+                System.out.println("Failed to make connection to the database.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return forecastInfo;
 	}
     public String[] retrieveForecastInfo(String city)
 	{
-		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
-		return data;
+        String[] forecastInfo = new String[9]; // Array to store forecast information
+
+        try (Connection connection = connect()) {
+            if (connection != null) {
+                // Query to retrieve forecast data based on city name
+                String query = "SELECT Locations.name, Locations.country, Forecast.datee, Forecast.formattedMinTemp, " +
+                        "Forecast.formattedMaxTemp, Forecast.weather, Forecast.weatherDescription, Locations.latitude, " +
+                        "Locations.longitude " +
+                        "FROM Locations INNER JOIN Forecast ON Locations.id = Forecast.location_id " +
+                        "WHERE Locations.name = ?";
+
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+                    statement.setString(1, city);
+
+                    try (ResultSet resultSet = statement.executeQuery()) {
+                        if (resultSet.next()) {
+                            // Extract data from the result set and store in the array
+                            forecastInfo[0] = resultSet.getString("name");
+                            forecastInfo[1] = resultSet.getString("country");
+                            forecastInfo[2] = resultSet.getString("datee");
+                            forecastInfo[3] = resultSet.getString("formattedMinTemp");
+                            forecastInfo[4] = resultSet.getString("formattedMaxTemp");
+                            forecastInfo[5] = resultSet.getString("weather");
+                            forecastInfo[6] = resultSet.getString("weatherDescription");
+                            forecastInfo[7] = resultSet.getString("latitude");
+                            forecastInfo[8] = resultSet.getString("longitude");
+                        }
+                    }
+                }
+            } else {
+                System.out.println("Failed to make connection to the database.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return forecastInfo;
 	}
 
 
@@ -304,7 +426,7 @@ public class SQL implements DB
 
 	//boolean functions to check data existance 
 
-	public boolean checkIfWeatherExists(double lat, double lon) {
+	public boolean checkIfDataExists(double lat, double lon) {
         boolean exists = false;
         String query = "SELECT COUNT(*) FROM Locations WHERE latitude = ? AND longitude = ?";
         try (Connection connection = connect();
@@ -322,7 +444,7 @@ public class SQL implements DB
         }
         return exists;
     }
-    public boolean checkIfWeatherExists(String city) {
+    public boolean checkIfDataExists(String city) {
         boolean exists = false;
         String query = "SELECT COUNT(*) FROM Locations WHERE name = ?";
         try (Connection connection = connect();
@@ -363,7 +485,7 @@ public class SQL implements DB
     //Session methods for weather
     public String[] GetWeather(double lat,double lon)
 	{
-		if (checkIfWeatherExists(lat, lon)) {
+		if (checkIfDataExists(lat, lon)) {
             return retrieveWeatherInfo(lat, lon);
         } else {
 			String[] data = APIInterface.getCurrentWeather(lat,lon);
@@ -374,7 +496,7 @@ public class SQL implements DB
     }
     public String[] GetWeather(String city)
 	{
-		if (checkIfWeatherExists(city)) {
+		if (checkIfDataExists(city)) {
             return retrieveWeatherInfo(city);
         } else {
             String[] data = APIInterface.getCurrentWeather(city);
@@ -384,16 +506,30 @@ public class SQL implements DB
         }
 	}
    
-    //session methods for forecast,     //to be implemented
+    //session methods for forecast,     // implemented
     public String[] GetForecast(double lat,double  lon)
 	{
-		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
-		return data;
+		if (checkIfDataExists(lat, lon)) {
+            return retrieveForecastInfo(lat, lon);
+        } else
+        {
+			String[] data = APIInterface.get5DayForecast(lat,lon);
+            //api call and insert method will be called here
+			insertForecastInfo(data);
+			return data;
+        }
 	}
     public String[] GetForecast(String city)
 	{
-		String[] data = {"karachi","pakistan","6:00","6:00","24.8607","67.0011","sunny","clear sky","30","30","30","30"};
-		return data;
+		if (checkIfDataExists(city)) {
+            return retrieveForecastInfo(city);
+        } else
+        {
+			String[] data = APIInterface.get5DayForecast(city);
+            //api call and insert method will be called here
+			insertForecastInfo(data);
+			return data;
+        }
 	}
     
     //session methods for air quality
