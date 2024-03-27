@@ -38,11 +38,20 @@ public class Forecast {
                 }
                 scanner.close();
 
+                
+
                 // Parse JSON response
                 JSONParser parser = new JSONParser();
                 JSONObject jsonObject = (JSONObject) parser.parse(informationString.toString());
 
-				
+				if (jsonObject.containsKey("message")) {
+                    forecastInfoList.add("Not Found");
+                    for (int i = 0; i < 40; i++) {
+                        forecastInfoList.add(null);
+                    }
+                    return forecastInfoList.toArray(new String[0]);
+                }
+                
 				String countryName = (String) jsonObject.get("country");
 				JSONObject cityObject = (JSONObject) jsonObject.get("city");
 				String cityName = (String) cityObject.get("name");

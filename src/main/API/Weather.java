@@ -12,18 +12,19 @@ import java.util.TimeZone;
 import java.util.Date;
 
 public class Weather {
+
     // Private method to fetch weather data from OpenWeatherMap API
     @SuppressWarnings("deprecation")
     public String[] getCurrentWeatherData(String queryParameter, String apiKey) {
-        // Method implementation
         List<String> weatherInfoList = new ArrayList<>();
+        
         try {
             // Construct the URL for API request
             URL url = new URL("https://api.openweathermap.org/data/2.5/weather?" + queryParameter + "&appid=" + apiKey);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             con.connect();
-			
+
             // Check the HTTP response code
             int responseCode = con.getResponseCode();
             if (responseCode != 200) {
@@ -42,10 +43,18 @@ public class Weather {
                 JSONParser parser = new JSONParser();
                 JSONObject jsonObject = (JSONObject) parser.parse(informationString.toString());
 
+                if (jsonObject.containsKey("message")) {
+                    weatherInfoList.add("Not Found");
+                    for (int i = 0; i < 12; i++) {
+                        weatherInfoList.add(null);
+                    }
+                    return weatherInfoList.toArray(new String[0]);
+                }
+
                 // Extract relevant data from JSON object
                 String cityName = (String) jsonObject.get("name");
                 long timeZoneOffset = (long) jsonObject.get("timezone");
-				long timestamp = (long) jsonObject.get("dt");
+                long timestamp = (long) jsonObject.get("dt");
                 JSONObject sysObject = (JSONObject) jsonObject.get("sys");
                 String countryName = (String) sysObject.get("country");
                 long sunriseTimeUTC = (long) sysObject.get("sunrise");
@@ -65,10 +74,11 @@ public class Weather {
 
                 Double latitude = latitudeN.doubleValue();
                 Double longitude = longitudeN.doubleValue();
-				// Convert timestamp to local time
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				sdf.setTimeZone(TimeZone.getDefault()); // Set local timezone
-				String localTime = sdf.format(new Date(timestamp * 1000L));
+
+                // Convert timestamp to local time
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                sdf.setTimeZone(TimeZone.getDefault()); // Set local timezone
+                String localTime = sdf.format(new Date(timestamp * 1000L));
 
                 // Convert time from UTC to local time
                 long sunriseTimeLocal = sunriseTimeUTC + timeZoneOffset;
@@ -81,8 +91,6 @@ public class Weather {
 
                 String sunriseTime = dateFormat.format(sunriseDateLocal);
                 String sunsetTime = dateFormat.format(sunsetDateLocal);
-
-
 
                 // Convert temperature from Kelvin to Celsius
                 temp = temp - 273.15;
@@ -98,7 +106,7 @@ public class Weather {
                 // Populate the list with extracted data
                 weatherInfoList.add(cityName);
                 weatherInfoList.add(countryName);
-				weatherInfoList.add(localTime);
+                weatherInfoList.add(localTime);
                 weatherInfoList.add(sunriseTime);
                 weatherInfoList.add(sunsetTime);
                 weatherInfoList.add(latitude.toString());

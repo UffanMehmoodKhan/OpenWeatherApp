@@ -41,6 +41,16 @@ public class AirPollution {
 				JSONParser parser = new JSONParser();
 				JSONObject jsonObject = (JSONObject) parser.parse(informationString.toString());
 
+				if (jsonObject.containsKey("message")) {
+                    airQualityInfoList.add("Not Found");
+					airQualityInfoList.add("Not Found");
+                    for (int i = 0; i < 10; i++) {
+                        airQualityInfoList.add(null);
+                    }
+                    return airQualityInfoList.toArray(new String[0]);
+                }
+
+
 				// Extract relevant data from JSON object
 				JSONObject coordObject = (JSONObject) jsonObject.get("coord");
 				Double latitude = (Double) coordObject.get("lat");
