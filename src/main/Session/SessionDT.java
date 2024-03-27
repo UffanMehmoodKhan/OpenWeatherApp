@@ -143,6 +143,8 @@ public class SessionDT implements Session {
         }
         //String[] forecastData = APIInterface.get5DayForecast(dataarr[0][0],dataarr[0][1]);
         String[] forecastData = DB_cache.GetForecast(dataarr[0][0],dataarr[0][1]);
+       
+
         String[][] Weatherarr = new String[7][]; // Initialize the 2D array with 7 rows
         int x = 0;
         // Initialize the first row with 4 elements
@@ -169,6 +171,12 @@ public class SessionDT implements Session {
             String[][] Weatherarr = new String[7][]; // Initialize the 2D array with 7 rows
             int x = 0;
             // Initialize the first row with 4 elements
+            System.out.println(forecastData.length);
+        System.out.println("    5 Day Forecast Data");
+        //print forecastdata array
+        for (int i = 0; i < forecastData.length; i++) {
+            System.out.println(forecastData[i]);
+        }
             Weatherarr[0] = new String[4];
             for (x = 0; x < 4; x++) {
                 Weatherarr[0][x] = forecastData[x];
