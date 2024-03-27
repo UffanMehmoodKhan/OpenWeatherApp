@@ -9,6 +9,13 @@
             "name": "App",
             "request": "launch",
             "mainClass": "main.App.App",
+            "projectName": "OpenWeatherApp_d5ff6e44"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "main.App.App",
             "projectName": "OpenWeatherApp_b93fec82"
         },
         {
@@ -29,24 +36,21 @@
             "type": "java",
             "name": "Current File",
             "request": "launch",
-            "mainClass": "${file}",
-           // "console": "externalTerminal"
+            "mainClass": "${file}"
         },
         {
             "type": "java",
             "name": "App",
             "request": "launch",
             "mainClass": "main.App.App",
-            "projectName": "OpenWeatherApp_a03172b3",
-            //"console": "externalTerminal"
+            "projectName": "OpenWeatherApp_a03172b3"
         },
         {
             "type": "java",
             "name": "test",
             "request": "launch",
             "mainClass": "test.test",
-            "projectName": "OpenWeatherApp_a03172b3",
-           // "console": "externalTerminal"
+            "projectName": "OpenWeatherApp_a03172b3"
         }
     ]
 }
