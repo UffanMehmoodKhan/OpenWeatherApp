@@ -3,11 +3,10 @@ package main.App;
 import main.Session.*;
 import main.Database.*;
 
-
 public class App{
 
 	Session session;
-	DB db;
+	static DB db;
 	
 	//App constructor take console argument
     App(String argvString, String ui) {
@@ -37,11 +36,21 @@ public class App{
 	{
         return session;
     }
+	
+	public static void clearDatabase()	
+	{
+		db.clearCache();
+	}
+
+
+
+
 
     public static void main(String[] args)
 	{
+		//clearDatabase();
         System.out.println("\n" + args[0] + " application config"); 
 		App OpenWeatherMap = new App(args[0], args[1]); //Initialize OpenWeatherMap App object
-		OpenWeatherMap.getSession();
+		OpenWeatherMap.getSession();	
     }
 }

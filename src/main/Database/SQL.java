@@ -20,9 +20,9 @@ public class SQL implements DB
 		Connection conn = null;
 		try
 		{
-			String connectionString = "jdbc:sqlserver://Zohaib1;databaseName=testing2;integratedSecurity=true;TrustServerCertificate=True";
+			String connectionString = "jdbc:sqlserver://DESKTOP-2DS0DMR;databaseName=testing2;integratedSecurity=true;TrustServerCertificate=True";
 			conn = DriverManager.getConnection(connectionString);
-			System.out.println("Connection has been established.");
+			//System.out.println("Connection has been established.");
 		}
 		catch (SQLException e) 
 		{
@@ -570,10 +570,33 @@ public class SQL implements DB
         }
 	}
     @Override
-    public void clearCache() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clearCache'");
+    public void clearCache()
+    {
+        //this method should delete the data from the database if it is already not deleted from all tables 
+        try (Connection connection = connect()) {
+            if (connection != null) {
+                String deleteLocationsQuery = "DELETE FROM Locations";
+                String deleteWeatherQuery = "DELETE FROM weather";
+                String deleteForecastQuery = "DELETE FROM Forecast";
+                String deleteAirQualityQuery = "DELETE FROM AirQuality";
+                try (PreparedStatement deleteLocationsStatement = connection.prepareStatement(deleteLocationsQuery);
+                     PreparedStatement deleteWeatherStatement = connection.prepareStatement(deleteWeatherQuery);
+                     PreparedStatement deleteForecastStatement = connection.prepareStatement(deleteForecastQuery);
+                     PreparedStatement deleteAirQualityStatement = connection.prepareStatement(deleteAirQualityQuery)) {
+                    deleteLocationsStatement.executeUpdate();
+                    deleteWeatherStatement.executeUpdate();
+                    deleteForecastStatement.executeUpdate();
+                    deleteAirQualityStatement.executeUpdate();
+                }
+            } else {
+                System.out.println("Failed to make connection to the database.");
+            }
+        } catch (SQLException e) 
+        {
+            e.printStackTrace();
+       
+        }
+
+
     }
-
-
 }

@@ -28,8 +28,12 @@ public class Forecast {
             int responseCode = con.getResponseCode();
             if (responseCode != 200) {
                 System.out.println("Failed : HTTP error code : " + responseCode);
+                System.out.println("11111111111111111");
+                for (int i = 0; i < 4; i++) {
+                    forecastInfoList.add(null);
+                }
                 forecastInfoList.add("Not Found");
-                for (int i = 0; i < 40; i++) {
+                for (int i = 0; i < 36; i++) {
                     forecastInfoList.add(null);
                 }
                 return forecastInfoList.toArray(new String[0]);
@@ -47,10 +51,14 @@ public class Forecast {
                 JSONParser parser = new JSONParser();
                 JSONObject jsonObject = (JSONObject) parser.parse(informationString.toString());
 
-                if (jsonObject.containsKey("message") || jsonObject.containsKey("error")) {
+                if (jsonObject.containsKey("error")) {
                     System.out.println("Error: " + jsonObject.get("message"));
+                    System.out.println("222222222222222");
+                    for (int i = 0; i < 4; i++) {
+                        forecastInfoList.add(null);
+                    }
                     forecastInfoList.add("Not Found");
-                    for (int i = 0; i < 40; i++) {
+                    for (int i = 0; i < 36; i++) {
                         forecastInfoList.add(null);
                     }
                     return forecastInfoList.toArray(new String[0]);
