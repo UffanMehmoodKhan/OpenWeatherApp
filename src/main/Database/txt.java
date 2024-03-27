@@ -154,4 +154,20 @@ public class txt implements DB {
             return lines;
         }
     }
+
+    @Override
+    // Clear cache method
+    public void clearCache() {
+        clearFileContents(WEATHER_FILE);
+        clearFileContents(FORECAST_FILE);
+        clearFileContents(AIR_FILE);
+    }
+    private void clearFileContents(String fileName) {
+        try (PrintWriter writer = new PrintWriter(fileName)) {
+            writer.print("");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
