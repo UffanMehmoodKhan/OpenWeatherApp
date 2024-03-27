@@ -20,6 +20,20 @@
         },
         {
             "type": "java",
+            "name": "forecastLocationName",
+            "request": "launch",
+            "mainClass": "main.UserInterface.Screens.forecastLocationName",
+            "projectName": "OpenWeatherApp_97f643d1"
+        },
+        {
+            "type": "java",
+            "name": "forecastLon_latinput",
+            "request": "launch",
+            "mainClass": "main.UserInterface.Screens.forecastLon_latinput",
+            "projectName": "OpenWeatherApp_97f643d1"
+        },
+        {
+            "type": "java",
             "name": "WeatherForecastDisplayScreen",
             "request": "launch",
             "mainClass": "main.UserInterface.Screens.WeatherForecastDisplayScreen",
@@ -58,6 +72,7 @@
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
+            "mainClass": "${file}"
         },
         {
             "type": "java",
@@ -65,12 +80,14 @@
             "request": "launch",
             "mainClass": "main.App.App",
             "projectName": "OpenWeatherApp_a03172b3"
+            "projectName": "OpenWeatherApp_a03172b3"
         },
         {
             "type": "java",
             "name": "test",
             "request": "launch",
             "mainClass": "test.test",
+            "projectName": "OpenWeatherApp_a03172b3"
             "projectName": "OpenWeatherApp_a03172b3"
         }
     ]

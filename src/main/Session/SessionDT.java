@@ -7,7 +7,7 @@ public class SessionDT implements Session {
     UserInterface UIInterface; 
     //DB SQL_cache; DB txt_cache;
     DB DB_cache;
-
+    // SessionST constructor 
     public SessionDT(DB db)
     { 
         System.out.println("Desktop is Operational"); 
@@ -17,52 +17,55 @@ public class SessionDT implements Session {
         this.getWelcomeScreen();
         System.out.println("Desktop is Operational");
     }   
-
+  
+    // ---------------------------------------------
+    // displaying the welcome screen
     @Override 
     public void getWelcomeScreen() { 
         UIInterface.welcomeScreen(this); 
     } 
-
+   
+    // displaying the weather screen
     @Override
-    public void test(Session sessionInstance,String[] a ) {
-        // Method implementation
-    }
+    public void displayWeatherscreen(Session sessionInstance,String[][] weatherarr,int count){
+     UIInterface.displayscreen(sessionInstance,weatherarr,count);
+ }
 
+    // displaying the air pollution
+    @Override
+    public void displayAirPollutionScreen(Session sessionInstance, String[][]arr,int count) {
+   UIInterface.displayAirPollutionScreen(sessionInstance, arr,count);   
+  }
+    
+  // displaying the 5 day forecast
+    @Override
+    public void display5DayForecastScreen(Session sessionInstance, String[][] arr, int count) {
+      UIInterface.display5DayForecastScreen(sessionInstance, arr, count);
+  }
+  //--------------------------------------------------
+
+    // location input by cords
     @Override
     public void getLoc_LatInpu(Session sessionInstance, int choice) {
         UIInterface.lat_locInputScreen(sessionInstance, choice);
     }
-
+    //forecast location input by cords
     @Override
-    public void getWeatherLoc_LatProcess(double[][] dataarr) {
-        if (dataarr == null || dataarr.length == 0) {
-            // Handle null or empty input array
-            return;
-        }
-
-        int count = dataarr.length;
-        System.out.println(count);
-        for (int i = 0; i < count; i++) {
-            for (int j = 0; j < dataarr[i].length; j++) {
-                System.out.print(dataarr[i][j] + " ");
-            }
-            System.out.println();
-        }
-
-        String[][] arr = new String[count][];
-        for (int x = 0; x < count; x++) 
-        {   
-            String[] weatherData = DB_cache.GetWeather(dataarr[x][0],dataarr[x][1]);
-            arr[x] = weatherData;
-        }
-        this.displayWeatherscreen(this, arr, count);
+    public void GetForecastLocationInput(Session sessionInstance) {
+        UIInterface.ForecastLocationInputScreen(sessionInstance);   
     }
-
+    // forecast location input by name
+    @Override
+    public void GetForecastLocationbyNameInput(Session sessionInstance) {
+        UIInterface.ForecastLocationbyNameInput(sessionInstance);   
+    }
+    //  location input by name
     @Override
     public void getWeatherLocationInput(Session sessionInstance) {
        UIInterface.locationInputScreen(sessionInstance);
     }
-
+    // ------------------------------------------------
+    // getting the weather by location
     @Override
     public void getWeatherLocationProcess(String[] dataarra) {
         if (dataarra == null || dataarra.length == 0) {
@@ -87,17 +90,32 @@ public class SessionDT implements Session {
        
         this.displayWeatherscreen(this, arr, count);
     }
-      
+   // getting the weather by cords
     @Override
-    public void displayWeatherscreen(Session sessionInstance,String[][] weatherarr,int count){
-        UIInterface.displayscreen(sessionInstance,weatherarr,count);
-    }
+    public void getWeatherLoc_LatProcess(double[][] dataarr) {
+        if (dataarr == null || dataarr.length == 0) {
+            // Handle null or empty input array
+            return;
+        }
 
-    @Override
-    public void displayAirPollutionScreen(Session sessionInstance, String[][]arr,int count) {
-     UIInterface.displayAirPollutionScreen(sessionInstance, arr,count);   
-    }
+        int count = dataarr.length;
+        System.out.println(count);
+        for (int i = 0; i < count; i++) {
+            for (int j = 0; j < dataarr[i].length; j++) {
+                System.out.print(dataarr[i][j] + " ");
+            }
+            System.out.println();
+        }
 
+        String[][] arr = new String[count][];
+        for (int x = 0; x < count; x++) 
+        {   
+            String[] weatherData = DB_cache.GetWeather(dataarr[x][0],dataarr[x][1]);
+            arr[x] = weatherData;
+        }
+        this.displayWeatherscreen(this, arr, count);
+    }
+    // getting the air pollution by cords
     @Override
     public void getAirPollutionLoc_LatProcess(double[][] dataarr) {
        
@@ -116,6 +134,8 @@ public class SessionDT implements Session {
         
         this.displayAirPollutionScreen(this, arr, count);
     }
+  
+    // getting the 5 day forecast by cords
     @Override
     public void get5DayForecastDataProcess(double[][] dataarr) {
         if (dataarr == null || dataarr.length == 0) {
@@ -141,6 +161,7 @@ public class SessionDT implements Session {
         int count = Weatherarr.length;
     this.display5DayForecastScreen(this,Weatherarr, count); 
     }
+    // getting the 5 day forecast by city name
     @Override
     public void get5DayForecastDataProcess(String cityName) {
     
@@ -166,8 +187,7 @@ public class SessionDT implements Session {
 
         this.display5DayForecastScreen(this,Weatherarr, count);    
     }
-    @Override
-    public void display5DayForecastScreen(Session sessionInstance, String[][] arr, int count) {
-        UIInterface.display5DayForecastScreen(sessionInstance, arr, count);
-    }
+   
+
+   
 } 

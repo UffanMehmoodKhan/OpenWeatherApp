@@ -235,6 +235,16 @@ public class terminal implements UserInterface
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'display5DayForecastScreen'");
     }
+    @Override
+    public void ForecastLocationInputScreen(Session sessionInstance) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'ForecastLocationInputScreen'");
+    }
+    @Override
+    public void ForecastLocationbyNameInput(Session sessionInstance) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'ForecastLocationbyNameInput'");
+    }
     
     
 } 

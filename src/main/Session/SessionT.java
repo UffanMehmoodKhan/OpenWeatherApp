@@ -24,12 +24,6 @@ public class SessionT implements Session
     public void getWelcomeScreen(){ 
 		UIInterface.welcomeScreen(this);
     } 
-
-    @Override
-    public void test(Session sessionInstance, String[] a){
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'test'");
-    }
     @Override
     public void getLoc_LatInpu(Session sessionInstance, int choice) 
     {
@@ -89,6 +83,17 @@ public class SessionT implements Session
     public void display5DayForecastScreen(Session sessionInstance, String[][] arr, int count) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'display5DayForecastScreen'");
+    }
+
+    @Override
+    public void GetForecastLocationInput(Session sessionInstance) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'GetForecastLocationInput'");
+    }
+    @Override 
+    public void GetForecastLocationbyNameInput(Session sessionInstance) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'GetForecastLocationbyNameInput'");
     }
 }
 
