@@ -12,9 +12,9 @@ public class SessionT implements Session
     DB DB_cache;
     public SessionT(DB db)
     { 
-		UIInterface = new terminal(); 
+        DB_cache = db;
+		UIInterface = new terminal(DB_cache); 
 		//SQL_cache = new SQL(); txt_cache = new txt();
-        DB_cache = db;;
         System.out.println("Terminal is Operational"); 
         this.getWelcomeScreen();
         System.out.println("Terminal is Operational");
