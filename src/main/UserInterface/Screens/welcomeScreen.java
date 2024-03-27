@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public class welcomeScreen extends JFrame implements ActionListener { 
     Session sessionInstance;
     private JButton[] buttons; 
-    private String[] buttonLabels = {"Check Weather Via longitude,Latitude", "Check Weather by Location", "check AirQuality by Lon,Lat", "Button 4", "Button 5", "Button 6"}; 
+    private String[] buttonLabels = {"Check Weather Via longitude,Latitude", "Check Weather by Location", "check AirQuality by Lon,Lat", "Get 5 day weather forcast with Lon,Lat", "Button 5", "Button 6"}; 
     
     public welcomeScreen(Session SI) { 
         sessionInstance = SI;
@@ -71,7 +71,10 @@ public class welcomeScreen extends JFrame implements ActionListener {
                 return;
             } 
             else if (e.getSource() == buttons[3]) { 
-                // Handle button 4 click 
+                dispose();
+                sessionInstance.getLoc_LatInpu(sessionInstance,3);
+                return;
+                // will have its own input screen 
             } 
             else if (e.getSource() == buttons[4]) { 
                 // Handle button 5 click 
