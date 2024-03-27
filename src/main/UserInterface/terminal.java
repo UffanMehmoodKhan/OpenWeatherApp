@@ -209,11 +209,6 @@ public class terminal implements UserInterface
         
     }
     @Override
-    public void display5DayForecastScreen(Session sessionInstance, String[][] arr, int count) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'display5DayForecastScreen'");
-    }
-    @Override
     public void ForecastLocationInputScreen(Session sessionInstance) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'ForecastLocationInputScreen'");
@@ -223,7 +218,11 @@ public class terminal implements UserInterface
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'ForecastLocationbyNameInput'");
     }
-    
+    public void display5DayForecastScreen(Session sessionInstance,String[][]arr,int count)
+    {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'display5DayForecastScreen'");
+    }
     
 } 
  

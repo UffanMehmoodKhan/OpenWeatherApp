@@ -48,7 +48,7 @@ public class App{
 
     public static void main(String[] args)
 	{
-		clearDatabase();
+		//clearDatabase();
         System.out.println("\n" + args[0] + " application config"); 
 		App OpenWeatherMap = new App(args[0], args[1]); //Initialize OpenWeatherMap App object
 		OpenWeatherMap.getSession();	
