@@ -68,50 +68,6 @@ public class txt implements DB {
 
     @Override
     public String[] retrieveWeatherInfo(double lat, double lon) {
-<<<<<<< HEAD
-        String line = "0";
-        boolean flag = false;
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("weather.txt"));
-            while ((line = br.readLine()) != null) {
-                double num = Double.parseDouble(line);
-                if (num == lat)
-                {
-                    flag = true;
-                }
-                if (num == lon)
-                {
-                    flag = true;
-                    break;
-                } else {
-                    flag = false;
-                }
-            }
-        } catch (IOException e) {
-            e.getMessage();
-        }
-        if (flag) {
-            return new String[]{line};
-        } else {
-            System.out.println("Sorry data does not exist");
-            return new String[]{"0"};
-        }
-    }
-	public String[] retrieveWeatherInfo(String city) {
-        String line = "0";
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("weather.txt"));
-            while ((line = br.readLine()) != null) {
-                if (line.contains(city)) {
-                    return new String[]{line};
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("sorry data does not exist");
-            e.getMessage();
-        }
-        return new String[]{"0"};
-=======
         String searchCriteria = lat + " " + lon;
         return retrieveInfoFromFile(WEATHER_FILE, searchCriteria);
     }
@@ -119,7 +75,6 @@ public class txt implements DB {
     @Override
     public String[] retrieveWeatherInfo(String city) {
         return retrieveInfoFromFile(WEATHER_FILE, city);
->>>>>>> danish1
     }
 
     @Override

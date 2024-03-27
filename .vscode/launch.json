@@ -4,7 +4,13 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "main.App.App",
+            "projectName": "OpenWeatherApp_d5ff6e44"
+        },
         {
             "type": "java",
             "name": "WeatherForecastDisplayScreen",
@@ -25,7 +31,6 @@
             "request": "launch",
             "mainClass": "main.App.App",
             "projectName": "OpenWeatherApp_97f643d1"
-            //"projectName": "OpenWeatherApp_b93fec82"
         },
         {
             "type": "java",
