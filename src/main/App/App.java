@@ -19,11 +19,13 @@ public class App{
 			session = new SessionDT(); 
 		}
     }
-	Session getSession() {
+	Session getSession()
+	{
         return session;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+	{
 
         System.out.println("\n" + args[0] + " application config"); 
 		App OpenWeatherMap = new App(args[0]); //Initialize OpenWeatherMap App object

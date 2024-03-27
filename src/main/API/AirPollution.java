@@ -58,31 +58,38 @@ public class AirPollution {
 				String localTime = sdf.format(new Date(timestamp * 1000L));
 
 				// Extract air quality data
-				Double co = (Double) componentsObject.get("co");
-				Double no = (Double) componentsObject.get("no");
-				Double no2 = (Double) componentsObject.get("no2");
-				Double o3 = (Double) componentsObject.get("o3");
-				Double so2 = (Double) componentsObject.get("so2");
-				Double pm2_5 = (Double) componentsObject.get("pm2_5");
-				Double pm10 = (Double) componentsObject.get("pm10");
-				Double nh3 = (Double) componentsObject.get("nh3");
+				Number co = (Number) componentsObject.get("co");
+				Number no = (Number) componentsObject.get("no");
+				Number no2 = (Number) componentsObject.get("no2");
+				Number o3 = (Number) componentsObject.get("o3");
+				Number so2 = (Number) componentsObject.get("so2");
+				Number pm2_5 = (Number) componentsObject.get("pm2_5");
+				Number pm10 = (Number) componentsObject.get("pm10");
+				Number nh3 = (Number) componentsObject.get("nh3");
 
-
+				
+				Double Dco = co.doubleValue();		
+				Double Dno = no.doubleValue();
+				Double Dno2 = no2.doubleValue();
+				Double Do3 = o3.doubleValue();			
+				Double Dso2 = so2.doubleValue();
+				Double Dpm2_5 = pm2_5.doubleValue();
+				Double Dpm10 =pm10.doubleValue();
+				Double Dnh3 = nh3.doubleValue();
 				// Populate the list with extracted data
 				airQualityInfoList.add(latitude.toString());
 				airQualityInfoList.add(longitude.toString());
-				
 				airQualityInfoList.add(localTime);
 				Double aqiDouble = aqi.doubleValue();
 				airQualityInfoList.add(aqiDouble.toString());
-				airQualityInfoList.add(co + " µg/m³");
-				airQualityInfoList.add(no + " µg/m³");
-				airQualityInfoList.add(no2 + " µg/m³");
-				airQualityInfoList.add(o3 + " µg/m³");
-				airQualityInfoList.add(so2 + " µg/m³");
-				airQualityInfoList.add(pm2_5 + " µg/m³");
-				airQualityInfoList.add(pm10 + " µg/m³");
-				airQualityInfoList.add(nh3 + " µg/m³");
+				airQualityInfoList.add(Dco + " µg/m³");
+				airQualityInfoList.add(Dno + " µg/m³");
+				airQualityInfoList.add(Dno2 + " µg/m³");
+				airQualityInfoList.add(Do3 + " µg/m³");
+				airQualityInfoList.add(Dso2 + " µg/m³");
+				airQualityInfoList.add(Dpm2_5 + " µg/m³");
+				airQualityInfoList.add(Dpm10 + " µg/m³");
+				airQualityInfoList.add(Dnh3 + " µg/m³");
 			}
 
 		} catch (Exception e) {
