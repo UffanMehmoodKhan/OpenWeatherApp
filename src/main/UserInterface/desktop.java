@@ -7,6 +7,8 @@ import main.UserInterface.Screens.LocationInputScreen;
 import main.UserInterface.Screens.WeatherInfoDisplayScreen; 
 import main.UserInterface.Screens.airPollutionDisplayScreen;
 import main.UserInterface.Screens.weatherForcastDisplayScreen;
+import main.UserInterface.Screens.forecastLon_latinput;
+import main.UserInterface.Screens.forecastLocationName;
 
 public class desktop implements UserInterface 
 { 
@@ -37,5 +39,13 @@ public class desktop implements UserInterface
     @Override
     public void display5DayForecastScreen(Session sessionInstance, String[][] arr, int count) {
        new weatherForcastDisplayScreen(sessionInstance, arr, count);
+    }
+    @Override
+    public void ForecastLocationInputScreen(Session sessionInstance) {
+     new forecastLon_latinput(sessionInstance);   
+    }
+    @Override
+    public void ForecastLocationbyNameInput(Session sessionInstance) {
+        new forecastLocationName(sessionInstance); 
     }
 } 
