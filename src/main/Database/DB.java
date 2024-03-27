@@ -28,5 +28,8 @@ public interface DB
     public String[] GetForecast(double lat, double  lon);
     public String[] GetForecast(String city);
     public String[] GetAirPoll(double lat, double lon);
+
+    //clear cache method
+    public void clearCache();
 }
 

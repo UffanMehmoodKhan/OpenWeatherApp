@@ -8,11 +8,13 @@ import main.UserInterface.terminal;
 public class SessionT implements Session 
 { 
 	UserInterface UIInterface; 
-    DB SQL_cache; DB txt_cache;
-    public SessionT()
+    //DB SQL_cache; DB txt_cache;
+    DB DB_cache;
+    public SessionT(DB db)
     { 
 		UIInterface = new terminal(); 
-		SQL_cache = new SQL(); txt_cache = new txt();
+		//SQL_cache = new SQL(); txt_cache = new txt();
+        DB_cache = db;;
         System.out.println("Terminal is Operational"); 
         this.getWelcomeScreen();
         System.out.println("Terminal is Operational");
