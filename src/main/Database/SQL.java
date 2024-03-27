@@ -570,4 +570,34 @@ public class SQL implements DB
         }
 	}
 
+    //clear cache method
+    public void clearCache()
+    {
+        try (Connection connection = connect()) 
+        {
+            if (connection != null) {
+                String deleteLocationsQuery = "DELETE FROM Locations";
+                String deleteWeatherQuery = "DELETE FROM weather";
+                String deleteForecastQuery = "DELETE FROM Forecast";
+                String deleteAirQualityQuery = "DELETE FROM AirQuality";
+    
+                try (PreparedStatement deleteLocationsStatement = connection.prepareStatement(deleteLocationsQuery);
+                     PreparedStatement deleteWeatherStatement = connection.prepareStatement(deleteWeatherQuery);
+                     PreparedStatement deleteForecastStatement = connection.prepareStatement(deleteForecastQuery);
+                     PreparedStatement deleteAirQualityStatement = connection.prepareStatement(deleteAirQualityQuery)) {
+                    deleteLocationsStatement.executeUpdate();
+                    deleteWeatherStatement.executeUpdate();
+                    deleteForecastStatement.executeUpdate();
+                    deleteAirQualityStatement.executeUpdate();
+                }
+            } else {
+                System.out.println("Failed to make connection to the database.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            }
+    }
+
+    
 }

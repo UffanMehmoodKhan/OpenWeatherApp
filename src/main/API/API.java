@@ -6,12 +6,10 @@ public class API {
     // OpenWeatherMap API key
     private String API_Key = "bc146deacea7f9cc88cdb8b6bbb5fef9";
 
-    //WeatherMap API key
-    Weather weather = new Weather();
-    //ForecastMap API key
-    Forecast forecast = new Forecast();
-    //AirPollution API key
-    AirPollution airPoll = new AirPollution();
+    
+    Weather weather = new Weather();//WeatherMap API key
+    Forecast forecast = new Forecast();//ForecastMap API key
+    AirPollution airPoll = new AirPollution();//AirPollution API key
 
     // Default constructor
     public API() {}

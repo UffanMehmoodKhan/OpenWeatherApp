@@ -3,16 +3,18 @@ package main.Session;
 
 import main.Database.*;
 import main.UserInterface.UserInterface;
-import main.UserInterface.desktop;
 import main.UserInterface.terminal; 
 
 public class SessionT implements Session 
 { 
 	UserInterface UIInterface; 
-    DB SQL_cache; DB txt_cache;
-    public SessionT()
+    //DB SQL_cache; DB txt_cache;
+    DB DB_cache;
+    public SessionT(DB db)
     { 
-		UIInterface = new terminal(); UIInterface = new desktop(); SQL_cache = new SQL(); txt_cache = new txt();
+		UIInterface = new terminal(); 
+		//SQL_cache = new SQL(); txt_cache = new txt();
+        DB_cache = db;;
         System.out.println("Terminal is Operational"); 
         this.getWelcomeScreen();
         System.out.println("Terminal is Operational");
@@ -20,11 +22,11 @@ public class SessionT implements Session
 
     @Override 
     public void getWelcomeScreen(){ 
-      UIInterface.welcomeScreen(this);
+		UIInterface.welcomeScreen(this);
     } 
 
     @Override
-    public void test(Session sessionInstance,String[] a){
+    public void test(Session sessionInstance, String[] a){
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'test'");
     }
@@ -73,6 +75,7 @@ public class SessionT implements Session
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'displayAirPollutionScreen'");
     }
+
     @Override
     public void get5DayForecastDataProcess(double[][] dataarr) {
         // TODO Auto-generated method stub
@@ -88,5 +91,6 @@ public class SessionT implements Session
         throw new UnsupportedOperationException("Unimplemented method 'display5DayForecastScreen'");
     }
 }
+
 
     
