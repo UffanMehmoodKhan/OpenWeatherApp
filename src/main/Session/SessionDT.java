@@ -113,12 +113,6 @@ public class SessionDT implements Session {
             String[] airPollutionData = DB_cache.GetAirPoll(dataarr[x][0],dataarr[x][1]);
             arr[x] = airPollutionData;
         }
-        for (int i = 0; i < count; i++) {
-            for (int j = 0; j < arr[i].length; j++) {
-                System.out.print(arr[i][j] + " ");
-            }
-            System.out.println();
-        }
         
         this.displayAirPollutionScreen(this, arr, count);
     }
