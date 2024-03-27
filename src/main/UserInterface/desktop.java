@@ -20,7 +20,7 @@ public class desktop implements UserInterface
 
     @Override
     public void lat_locInputScreen(Session sessionInstance,int choice) {
-        new lat_locInputScreen(sessionInstance,choice);
+         new lat_locInputScreen(sessionInstance,choice);
     }
 
     @Override
