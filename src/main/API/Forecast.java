@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.net.*;
-import java.text.SimpleDateFormat;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import java.util.Date;
 import java.util.HashSet;
 
 public class Forecast {
@@ -17,7 +15,6 @@ public class Forecast {
 	@SuppressWarnings("deprecation")
     public String[] get5DayForecastData(String queryParameter, String apiKey) {
         List<String> forecastInfoList = new ArrayList<>();
-        HashSet<String> uniqueDates = new HashSet<>();
         HashSet<String> uniqueDates = new HashSet<>();
         try {
             // Construct the URL for API request

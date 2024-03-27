@@ -1,7 +1,6 @@
 package main.Database;
 
 import java.io.*;
-import main.API.API;
 
 public class txt implements DB {
     private static final String WEATHER_FILE = "weather.txt";
