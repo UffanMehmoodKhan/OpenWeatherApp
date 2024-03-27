@@ -12,7 +12,7 @@ public class SessionDT implements Session {
     public SessionDT()
     { 
         System.out.println("Desktop is Operational"); 
-        UIInterface = new desktop(); SQL_cache = new SQL(); txt_cache = new txt();
+        UIInterface = new desktop(); txt_cache = new SQL(); txt_cache = new txt();
         this.getWelcomeScreen();
         System.out.println("Desktop is Operational");
     }   
@@ -51,7 +51,7 @@ public class SessionDT implements Session {
         String[][] arr = new String[count][];
         for (int x = 0; x < count; x++) 
         {   
-            String[] weatherData = SQL_cache.GetWeather(dataarr[x][0],dataarr[x][1]);
+            String[] weatherData = txt_cache.GetWeather(dataarr[x][0],dataarr[x][1]);
             arr[x] = weatherData;
         }
         this.displayWeatherscreen(this, arr, count);
@@ -79,7 +79,7 @@ public class SessionDT implements Session {
         for (int i = 0; i < count ; i++) 
         {
            // String[] weatherData = APIInterface.getCurrentWeather(dataarra[i]);
-            String[] weatherData = SQL_cache.GetWeather(dataarra[i]);
+            String[] weatherData = txt_cache.GetWeather(dataarra[i]);
             arr[i] = weatherData;
         }
 
@@ -109,7 +109,7 @@ public class SessionDT implements Session {
         System.out.println(count);
         String[][] arr = new String[count][];
         for (int x = 0; x < count; x++) {   
-            String[] airPollutionData = SQL_cache.GetAirPoll(dataarr[x][0],dataarr[x][1]);
+            String[] airPollutionData = txt_cache.GetAirPoll(dataarr[x][0],dataarr[x][1]);
             arr[x] = airPollutionData;
         }
         for (int i = 0; i < count; i++) {
@@ -128,7 +128,7 @@ public class SessionDT implements Session {
             return;
         }
         //String[] forecastData = APIInterface.get5DayForecast(dataarr[0][0],dataarr[0][1]);
-        String[] forecastData = SQL_cache.GetForecast(dataarr[0][0],dataarr[0][1]);
+        String[] forecastData = txt_cache.GetForecast(dataarr[0][0],dataarr[0][1]);
         String[][] Weatherarr = new String[7][]; // Initialize the 2D array with 7 rows
         int x = 0;
         // Initialize the first row with 4 elements
@@ -150,7 +150,7 @@ public class SessionDT implements Session {
     public void get5DayForecastDataProcess(String cityName) {
     
             //String[] forecastData = APIInterface.get5DayForecast(cityName);
-            String[] forecastData = SQL_cache.GetForecast(cityName);
+            String[] forecastData = txt_cache.GetForecast(cityName);
             String[][] Weatherarr = new String[7][]; // Initialize the 2D array with 7 rows
             int x = 0;
             // Initialize the first row with 4 elements

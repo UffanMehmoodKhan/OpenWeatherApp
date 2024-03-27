@@ -77,7 +77,9 @@ public class welcomeScreen extends JFrame implements ActionListener {
                 // will have its own input screen 
             } 
             else if (e.getSource() == buttons[4]) { 
-                // Handle button 5 click 
+                dispose();
+                sessionInstance.getWeatherLocationInput(sessionInstance);
+                return;
             } 
             else if (e.getSource() == buttons[5]) { 
                 // Handle button 6 click
