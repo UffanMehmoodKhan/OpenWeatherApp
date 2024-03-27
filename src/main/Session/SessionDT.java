@@ -5,7 +5,6 @@ import main.UserInterface.*;
 public class SessionDT implements Session { 
 
     UserInterface UIInterface; 
-    //DB SQL_cache; DB txt_cache;
     DB DB_cache;
     // SessionST constructor 
     public SessionDT(DB db)
