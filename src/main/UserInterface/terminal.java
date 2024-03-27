@@ -5,7 +5,55 @@ import main.Session.*;
 import main.API.*;
 
 public class terminal implements UserInterface
- {  
+ {  String[] weather_titles = {
+        "City Name",
+        "Country Name",
+        "Local Time",
+        "Sunrise Time",
+        "Sunset Time",
+        "Latitude",
+        "Longitude",
+        "Weather",
+        "Weather Description",
+        "Temperature",
+        "Feels Like",
+        "Maximum Temp"
+    };
+
+    String[] AirPoll_titles = {
+        "Latitude",
+        "Longitude",
+        "Local Time",
+        "Air Quality Index",
+        "Concentration of CO",
+        "Concentration of NO",
+        "Concentration of NO2",
+        "Concentration of O3",
+        "Concentration of SO2",
+        "Concentration of PM2.5",
+        "Concentration of PM10",
+        "Concentration of NH3"
+    };
+
+    String[] forecast_prelim = {
+        "City Name",
+        "Country Name",
+        "Latitude",
+        "Longitude",
+        "Time Stamp",
+        "Current Max Temp",
+        "Current Min Temp",
+        "Weather",
+        "Weather Description"
+    };
+
+    String[] forecast_titles = {
+        "Timestamp",
+        "Maximum Temperature",
+        "Minimum Temperature",
+        "Weather",
+        "Weather Description"
+    };
     
     API OpenAI = new API();
     public terminal(){ }
@@ -14,8 +62,6 @@ public class terminal implements UserInterface
     { 
         int choice; Scanner sc = new Scanner(System.in); sc.reset();
         String[][] arr = new String[3][2];
-        
-        
         
         // if(choice == (1)){
         //     this.lat_locInputScreen(sessionInstance, 1);
@@ -58,9 +104,7 @@ public class terminal implements UserInterface
         else if (choice == 2){
             System.out.print("\033[H\033[2J");  
 		    System.out.flush(); 
-            System.out.println("\n\tChoose the following options for Air Pollution Report:");
-            System.out.println("\n[1] Lat/Lon\t\t[2]City, Country");
-            sc.reset(); choice = sc.nextInt();
+            System.out.println("\n\tAir Pollution Index Report\n");
             this.displayAirPollutionScreen(sessionInstance,  arr, choice);
         }
         else if (choice == 3)
@@ -70,7 +114,6 @@ public class terminal implements UserInterface
             this.display_forecast(sessionInstance, arr, choice);
         }
         else {
-            
 			status = false;
 		}
         
@@ -97,8 +140,8 @@ public class terminal implements UserInterface
             weather = OpenAI.getCurrentWeather("London");
         }
 		
-        for(String em: weather){
-				System.out.println(em);
+        for(int i = 0; i < weather.length - 1; i++){
+			System.out.println(weather_titles[i] +": "+weather[i]);
 		}
         
         try{
@@ -138,20 +181,20 @@ public class terminal implements UserInterface
 
         Scanner sc = new Scanner(System.in); 
         double lat; double lon; String loc;
-        System.out.println("Enter lat: "); lat = sc.nextDouble(); 
-        System.out.println("Enter lon: ");lon = sc.nextDouble();
+        System.out.println("\nEnter latitude: "); lat = sc.nextDouble(); 
+        System.out.println("Enter longitude: "); lon = sc.nextDouble();
         
         String[] air_poll = OpenAI.getAirQuality(lat, lon);
         
-        for(String em: air_poll){
-            System.out.println(em);
-        }
-
+        for(int i = 0; i < air_poll.length - 1; i++){
+			System.out.println(AirPoll_titles[i] +": "+air_poll[i]);
+		}
+        
         try{
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-            }
+        }
         //throw new UnsupportedOperationException("Unimplemented method 'displayAirPollutionScreen'");
     }
 
@@ -159,15 +202,24 @@ public class terminal implements UserInterface
         Scanner sc = new Scanner(System.in); 
         double lat; double lon; String loc;
         
-        String[] weather = null;
+        String[] forecast = null;
         
         System.out.println("Enter lat: "); lat = sc.nextDouble(); 
         System.out.println("Enter lon: ");lon = sc.nextDouble();
-        weather = OpenAI.get5DayForecast(lat, lon);
+        forecast = OpenAI.get5DayForecast((double)lat, (double)lon);
+        System.out.println("\n");
     
-        for(String em: weather){
-            System.out.println(em);
+        for(int i = 0; i < 9; i++){
+            System.out.println(forecast_prelim[i] + ": "+forecast[i]);
+        } System.out.println("\n");
+        
+        int day = 1;
+        for(int i = 9; i < forecast.length; i++){
+            if((i + 1) % 5 == 0){System.out.println("\nDay ["+day+"] "); day++;}
+            System.out.println(forecast[i]);
         }
+
+        
 
         try{
             Thread.sleep(5000);
