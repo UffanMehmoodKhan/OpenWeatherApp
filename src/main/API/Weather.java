@@ -13,11 +13,10 @@ import java.util.Date;
 
 public class Weather {
 
-    // Private method to fetch weather data from OpenWeatherMap API
-    @SuppressWarnings("deprecation")
+    @Deprecated
     public String[] getCurrentWeatherData(String queryParameter, String apiKey) {
         List<String> weatherInfoList = new ArrayList<>();
-        
+
         try {
             // Construct the URL for API request
             URL url = new URL("https://api.openweathermap.org/data/2.5/weather?" + queryParameter + "&appid=" + apiKey);
@@ -28,7 +27,12 @@ public class Weather {
             // Check the HTTP response code
             int responseCode = con.getResponseCode();
             if (responseCode != 200) {
-                throw new RuntimeException("Failed : HTTP error code : " + responseCode);
+                System.out.println("Failed : HTTP error code : " + responseCode);
+                weatherInfoList.add("Not Found");
+                for (int i = 0; i < 12; i++) {
+                    weatherInfoList.add(null);
+                }
+                return weatherInfoList.toArray(new String[0]);
             } else {
                 // Read the API response
                 StringBuilder informationString = new StringBuilder();
@@ -43,7 +47,8 @@ public class Weather {
                 JSONParser parser = new JSONParser();
                 JSONObject jsonObject = (JSONObject) parser.parse(informationString.toString());
 
-                if (jsonObject.containsKey("message")) {
+                if (jsonObject.containsKey("message") || jsonObject.containsKey("error")) {
+                    System.out.println("Error: " + jsonObject.get("message"));
                     weatherInfoList.add("Not Found");
                     for (int i = 0; i < 12; i++) {
                         weatherInfoList.add(null);
