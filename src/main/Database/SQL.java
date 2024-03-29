@@ -131,7 +131,6 @@ public class SQL implements DB
             System.out.println("Invalid data provided.");
             return;
         }
-        
         String cityName = data[0];
         String countryName = data[1];
         String latitude = data[2];
@@ -601,9 +600,14 @@ public class SQL implements DB
             return retrieveForecastInfo(city);
         } else
         {
+            System.out.println("//////////////reachedhere///////////////////");
+
 			String[] data = APIInterface.get5DayForecast(city);
             //api call and insert method will be called here
 			insertForecastInfo(data);
+            System.out.println("//////////////////////////////////////////////");
+            System.out.println(data.length);
+            System.out.println("//////////////////////////////////////////////");
 			return data;
         }
 	}
