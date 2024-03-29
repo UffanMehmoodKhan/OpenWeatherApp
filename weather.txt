@@ -1,0 +1,4 @@
+London,GB,2024-03-29_23:15:07,05:41:47,18:28:17,51.5085,-0.1257,Clouds,few clouds,11.76,10.82,10.88,12.49
+Not Found,null,null,null,null,null,null,null,null,null,null,null,null
+Lahore,PK,2024-03-29_23:54:37,05:54:47,18:19:39,31.5497,74.3436,Clouds,scattered clouds,23.99,23.93,23.06,23.99
+Bolori,NG,2024-03-30_00:24:08,06:05:37,18:18:30,12.13,13.12,Clouds,scattered clouds,34.42,31.82,34.42,34.42
