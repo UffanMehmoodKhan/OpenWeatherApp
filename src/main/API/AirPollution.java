@@ -47,7 +47,7 @@ public class AirPollution {
                 JSONParser parser = new JSONParser();
                 JSONObject jsonObject = (JSONObject) parser.parse(informationString.toString());
 
-                if (jsonObject.containsKey("error")) {
+                if (jsonObject.containsKey("message") || jsonObject.containsKey("error")) {
                     System.out.println("Error: " + jsonObject.get("message"));
                     airQualityInfoList.add("Not Found");
                     for (int i = 0; i < 10; i++) {
@@ -71,6 +71,7 @@ public class AirPollution {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 sdf.setTimeZone(TimeZone.getDefault()); // Set local timezone
                 String localTime = sdf.format(new Date(timestamp * 1000L));
+                localTime = localTime.replace(" ", "_");
 
                 // Extract air quality data
                 Number co = (Number) componentsObject.get("co");

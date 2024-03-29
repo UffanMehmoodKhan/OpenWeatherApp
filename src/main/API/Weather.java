@@ -47,7 +47,7 @@ public class Weather {
                 JSONParser parser = new JSONParser();
                 JSONObject jsonObject = (JSONObject) parser.parse(informationString.toString());
 
-                if (jsonObject.containsKey("error")) {
+                if (jsonObject.containsKey("message") || jsonObject.containsKey("error")) {
                     System.out.println("Error: " + jsonObject.get("message"));
                     weatherInfoList.add("Not Found");
                     for (int i = 0; i < 12; i++) {
@@ -84,7 +84,7 @@ public class Weather {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 sdf.setTimeZone(TimeZone.getDefault()); // Set local timezone
                 String localTime = sdf.format(new Date(timestamp * 1000L));
-
+                localTime = localTime.replace(" ", "_");
                 // Convert time from UTC to local time
                 long sunriseTimeLocal = sunriseTimeUTC + timeZoneOffset;
                 long sunsetTimeLocal = sunsetTimeUTC + timeZoneOffset;
