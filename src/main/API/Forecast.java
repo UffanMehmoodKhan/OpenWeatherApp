@@ -82,6 +82,7 @@ public class Forecast {
                     JSONObject forecastObject = (JSONObject) forecastList.get(i);
                     String dateTime = (String) forecastObject.get("dt_txt");
                     String datee = dateTime.split(" ")[0];
+                    datee = datee.replace(" ", "_");
 
                     // Skip if date is already added
                     if (uniqueDates.contains(datee)) {

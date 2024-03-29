@@ -84,7 +84,7 @@ public class Weather {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 sdf.setTimeZone(TimeZone.getDefault()); // Set local timezone
                 String localTime = sdf.format(new Date(timestamp * 1000L));
-
+                localTime = localTime.replace(" ", "_");
                 // Convert time from UTC to local time
                 long sunriseTimeLocal = sunriseTimeUTC + timeZoneOffset;
                 long sunsetTimeLocal = sunsetTimeUTC + timeZoneOffset;

@@ -71,6 +71,7 @@ public class AirPollution {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 sdf.setTimeZone(TimeZone.getDefault()); // Set local timezone
                 String localTime = sdf.format(new Date(timestamp * 1000L));
+                localTime = localTime.replace(" ", "_");
 
                 // Extract air quality data
                 Number co = (Number) componentsObject.get("co");
