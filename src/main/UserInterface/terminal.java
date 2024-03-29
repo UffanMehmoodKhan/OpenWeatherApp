@@ -125,7 +125,7 @@ public class terminal implements UserInterface
         }
         else if(choice == 2){
             System.out.println("Enter location: "); loc = sc.next(); 
-            weather = DB_cache.GetWeather("London");
+            weather = DB_cache.GetWeather(loc);
         }
 		
         for(int i = 0; i < weather.length - 1; i++){
