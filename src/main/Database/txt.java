@@ -93,7 +93,7 @@ public class txt implements DB {
 
     @Override
     public String[] retrieveWeatherInfo(double lat, double lon) {
-        String searchCriteria = lat + " " + lon;
+        String searchCriteria = lat + "," + lon;
         return retrieveInfoFromFile(WEATHER_FILE, searchCriteria);
     }
 
@@ -104,7 +104,7 @@ public class txt implements DB {
 
     @Override
     public String[] retrieveForecastInfo(double lat, double lon) {
-        String searchCriteria = lat + " " + lon;
+        String searchCriteria = lat + "," + lon;
         return retrieveInfoFromFile(FORECAST_FILE, searchCriteria);
     }
 
@@ -115,7 +115,7 @@ public class txt implements DB {
 
     @Override
     public String[] retrieveAirInfo(double lat, double lon) {
-        String searchCriteria = lat + " " + lon;
+        String searchCriteria = lat + "," + lon;
         return retrieveInfoFromFile(AIR_FILE, searchCriteria);
     }
 
