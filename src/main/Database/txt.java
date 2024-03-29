@@ -10,11 +10,18 @@ public class txt implements DB {
 
     @Override
     public void insertWeatherInfo(String[] data) {
+        int i = 0;
         try (FileWriter fw = new FileWriter(WEATHER_FILE, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
             for (String datum : data) {
-                out.print(datum + " ");
+                i++;
+                if(i==13){
+                    out.print(datum);
+                }
+                else{
+                    out.print(datum + " ");
+                }
             }
             out.println();
         } catch (IOException e) {
@@ -24,11 +31,18 @@ public class txt implements DB {
 
     @Override
     public void insertForecastInfo(String[] data) {
+        int i = 0;
         try (FileWriter fw = new FileWriter(FORECAST_FILE, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
             for (String datum : data) {
-                out.print(datum + " ");
+                i++;
+                if(i==34){
+                    out.print(datum);
+                }
+                else{
+                    out.print(datum + " ");
+                }
             }
             out.println();
         } catch (IOException e) {
@@ -38,11 +52,19 @@ public class txt implements DB {
 
     @Override
     public void insertAirInfo(String[] data) {
+        int i = 0;
         try (FileWriter fw = new FileWriter(AIR_FILE, true);
+        
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
             for (String datum : data) {
-                out.print(datum + " ");
+                i++;
+                if(i==12){
+                    out.print(datum);
+                }
+                else{
+                    out.print(datum + " ");
+                }
             }
             out.println();
         } catch (IOException e) {
