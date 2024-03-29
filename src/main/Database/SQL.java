@@ -31,13 +31,14 @@ public class SQL implements DB
 		}
 		return conn;
 	}
-	public void insertWeatherInfo(String[] data)
-	{
-        //if string data array is  null then return
-        if (data == null) {
+	public void insertWeatherInfo(String[] data) {
+        // Check if the data array is null or empty
+        if (data == null || data.length < 13) {
+            System.out.println("Invalid data provided.");
             return;
         }
-		String cityName = data[0];
+        
+        String cityName = data[0];
         String countryName = data[1];
         String localTime = data[2];
         String sunriseTime = data[3];
@@ -50,43 +51,24 @@ public class SQL implements DB
         String feelsLike = data[10];
         String minTemp = data[11];
         String maxTemp = data[12];
-
-        try (Connection connection = connect()) 
-		{
+    
+        try (Connection connection = connect()) {
             if (connection != null) {
-                // Insert into Locations table
-                String locationInsertQuery = "INSERT INTO Locations (name, latitude, longitude, country) VALUES (?, ?, ?, ?)";
-                try (PreparedStatement locationStatement = connection.prepareStatement(locationInsertQuery, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                // Check if location data exists
+                String locationQuery = "SELECT id FROM Locations WHERE name = ?";
+                try (PreparedStatement locationStatement = connection.prepareStatement(locationQuery)) {
                     locationStatement.setString(1, cityName);
-                    locationStatement.setString(2, latitude);
-                    locationStatement.setString(3, longitude);
-                    locationStatement.setString(4, countryName);
-                    locationStatement.executeUpdate();
-
-                    // Get the generated location ID
-                    int locationId;
-                    try (var generatedKeys = locationStatement.getGeneratedKeys()) {
-                        if (generatedKeys.next()) {
-                            locationId = generatedKeys.getInt(1);
+                    try (ResultSet resultSet = locationStatement.executeQuery()) {
+                        if (resultSet.next()) {
+                            // Location data exists, update latitude and longitude
+                            int locationId = resultSet.getInt("id");
+                            updateLocation(connection, locationId, latitude, longitude);
                         } else {
-                            throw new SQLException("Creating location failed, no ID obtained.");
+                            // Location data doesn't exist, insert into Locations table
+                            int locationId = insertLocation(connection, cityName, latitude, longitude, countryName);
+                            // Insert weather data
+                            insertWeather(connection, localTime, sunriseTime, sunsetTime, weather, weatherDescription, temp, feelsLike, minTemp, maxTemp, locationId);
                         }
-                    }
-
-                    // Insert into weather table
-                    String weatherInsertQuery = "INSERT INTO weather (localTime, sunriseTime, sunsetTime, weather, weatherDescription, Temp, FeelsLike, MinTemp, MaxTemp, location_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                    try (PreparedStatement weatherStatement = connection.prepareStatement(weatherInsertQuery)) {
-                        weatherStatement.setString(1, localTime);
-                        weatherStatement.setString(2, sunriseTime);
-                        weatherStatement.setString(3, sunsetTime);
-                        weatherStatement.setString(4, weather);
-                        weatherStatement.setString(5, weatherDescription);
-                        weatherStatement.setString(6, temp);
-                        weatherStatement.setString(7, feelsLike);
-                        weatherStatement.setString(8, minTemp);
-                        weatherStatement.setString(9, maxTemp);
-                        weatherStatement.setInt(10, locationId);
-                        weatherStatement.executeUpdate();
                     }
                 }
             } else {
@@ -96,59 +78,94 @@ public class SQL implements DB
             e.printStackTrace();
         }
     }
-		
-	
-    //implemented
+    
+    private int insertLocation(Connection connection, String cityName, String latitude, String longitude, String countryName) throws SQLException {
+        String locationInsertQuery = "INSERT INTO Locations (name, latitude, longitude, country) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement locationStatement = connection.prepareStatement(locationInsertQuery, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            locationStatement.setString(1, cityName);
+            locationStatement.setString(2, latitude);
+            locationStatement.setString(3, longitude);
+            locationStatement.setString(4, countryName);
+            locationStatement.executeUpdate();
+    
+            // Get the generated location ID
+            try (var generatedKeys = locationStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Creating location failed, no ID obtained.");
+                }
+            }
+        }
+    }
+    
+    private void updateLocation(Connection connection, int locationId, String latitude, String longitude) throws SQLException {
+        String locationUpdateQuery = "UPDATE Locations SET latitude = ?, longitude = ? WHERE id = ?";
+        try (PreparedStatement locationStatement = connection.prepareStatement(locationUpdateQuery)) {
+            locationStatement.setString(1, latitude);
+            locationStatement.setString(2, longitude);
+            locationStatement.setInt(3, locationId);
+            locationStatement.executeUpdate();
+        }
+    }
+    
+    private void insertWeather(Connection connection, String localTime, String sunriseTime, String sunsetTime, String weather, String weatherDescription, String temp, String feelsLike, String minTemp, String maxTemp, int locationId) throws SQLException {
+        String weatherInsertQuery = "INSERT INTO weather (localTime, sunriseTime, sunsetTime, weather, weatherDescription, Temp, FeelsLike, MinTemp, MaxTemp, location_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement weatherStatement = connection.prepareStatement(weatherInsertQuery)) {
+            weatherStatement.setString(1, localTime);
+            weatherStatement.setString(2, sunriseTime);
+            weatherStatement.setString(3, sunsetTime);
+            weatherStatement.setString(4, weather);
+            weatherStatement.setString(5, weatherDescription);
+            weatherStatement.setString(6, temp);
+            weatherStatement.setString(7, feelsLike);
+            weatherStatement.setString(8, minTemp);
+            weatherStatement.setString(9, maxTemp);
+            weatherStatement.setInt(10, locationId);
+            weatherStatement.executeUpdate();
+        }
+    }
+    
+    
     public void insertForecastInfo(String[] data) {
-        //if string data array is  null then return
-        if (data == null) {
+        // Check if the data array is null or empty
+        if (data == null || data.length < 4) {
+            System.out.println("Invalid data provided.");
             return;
         }
-
+        
         String cityName = data[0];
         String countryName = data[1];
         String latitude = data[2];
         String longitude = data[3];
-    
+        
         try (Connection connection = connect()) {
             if (connection != null) {
-                // Insert into Locations table
-                String locationInsertQuery = "INSERT INTO Locations (name, latitude, longitude, country) VALUES (?, ?, ?, ?)";
-                try (PreparedStatement locationStatement = connection.prepareStatement(locationInsertQuery, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                // Check if location data exists
+                String locationQuery = "SELECT id FROM Locations WHERE name = ?";
+                try (PreparedStatement locationStatement = connection.prepareStatement(locationQuery)) {
                     locationStatement.setString(1, cityName);
-                    locationStatement.setString(2, latitude);
-                    locationStatement.setString(3, longitude);
-                    locationStatement.setString(4, countryName);
-                    locationStatement.executeUpdate();
-    
-                    // Get the generated location ID
-                    int locationId;
-                    try (var generatedKeys = locationStatement.getGeneratedKeys()) {
-                        if (generatedKeys.next()) {
-                            locationId = generatedKeys.getInt(1);
+                    try (ResultSet resultSet = locationStatement.executeQuery()) {
+                        int locationId;
+                        if (resultSet.next()) {
+                            // Location data exists, update latitude and longitude
+                            locationId = resultSet.getInt("id");
+                            updateLocation(connection, locationId, latitude, longitude);
                         } else {
-                            throw new SQLException("Creating location failed, no ID obtained.");
+                            // Location data doesn't exist, insert into Locations table
+                            locationId = insertLocation(connection, cityName, latitude, longitude, countryName);
                         }
-                    }
-    
-                    // Insert forecast data into Forecast table
-                    int dataIdx = 4; // Starting index of forecast data in the array (after city, country, latitude, and longitude)
-                    while (dataIdx < data.length) {
-                        String date = data[dataIdx++];
-                        String formattedMinTemp = data[dataIdx++];
-                        String formattedMaxTemp = data[dataIdx++];
-                        String weather = data[dataIdx++];
-                        String weatherDescription = data[dataIdx++];
-    
-                        String forecastInsertQuery = "INSERT INTO Forecast (datee, formattedMinTemp, formattedMaxTemp, weather, weatherDescription, location_id) VALUES (?, ?, ?, ?, ?, ?)";
-                        try (PreparedStatement forecastStatement = connection.prepareStatement(forecastInsertQuery)) {
-                            forecastStatement.setString(1, date);
-                            forecastStatement.setString(2, formattedMinTemp);
-                            forecastStatement.setString(3, formattedMaxTemp);
-                            forecastStatement.setString(4, weather);
-                            forecastStatement.setString(5, weatherDescription);
-                            forecastStatement.setInt(6, locationId);
-                            forecastStatement.executeUpdate();
+                        
+                        // Insert forecast data into Forecast table
+                        int dataIdx = 4; // Starting index of forecast data in the array (after city, country, latitude, and longitude)
+                        while (dataIdx < data.length) {
+                            String date = data[dataIdx++];
+                            String formattedMinTemp = data[dataIdx++];
+                            String formattedMaxTemp = data[dataIdx++];
+                            String weather = data[dataIdx++];
+                            String weatherDescription = data[dataIdx++];
+                            
+                            insertForecast(connection, date, formattedMinTemp, formattedMaxTemp, weather, weatherDescription, locationId);
                         }
                     }
                 }
@@ -160,14 +177,27 @@ public class SQL implements DB
         }
     }
     
-	
-    public void insertAirInfo(String[] data)
-	{
-        //if string data array is  null then return
-        if (data == null) {
+    private void insertForecast(Connection connection, String date, String formattedMinTemp, String formattedMaxTemp, String weather, String weatherDescription, int locationId) throws SQLException {
+        String forecastInsertQuery = "INSERT INTO Forecast (datee, formattedMinTemp, formattedMaxTemp, weather, weatherDescription, location_id) VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement forecastStatement = connection.prepareStatement(forecastInsertQuery)) {
+            forecastStatement.setString(1, date);
+            forecastStatement.setString(2, formattedMinTemp);
+            forecastStatement.setString(3, formattedMaxTemp);
+            forecastStatement.setString(4, weather);
+            forecastStatement.setString(5, weatherDescription);
+            forecastStatement.setInt(6, locationId);
+            forecastStatement.executeUpdate();
+        }
+    }
+    
+    public void insertAirInfo(String[] data) {
+        // Check if the data array is null or empty
+        if (data == null || data.length < 12) {
+            System.out.println("Invalid data provided.");
             return;
         }
-		String latitude = data[0];
+        
+        String latitude = data[0];
         String longitude = data[1];
         String localTime = data[2];
         String aqi = data[3];
@@ -179,42 +209,26 @@ public class SQL implements DB
         String dpm2_5 = data[9];
         String dpm10 = data[10];
         String dnh3 = data[11];
-
+        
         try (Connection connection = connect()) {
             if (connection != null) {
-                // Insert into Locations table
-                String locationInsertQuery = "INSERT INTO Locations (latitude, longitude) VALUES (?, ?)";
-                try (PreparedStatement locationStatement = connection.prepareStatement(locationInsertQuery, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                // Check if location data exists
+                String locationQuery = "SELECT id FROM Locations WHERE latitude = ? AND longitude = ?";
+                try (PreparedStatement locationStatement = connection.prepareStatement(locationQuery)) {
                     locationStatement.setString(1, latitude);
                     locationStatement.setString(2, longitude);
-                    locationStatement.executeUpdate();
-
-                    // Get the generated location ID
-                    int locationId;
-                    try (var generatedKeys = locationStatement.getGeneratedKeys()) {
-                        if (generatedKeys.next()) {
-                            locationId = generatedKeys.getInt(1);
+                    try (ResultSet resultSet = locationStatement.executeQuery()) {
+                        int locationId;
+                        if (resultSet.next()) {
+                            // Location data exists
+                            locationId = resultSet.getInt("id");
                         } else {
-                            throw new SQLException("Creating location failed, no ID obtained.");
+                            // Location data doesn't exist, insert into Locations table
+                            locationId = insertLocation(connection, null, latitude, longitude, null);
                         }
-                    }
-
-                    // Insert into AirQuality table
-                    String airQualityInsertQuery = "INSERT INTO AirQuality (localTime, aqi, Dco, Dno, Dno2, Do3, Dso2, Dpm2_5, Dpm10, Dnh3, location_id) " +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                    try (PreparedStatement airQualityStatement = connection.prepareStatement(airQualityInsertQuery)) {
-                        airQualityStatement.setString(1, localTime);
-                        airQualityStatement.setString(2, aqi);
-                        airQualityStatement.setString(3, dco);
-                        airQualityStatement.setString(4, dno);
-                        airQualityStatement.setString(5, dno2);
-                        airQualityStatement.setString(6, do3);
-                        airQualityStatement.setString(7, dso2);
-                        airQualityStatement.setString(8, dpm2_5);
-                        airQualityStatement.setString(9, dpm10);
-                        airQualityStatement.setString(10, dnh3);
-                        airQualityStatement.setInt(11, locationId);
-                        airQualityStatement.executeUpdate();
+                        
+                        // Insert air quality data into AirQuality table
+                        insertAirQuality(connection, localTime, aqi, dco, dno, dno2, do3, dso2, dpm2_5, dpm10, dnh3, locationId);
                     }
                 }
             } else {
@@ -223,8 +237,26 @@ public class SQL implements DB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-	}
-
+    }
+    
+    private void insertAirQuality(Connection connection, String localTime, String aqi, String dco, String dno, String dno2, String do3, String dso2, String dpm2_5, String dpm10, String dnh3, int locationId) throws SQLException {
+        String airQualityInsertQuery = "INSERT INTO AirQuality (localTime, aqi, Dco, Dno, Dno2, Do3, Dso2, Dpm2_5, Dpm10, Dnh3, location_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement airQualityStatement = connection.prepareStatement(airQualityInsertQuery)) {
+            airQualityStatement.setString(1, localTime);
+            airQualityStatement.setString(2, aqi);
+            airQualityStatement.setString(3, dco);
+            airQualityStatement.setString(4, dno);
+            airQualityStatement.setString(5, dno2);
+            airQualityStatement.setString(6, do3);
+            airQualityStatement.setString(7, dso2);
+            airQualityStatement.setString(8, dpm2_5);
+            airQualityStatement.setString(9, dpm10);
+            airQualityStatement.setString(10, dnh3);
+            airQualityStatement.setInt(11, locationId);
+            airQualityStatement.executeUpdate();
+        }
+    }
+    
     //
     public String[] retrieveWeatherInfo(double lat,double lon)
 	{
@@ -421,8 +453,6 @@ public class SQL implements DB
         return forecastDataArray;
     }
     
-   
-
     public String[] retrieveAirInfo(double lat,double lon)
 	{
         String[] airInfo = new String[10]; // Array to store air quality information
@@ -464,13 +494,19 @@ public class SQL implements DB
 
 	//boolean functions to check data existance 
 
-	public boolean checkIfDataExists(double lat, double lon) {
+    private boolean checkIfDataExists(String query, Object... params) {
         boolean exists = false;
-        String query = "SELECT COUNT(*) FROM Locations WHERE latitude = ? AND longitude = ?";
         try (Connection connection = connect();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setDouble(1, lat);
-            statement.setDouble(2, lon);
+            
+            for (int i = 0; i < params.length; i++) {
+                if (params[i] instanceof Double) {
+                    statement.setDouble(i + 1, (Double) params[i]);
+                } else if (params[i] instanceof String) {
+                    statement.setString(i + 1, (String) params[i]);
+                }
+            }
+            
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     int count = resultSet.getInt(1);
@@ -482,24 +518,28 @@ public class SQL implements DB
         }
         return exists;
     }
-    public boolean checkIfDataExists(String city) {
-        boolean exists = false;
-        String query = "SELECT COUNT(*) FROM Locations WHERE name = ?";
-        try (Connection connection = connect();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, city);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    int count = resultSet.getInt(1);
-                    exists = count > 0;
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return exists;
+    
+    public boolean checkIfWeatherDataExists(String city) {
+        String locationQuery = "SELECT COUNT(*) FROM Locations WHERE name = ?";
+        String weatherQuery = "SELECT COUNT(*) FROM weather WHERE location_id = (SELECT TOP 1 id FROM Locations WHERE name = ?)";
+        return checkIfDataExists(locationQuery, city) && checkIfDataExists(weatherQuery, city);
     }
-    public boolean checkIfAirpollExists(double lat, double lon) {
+    public boolean checkIfWeatherDataExists(double lat, double lon) {
+        String locationQuery = "SELECT COUNT(*) FROM Locations WHERE latitude = ? AND longitude = ?";
+        String weatherQuery = "SELECT COUNT(*) FROM weather WHERE location_id = (SELECT TOP 1 id FROM Locations WHERE latitude = ? AND longitude = ?)";
+        return checkIfDataExists(locationQuery, lat, lon) && checkIfDataExists(weatherQuery, lat, lon);
+    }
+    public boolean checkIfForecastDataExists(double lat, double lon) {
+        String locationQuery = "SELECT COUNT(*) FROM Locations WHERE latitude = ? AND longitude = ?";
+        String weatherQuery = "SELECT COUNT(*) FROM Forecast WHERE location_id = (SELECT TOP 1 id FROM Locations WHERE latitude = ? AND longitude = ?)";
+        return checkIfDataExists(locationQuery, lat, lon) && checkIfDataExists(weatherQuery, lat, lon);
+    }
+    public boolean checkIfForecastDataExists(String city) {
+        String locationQuery = "SELECT COUNT(*) FROM Locations WHERE name = ?";
+        String weatherQuery = "SELECT COUNT(*) FROM Forecast WHERE location_id = (SELECT TOP 1 id FROM Locations WHERE name = ?)";
+        return checkIfDataExists(locationQuery, city) && checkIfDataExists(weatherQuery, city);
+    }
+	private boolean checkIfAirpollExists(double lat, double lon) {
         boolean exists = false;
         String query = "SELECT COUNT(*) FROM AirQuality INNER JOIN Locations ON AirQuality.location_id = Locations.id " +
                        "WHERE Locations.latitude = ? AND Locations.longitude = ?";
@@ -523,7 +563,7 @@ public class SQL implements DB
     //Session methods for weather
     public String[] GetWeather(double lat,double lon)
 	{
-		if (checkIfDataExists(lat, lon)) {
+		if (checkIfWeatherDataExists(lat, lon)) {
             return retrieveWeatherInfo(lat, lon);
         } else {
 			String[] data = APIInterface.getCurrentWeather(lat,lon);
@@ -534,7 +574,7 @@ public class SQL implements DB
     }
     public String[] GetWeather(String city)
 	{
-		if (checkIfDataExists(city)) {
+		if (checkIfWeatherDataExists(city)) {
             return retrieveWeatherInfo(city);
         } else {
             String[] data = APIInterface.getCurrentWeather(city);
@@ -547,7 +587,7 @@ public class SQL implements DB
     //session methods for forecast,     // implemented
     public String[] GetForecast(double lat,double  lon)
 	{
-		if (checkIfDataExists(lat, lon)) {
+		if (checkIfForecastDataExists(lat, lon)) {
             return retrieveForecastInfo(lat, lon);
         } else
         {
@@ -559,7 +599,7 @@ public class SQL implements DB
 	}
     public String[] GetForecast(String city)
 	{
-		if (checkIfDataExists(city)) {
+		if (checkIfForecastDataExists(city)) {
             return retrieveForecastInfo(city);
         } else
         {
