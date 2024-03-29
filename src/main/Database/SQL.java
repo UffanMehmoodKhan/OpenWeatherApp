@@ -33,6 +33,10 @@ public class SQL implements DB
 	}
 	public void insertWeatherInfo(String[] data)
 	{
+        //if string data array is  null then return
+        if (data == null) {
+            return;
+        }
 		String cityName = data[0];
         String countryName = data[1];
         String localTime = data[2];
@@ -96,6 +100,11 @@ public class SQL implements DB
 	
     //implemented
     public void insertForecastInfo(String[] data) {
+        //if string data array is  null then return
+        if (data == null) {
+            return;
+        }
+
         String cityName = data[0];
         String countryName = data[1];
         String latitude = data[2];
@@ -154,6 +163,10 @@ public class SQL implements DB
 	
     public void insertAirInfo(String[] data)
 	{
+        //if string data array is  null then return
+        if (data == null) {
+            return;
+        }
 		String latitude = data[0];
         String longitude = data[1];
         String localTime = data[2];

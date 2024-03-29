@@ -47,7 +47,7 @@ public class AirPollution {
                 JSONParser parser = new JSONParser();
                 JSONObject jsonObject = (JSONObject) parser.parse(informationString.toString());
 
-                if (jsonObject.containsKey("error")) {
+                if (jsonObject.containsKey("message") || jsonObject.containsKey("error")) {
                     System.out.println("Error: " + jsonObject.get("message"));
                     airQualityInfoList.add("Not Found");
                     for (int i = 0; i < 10; i++) {
