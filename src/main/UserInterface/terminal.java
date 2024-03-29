@@ -19,7 +19,8 @@ public class terminal implements UserInterface
         "Weather Description",
         "Temperature",
         "Feels Like",
-        "Maximum Temp"
+        "Minimum Temp",
+		"Maximum Temp"
     };
 
     String[] AirPoll_titles = {
@@ -43,8 +44,8 @@ public class terminal implements UserInterface
         "Latitude",
         "Longitude",
         "Time Stamp",
-        "Current Max Temp",
         "Current Min Temp",
+		"Current Max Temp",
         "Weather",
         "Weather Description"
     };
@@ -80,9 +81,6 @@ public class terminal implements UserInterface
         System.out.println("\n[1] Weather Report\t\t[2]Air Pollution Report");
         System.out.println("\n[3] 5-Day Forecast\t\t[4]Exit");
 
-        //choice = sc.nextInt(); 
-        //System.out.println(choice); sc.reset(); 
-
         try {
             choice = sc.nextInt(); System.out.println(choice); sc.reset(); 
             
@@ -95,18 +93,9 @@ public class terminal implements UserInterface
             this.lat_locInputScreen(sessionInstance, choice);
         }
         else if (choice == 2){
-            System.out.print("\033[H\033[2J");  
-		    System.out.flush(); 
-            System.out.println("\n\tAir Pollution Index Report\n");
             this.displayAirPollutionScreen(sessionInstance,  arr, choice);
         }
-        else if (choice == 3)
-        {
-            System.out.print("\033[H\033[2J");  
-		    System.out.flush(); 
-            System.out.println("\n\tChoose the following options for Weather Report:");
-            System.out.println("\n[1] Lat/Lon\t\t[2]City, Country");
-            sc.reset(); choice = sc.nextInt();
+        else if (choice == 3){
             this.display_forecast(sessionInstance, arr, choice);
         }
         else if(choice == 4){
@@ -177,7 +166,7 @@ public class terminal implements UserInterface
             lat_locInputScreen(sessionInstance, choice);
         }
 		
-        for(int i = 0; i < weather.length - 1; i++){
+        for(int i = 0; i < weather.length; i++){
 			System.out.println(weather_titles[i] +": " + weather[i]);
 		}
         
@@ -186,7 +175,6 @@ public class terminal implements UserInterface
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-         
     }
 
     @Override
@@ -202,11 +190,31 @@ public class terminal implements UserInterface
     }
     @Override
     public void displayAirPollutionScreen(Session sessionInstance, String[][] arr, int count) {
-
+		
+		System.out.print("\033[H\033[2J");  
+		System.out.flush(); 
+		System.out.println("\n\tAir Pollution Index Report\n\n");
         Scanner sc = new Scanner(System.in); 
-        double lat; double lon; String loc;
-        System.out.println("\nEnter latitude: "); lat = sc.nextDouble(); 
-        System.out.println("Enter longitude: "); lon = sc.nextDouble();
+        double lat = 1; double lon = 1; 
+        System.out.println("\nEnter latitude: "); 
+        
+
+		try {
+			lat = sc.nextDouble();  sc.reset(); 
+			
+		} catch (InputMismatchException e) {
+			sc.nextLine(); // Consume the invalid input to prevent an infinite loop
+			displayAirPollutionScreen(sessionInstance, arr, count); 
+		}
+
+		System.out.println("Enter longitude: "); 
+		try {
+			lon = sc.nextDouble();;  sc.reset(); 
+			
+		} catch (InputMismatchException e) {
+			sc.nextLine(); // Consume the invalid input to prevent an infinite loop
+			displayAirPollutionScreen(sessionInstance, arr, count); 
+		}
         
         String[] air_poll = DB_cache.GetAirPoll(lat, lon);
         
@@ -219,18 +227,47 @@ public class terminal implements UserInterface
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-       
+       sc.close();
     }
 
     public void display_forecast(Session sessionInstance, String[][] arr, int count){
-        Scanner sc = new Scanner(System.in); 
-        double lat; double lon; String loc;
+        System.out.print("\033[H\033[2J");  
+		System.out.flush(); 
+		System.out.println("\n\tChoose the following options for Weather Report:");
+		System.out.println("\n[1] Lat/Lon\t\t[2]City, Country");
+		Scanner sc = new Scanner(System.in);
+        double lat = 1; double lon = 1; String loc = "Lahore";
         
         String[] forecast = null;
+
+		try {
+            count = sc.nextInt(); sc.reset(); 
+            
+        } catch (InputMismatchException e) {
+			sc.nextLine();
+            display_forecast(sessionInstance, arr, count);
+           // Consume the invalid input to prevent an infinite loop
+        } 
         
         if(count == 1){
-            System.out.println("Enter lat: "); lat = sc.nextDouble(); 
-            System.out.println("Enter lon: ");lon = sc.nextDouble();
+            System.out.println("Enter lat: ");
+			try {
+				lat = sc.nextDouble();  sc.reset(); 
+				
+			} catch (InputMismatchException e) {
+				sc.nextLine(); // Consume the invalid input to prevent an infinite loop
+				display_forecast(sessionInstance, arr, count);
+			}
+
+			System.out.println("Enter lon: ");
+			try {
+				lat = sc.nextDouble();  sc.reset(); 
+				
+			} catch (InputMismatchException e) {
+				sc.nextLine(); // Consume the invalid input to prevent an infinite loop
+				display_forecast(sessionInstance, arr, count);
+			}
+
             forecast = DB_cache.GetForecast(lat, lon);
         }
         else if(count == 2){
@@ -257,7 +294,11 @@ public class terminal implements UserInterface
         }
         
     }
-    @Override
+    
+	
+	
+	
+	@Override
     public void ForecastLocationInputScreen(Session sessionInstance) {
         throw new UnsupportedOperationException("Unimplemented method 'ForecastLocationInputScreen'");
     }

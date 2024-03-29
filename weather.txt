@@ -1,8 +1,4 @@
-London GB 2024-03-29 15:31:13 05:41:47 18:28:17 51.5085 -0.1257 Clouds overcast clouds 10.21 9.53 8.91 11.64 
-Lahore PK 2024-03-29 15:45:54 05:54:47 18:19:39 31.5497 74.3436 Clouds scattered clouds 31.99 31.76 31.99 32.06 
-Karachi PK 2024-03-29 15:37:20 06:26:07 18:46:24 24.9056 67.0822 Clear clear sky 29.90 29.26 29.90 29.90 
-Rome US 2024-03-29 15:33:25 07:31:09 19:59:05 34.257 -85.1647 Clear clear sky 2.70 2.70 0.27 5.26 
-Cambridge CA 2024-03-29 15:43:46 07:07:22 19:44:03 43.3601 -80.3127 Clear clear sky -1.80 -4.63 -2.75 -1.03 
-New LR 2024-03-29 15:47:12 06:41:53 18:51:54 6.6518 -10.5932 Clouds overcast clouds 28.74 32.00 28.74 28.74 
-Chichawatni PK 2024-03-29 15:44:56 06:01:44 18:25:51 30.5333 72.7 Clouds overcast clouds 35.19 32.93 35.19 35.19 
-Montgomery PK 2024-03-29 15:49:16 06:00:05 18:24:18 30.6667 73.1 Clouds overcast clouds 35.51 33.17 35.51 35.51 
+London,GB,2024-03-29_23:15:07,05:41:47,18:28:17,51.5085,-0.1257,Clouds,few clouds,11.76,10.82,10.88,12.49
+Not Found,null,null,null,null,null,null,null,null,null,null,null,null
+Lahore,PK,2024-03-29_23:54:37,05:54:47,18:19:39,31.5497,74.3436,Clouds,scattered clouds,23.99,23.93,23.06,23.99
+Bolori,NG,2024-03-30_00:24:08,06:05:37,18:18:30,12.13,13.12,Clouds,scattered clouds,34.42,31.82,34.42,34.42
