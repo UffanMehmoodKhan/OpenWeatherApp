@@ -16,11 +16,11 @@ public class txt implements DB {
              PrintWriter out = new PrintWriter(bw)) {
             for (String datum : data) {
                 i++;
-                if(i==13){
+                if(i == 13){
                     out.print(datum);
                 }
                 else{
-                    out.print(datum + " ");
+                    out.print(datum + ",");
                 }
             }
             out.println();
@@ -28,7 +28,7 @@ public class txt implements DB {
             e.printStackTrace();
         }
     }
-
+    
     @Override
     public void insertForecastInfo(String[] data) {
         int i = 0;
@@ -37,11 +37,11 @@ public class txt implements DB {
              PrintWriter out = new PrintWriter(bw)) {
             for (String datum : data) {
                 i++;
-                if(i==34){
+                if(i == 34){
                     out.print(datum);
                 }
                 else{
-                    out.print(datum + " ");
+                    out.print(datum + ",");
                 }
             }
             out.println();
@@ -49,21 +49,20 @@ public class txt implements DB {
             e.printStackTrace();
         }
     }
-
+    
     @Override
     public void insertAirInfo(String[] data) {
         int i = 0;
         try (FileWriter fw = new FileWriter(AIR_FILE, true);
-        
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
             for (String datum : data) {
                 i++;
-                if(i==12){
+                if(i == 12){
                     out.print(datum);
                 }
                 else{
-                    out.print(datum + " ");
+                    out.print(datum + ",");
                 }
             }
             out.println();
@@ -71,13 +70,15 @@ public class txt implements DB {
             e.printStackTrace();
         }
     }
+    
 
     private String[] retrieveInfoFromFile(String fileName, String searchCriteria) {
         String line;
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             while ((line = br.readLine()) != null) {
-                if (line.contains(searchCriteria)) {
-                    return line.split(" ");
+                // Perform a case-insensitive check
+                if (line.toLowerCase().contains(searchCriteria.toLowerCase())) {
+                    return line.split(",");
                 }
             }
         } catch (IOException e) {
@@ -87,6 +88,8 @@ public class txt implements DB {
         
         return new String[]{"0"};
     }
+    
+    
 
     @Override
     public String[] retrieveWeatherInfo(double lat, double lon) {
