@@ -58,8 +58,8 @@ public class AirPollution {
 
                 // Extract relevant data from JSON object
                 JSONObject coordObject = (JSONObject) jsonObject.get("coord");
-                Double latitude = (Double) coordObject.get("lat");
-                Double longitude = (Double) coordObject.get("lon");
+                Number latitude = (Number) coordObject.get("lat");
+                Number longitude = (Number) coordObject.get("lon");
                 JSONArray listArray = (JSONArray) jsonObject.get("list");
                 JSONObject mainObject = (JSONObject) listArray.get(0);
                 long timestamp = (long) mainObject.get("dt");
@@ -71,6 +71,7 @@ public class AirPollution {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 sdf.setTimeZone(TimeZone.getDefault()); // Set local timezone
                 String localTime = sdf.format(new Date(timestamp * 1000L));
+                localTime = localTime.replace(" ", "_");
 
                 // Extract air quality data
                 Number co = (Number) componentsObject.get("co");
@@ -83,6 +84,8 @@ public class AirPollution {
                 Number nh3 = (Number) componentsObject.get("nh3");
 
                 // Convert values to Double
+                Double latitudeD = latitude.doubleValue();
+                Double longitudeD = longitude.doubleValue();
                 Double Dco = co.doubleValue();
                 Double Dno = no.doubleValue();
                 Double Dno2 = no2.doubleValue();
@@ -93,8 +96,8 @@ public class AirPollution {
                 Double Dnh3 = nh3.doubleValue();
 
                 // Populate the list with extracted data
-                airQualityInfoList.add(latitude.toString());
-                airQualityInfoList.add(longitude.toString());
+                airQualityInfoList.add(latitudeD.toString());
+                airQualityInfoList.add(longitudeD.toString());
                 airQualityInfoList.add(localTime);
                 Double aqiDouble = aqi.doubleValue();
                 airQualityInfoList.add(aqiDouble.toString());

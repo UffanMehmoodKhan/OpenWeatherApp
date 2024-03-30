@@ -77,8 +77,12 @@ private class EnterListener implements ActionListener {
         int index = 0;
         for (int i = 0; i < 3; i++) {
             if (!latitudeFields[i].getText().isEmpty() && !longitudeFields[i].getText().isEmpty()) {
-                enteredData[index][0] = Double.parseDouble(latitudeFields[i].getText());
-                enteredData[index][1] = Double.parseDouble(longitudeFields[i].getText());
+                // Convert integer strings to double values
+                double latitude = Double.parseDouble(latitudeFields[i].getText());
+                double longitude = Double.parseDouble(longitudeFields[i].getText());
+                
+                enteredData[index][0] = latitude;
+                enteredData[index][1] = longitude;
                 index++;
             }
         }

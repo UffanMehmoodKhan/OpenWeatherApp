@@ -1,8 +1,5 @@
-my hello 
-Paleochora null 34.5 23.5 2024-03-27 17.26 17.26 Clouds scattered clouds 2024-03-28 17.09 17.09 Clouds broken clouds 2024-03-29 15.61 15.61 Clear clear sky 2024-03-30 16.29 16.29 Clouds few clouds 2024-03-31 17.00 17.00 Clouds few clouds 2024-04-01 16.98 16.98 Clouds few clouds 
-null null null null Not Found null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null 
-null null null null Not Found null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null 
-null null null null Not Found null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null 
-null null null null Not Found null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null 
-Lahore null 31.5497 74.3436 2024-03-27 22.54 23.65 Clouds broken clouds 2024-03-28 22.17 22.26 Clouds overcast clouds 2024-03-29 20.52 20.52 Rain light rain 2024-03-30 22.32 22.32 Rain light rain 2024-03-31 17.34 17.34 Clouds few clouds 2024-04-01 18.23 18.23 Clouds broken clouds 
-null null null null Not Found null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null null 
+London,null,51.5085,-0.1257,2024-03-29,12.11,12.28,Rain,light rain,2024-03-30,7.81,7.81,Clouds,broken clouds,2024-03-31,7.46,7.46,Clouds,broken clouds,2024-04-01,10.00,10.00,Clouds,overcast clouds,2024-04-02,6.89,6.89,Rain,light rain,2024-04-03,8.83,8.83,Rain,light rain
+Lahore,null,31.5497,74.3436,2024-03-29,21.20,23.06,Rain,light rain,2024-03-30,19.39,20.92,Rain,light rain,2024-03-31,17.02,17.02,Clear,clear sky,2024-04-01,19.73,19.73,Clouds,overcast clouds,2024-04-02,20.95,20.95,Clouds,overcast clouds,2024-04-03,21.33,21.33,Clouds,overcast clouds
+123,null,14.645,120.9887,2024-03-29,26.98,27.39,Clouds,scattered clouds,2024-03-30,27.43,27.76,Clouds,broken clouds,2024-03-31,26.71,26.71,Clouds,broken clouds,2024-04-01,27.21,27.21,Clear,clear sky,2024-04-02,27.60,27.60,Clouds,few clouds,2024-04-03,28.07,28.07,Clouds,broken clouds
+
+Chichawatni null 30.5333 72.7 2024-03-30 20.58 21.59 Clouds broken clouds 2024-03-31 18.14 18.14 Clear clear sky 2024-04-01 18.87 18.87 Clouds overcast clouds 2024-04-02 20.10 20.10 Clouds overcast clouds 2024-04-03 19.87 19.87 Clouds few clouds 

@@ -9,6 +9,13 @@
             "name": "App",
             "request": "launch",
             "mainClass": "main.App.App",
+            "projectName": "OpenWeatherApp_b93fec82"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "main.App.App",
             "projectName": "OpenWeatherApp_a7690e50"
         },
         {
