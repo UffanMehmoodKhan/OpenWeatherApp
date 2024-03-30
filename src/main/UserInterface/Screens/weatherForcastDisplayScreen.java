@@ -80,7 +80,7 @@ public class weatherForcastDisplayScreen extends JFrame {
         weatherPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         weatherPanel.setBackground(Color.LIGHT_GRAY); // Set background color to royal blue
 
-        String[] labels = {"Date", "Max Temperature:", "Min Temperature:", "Weather:", "Weather Description:"}; // Add the timestamp label
+        String[] labels = {"Date", "Min Temperature:", "Max Temperature:", "Weather:", "Weather Description:"}; // Add the timestamp label
         for (int i = 0; i < labels.length; i++) {
             JLabel label = new JLabel(labels[i]);
             label.setForeground(Color.BLACK); // Set text color to black

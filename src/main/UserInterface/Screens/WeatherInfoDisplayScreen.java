@@ -63,7 +63,7 @@ public class WeatherInfoDisplayScreen extends JFrame {
         weatherPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         String[] labels = {"City Name:", "Country Name:", "Timestamp:", "Sunrise Time:", "Sunset Time:", "Latitude:", "Longitude:",
-                "Weather:", "Weather Description:", "Temperature:", "Feels Like:", "Max Temperature:", "Min Temperature:"}; // Add the timestamp label
+                "Weather:", "Weather Description:", "Temperature:", "Feels Like:", "Min Temperature:", "Max Temperature:"}; // Add the timestamp label
         for (int i = 0; i < labels.length; i++) {
             JLabel label = new JLabel(labels[i]);
             JLabel value = new JLabel(locationData[i]);
