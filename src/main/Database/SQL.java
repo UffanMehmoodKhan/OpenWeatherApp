@@ -18,7 +18,7 @@ public class SQL implements DB
 		Connection conn = null;
 		try
 		{
-			String connectionString = "jdbc:sqlserver://DESKTOP-2DS0DMR;databaseName=testing2;integratedSecurity=true;TrustServerCertificate=True";
+			String connectionString = "jdbc:sqlserver://ZOHAIB1;databaseName=testing2;integratedSecurity=true;TrustServerCertificate=True";
 			conn = DriverManager.getConnection(connectionString);
 			//System.out.println("Connection has been established.");
 		}
@@ -131,6 +131,7 @@ public class SQL implements DB
             System.out.println("Invalid data provided.");
             return;
         }
+        
         String cityName = data[0];
         String countryName = data[1];
         String latitude = data[2];

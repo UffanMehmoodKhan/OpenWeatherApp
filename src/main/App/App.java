@@ -41,11 +41,6 @@ public class App{
 	{
 		db.clearCache();
 	}
-
-
-
-
-
     public static void main(String[] args)
 	{
 		//clearDatabase();
