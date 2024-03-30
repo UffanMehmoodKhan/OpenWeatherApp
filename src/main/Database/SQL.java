@@ -131,6 +131,7 @@ public class SQL implements DB
             System.out.println("Invalid data provided.");
             return;
         }
+        
         String cityName = data[0];
         String countryName = data[1];
         String latitude = data[2];
@@ -219,6 +220,7 @@ public class SQL implements DB
                         if (resultSet.next()) {
                             // Location data exists
                             locationId = resultSet.getInt("id");
+                            updateLocation(connection, locationId, latitude, longitude);
                         } else {
                             // Location data doesn't exist, insert into Locations table
                             locationId = insertLocation(connection, null, latitude, longitude, null);
