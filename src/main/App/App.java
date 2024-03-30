@@ -24,11 +24,13 @@ public class App{
 			if(argvString.equals("terminal")){ 			//creates a terminal Session
 			System.out.println("is this terminal even working?");
 			session = new SessionT(db);
+
 			}
 			else if(argvString.equals("desktop")){		//creates a desktop Session
 				System.out.println("is this desktop even working?");
 				session = new SessionDT(db); 
 			}
+			//clearDatabase();
 		}
 		
     }
@@ -41,16 +43,11 @@ public class App{
 	{
 		db.clearCache();
 	}
-
-
-
-
-
     public static void main(String[] args)
 	{
-		//clearDatabase();
-        System.out.println("\n" + args[0] + " application config"); 
+		
+		System.out.println("\n" + args[0] + " application config"); 
 		App OpenWeatherMap = new App(args[0], args[1]); //Initialize OpenWeatherMap App object
-		OpenWeatherMap.getSession();	
+		OpenWeatherMap.getSession();
     }
 }
