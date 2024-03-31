@@ -11,7 +11,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class Forecast API{
+public class Forecast{
 
     @Deprecated
     // Method to get 5 day forecast data
