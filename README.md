@@ -1,5 +1,6 @@
 # OpenWeatherApp
-A Weather Application utilizing the OpenWeather API to provide historical, current and forecasted weather data. 
+
+A Weather Application utilizing the OpenWeather API to provide historical, current and forecasted weather data.
 This allows users to receive access to the various data for a specific location and obtain relevant weather updates.
 Current features include:
 
@@ -13,4 +14,71 @@ Current features include:
 8. Generate Government weather alerts & notification for poor weather conditions and air quality.
 9. Show Air Pollution data and concentration of polluting gasses in the atmosphere.
 
-This project is implemented in Java [stack and specks to be updated later].
+## Installation
+
+### Clone the Repository
+
+Clone the repository using the following command:
+
+```bash
+git clone https://github.com/UffanMehmoodKhan/OpenWeatherApp.git
+````
+
+### Compile the Application
+
+Navigate to the project directory and compile the application using Java compiler:
+
+````bash
+cd OpenWeatherApp
+javac -d bin src/main/App/*.java
+````
+
+### Windows Installation
+
+* Desktop Session with SQL Database
+
+Run the application with the following command:
+
+```bash
+cmd /C ""C:\Program Files\Java\jdk-21\bin\java.exe" @C:\Users\HP\AppData\Local\Temp\cp_b6rnjcjkktnnlwh83xkc6khos.argfile main.App.App desktop SQL"
+````
+
+* Desktop Session with txt Database
+
+Run the application with the following command:
+
+```bash
+cmd /C ""C:\Program Files\Java\jdk-21\bin\java.exe" @C:\Users\HP\AppData\Local\Temp\cp_b6rnjcjkktnnlwh83xkc6khos.argfile main.App.App desktop txt"
+````
+
+* Terminal Session with SQL Database
+
+Run the application with the following command:
+
+```bash
+cmd /C ""C:\Program Files\Java\jdk-21\bin\java.exe" @C:\Users\HP\AppData\Local\Temp\cp_b6rnjcjkktnnlwh83xkc6khos.argfile main.App.App terminal SQL"
+````
+
+* Terminal Session with txt Database
+
+Run the application with the following command:
+
+```bash
+cmd /C ""C:\Program Files\Java\jdk-21\bin\java.exe" @C:\Users\HP\AppData\Local\Temp\cp_b6rnjcjkktnnlwh83xkc6khos.argfile main.App.App terminal txt"
+````
+
+## License
+
+This project is licensed under the MIT License.
+
+## Contributions
+
+Contributions are welcome. Feel free to submit a pull request or open an issue and further contribute to this project. Further intergration of setting up Maven will be done on the future.
+
+## Acknowledgements
+
+Special thanks to the OpenWeatherMap API for providing weather data. And hats-off to the original contributers to the project @zohaibzahid1 @danish-61 @Huzyefah @HarisRandhawa12  @Wajeehaha  for their efforts in this project.
+
+## Contact
+
+For any inquiries, contact <uffanmehmoodkhan02@gmail.com>

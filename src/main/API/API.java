@@ -1,11 +1,10 @@
 package main.API;
 
 
-public class API { 
+public class API {
 
     // OpenWeatherMap API key
-    private String API_Key = "a262e48a1166d96447ed16fe0708d092";
-    //"bc146deacea7f9cc88cdb8b6bbb5fef9";
+    private String API_Key = "bc146deacea7f9cc88cdb8b6bbb5fef9";
 
     
     Weather weather = new Weather();//WeatherMap API key
