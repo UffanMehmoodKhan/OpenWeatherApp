@@ -1,12 +1,12 @@
-package main.Session; 
+package main.Session;
 import main.API.API;
 
   //Methods for API calls ----> made to DB first ----> then to API calls ----> then back ----------------< 
 
 public interface Session
-{ 
+{
 
-    public static API APIInterface = new API();  
+    public static API APIInterface = new API();
     API OpenAI = new API();
     //------------------------
     public void getLoc_LatInpu(Session sessionInstance,int choice); // location by cords

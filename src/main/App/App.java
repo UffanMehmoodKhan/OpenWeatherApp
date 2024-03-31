@@ -1,7 +1,11 @@
 package main.App;
 
-import main.Session.*;
-import main.Database.*;
+import main.Database.DB;
+import main.Database.SQL;
+import main.Database.txt;
+import main.Session.Session;
+import main.Session.SessionDT;
+import main.Session.SessionT;
 
 public class App{
 
@@ -34,17 +38,14 @@ public class App{
 		}
 		
     }
-	Session getSession()
-	{
+	Session getSession(){
         return session;
     }
 	
-	public static void clearDatabase()	
-	{
+	public static void clearDatabase(){
 		db.clearCache();
 	}
-    public static void main(String[] args)
-	{
+    public static void main(String[] args){
 		
 		System.out.println("\n" + args[0] + " application config"); 
 		App OpenWeatherMap = new App(args[0], args[1]); //Initialize OpenWeatherMap App object
