@@ -1,6 +1,8 @@
 # OpenWeatherApp
 
 A Weather Application utilizing the OpenWeather API to provide historical, current and forecasted weather data.
+
+A Weather Application utilizing the OpenWeather API to provide historical, current and forecasted weather data.
 This allows users to receive access to the various data for a specific location and obtain relevant weather updates.
 Current features include:
 
