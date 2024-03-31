@@ -586,8 +586,7 @@ public class SQL implements DB
 	}
    
     //session methods for forecast,     // implemented
-    public String[] GetForecast(double lat,double  lon)
-	{
+    public String[] GetForecast(double lat,double  lon){
 		if (checkIfForecastDataExists(lat, lon)) {
             return retrieveForecastInfo(lat, lon);
         } else
@@ -598,8 +597,7 @@ public class SQL implements DB
 			return data;
         }
 	}
-    public String[] GetForecast(String city)
-	{
+    public String[] GetForecast(String city){
 		if (checkIfForecastDataExists(city)) {
             return retrieveForecastInfo(city);
         } else
