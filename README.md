@@ -77,7 +77,7 @@ Contributions are welcome. Feel free to submit a pull request or open an issue a
 
 ## Acknowledgements
 
-Special thanks to the OpenWeatherMap API for providing weather data. And hats-off to the original contributers to the project @danish-61 @HarisRandhawa12 @Huzyefah @Wajeehaha @zohaibzahid1 for their efforts in this project.#
+Special thanks to the OpenWeatherMap API for providing weather data. And hats-off to the original contributers to the project @danish-61 @HarisRandhawa12 @Huzyefah @Wajeehaha @zohaibzahid1 for their efforts in this project.
 
 ## Contact
 
