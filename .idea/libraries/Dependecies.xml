@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Dependecies">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Dependecies/json-simple-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Dependecies/org.json-chargebee-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

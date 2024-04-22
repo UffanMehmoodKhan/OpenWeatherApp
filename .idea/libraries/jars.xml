@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="jars">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/enu/jars/mssql-jdbc-12.6.1.jre11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/enu/jars/mssql-jdbc-12.6.1.jre8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/enu/jars/mssql-jdbc-12.6.1.jre11-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/enu/jars/mssql-jdbc-12.6.1.jre11-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/enu/jars/mssql-jdbc-12.6.1.jre8-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/enu/jars/mssql-jdbc-12.6.1.jre8-sources.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
