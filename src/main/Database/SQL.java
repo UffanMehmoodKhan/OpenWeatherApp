@@ -220,6 +220,7 @@ public class SQL implements DB
                         if (resultSet.next()) {
                             // Location data exists
                             locationId = resultSet.getInt("id");
+                            updateLocation(connection, locationId, latitude, longitude);
                         } else {
                             // Location data doesn't exist, insert into Locations table
                             locationId = insertLocation(connection, null, latitude, longitude, null);
@@ -453,7 +454,7 @@ public class SQL implements DB
     
     public String[] retrieveAirInfo(double lat,double lon)
 	{
-        String[] airInfo = new String[10]; // Array to store air quality information
+        String[] airInfo = new String[12]; // Array to store air quality information
         try (Connection connection = connect()) {
             if (connection != null) {
                 // Query to retrieve air quality data based on latitude and longitude
@@ -468,16 +469,18 @@ public class SQL implements DB
                     try (ResultSet resultSet = statement.executeQuery()) {
                         if (resultSet.next()) {
                             // Extract data from the result set and store in the array
-                            airInfo[0] = resultSet.getString("localTime");
-                            airInfo[1] = resultSet.getString("aqi");
-                            airInfo[2] = resultSet.getString("Dco");
-                            airInfo[3] = resultSet.getString("Dno");
-                            airInfo[4] = resultSet.getString("Dno2");
-                            airInfo[5] = resultSet.getString("Do3");
-                            airInfo[6] = resultSet.getString("Dso2");
-                            airInfo[7] = resultSet.getString("Dpm2_5");
-                            airInfo[8] = resultSet.getString("Dpm10");
-                            airInfo[9] = resultSet.getString("Dnh3");
+                            airInfo[0] = String.valueOf(lat);
+                            airInfo[1] = String.valueOf(lon);
+                            airInfo[2] = resultSet.getString("localTime");
+                            airInfo[3] = resultSet.getString("aqi");
+                            airInfo[4] = resultSet.getString("Dco");
+                            airInfo[5] = resultSet.getString("Dno");
+                            airInfo[6] = resultSet.getString("Dno2");
+                            airInfo[7] = resultSet.getString("Do3");
+                            airInfo[8] = resultSet.getString("Dso2");
+                            airInfo[9] = resultSet.getString("Dpm2_5");
+                            airInfo[10] = resultSet.getString("Dpm10");
+                            airInfo[11] = resultSet.getString("Dnh3");
                         }
                     }
                 }
@@ -583,8 +586,7 @@ public class SQL implements DB
 	}
    
     //session methods for forecast,     // implemented
-    public String[] GetForecast(double lat,double  lon)
-	{
+    public String[] GetForecast(double lat,double  lon){
 		if (checkIfForecastDataExists(lat, lon)) {
             return retrieveForecastInfo(lat, lon);
         } else
@@ -595,15 +597,17 @@ public class SQL implements DB
 			return data;
         }
 	}
-    public String[] GetForecast(String city)
-	{
+    public String[] GetForecast(String city){
 		if (checkIfForecastDataExists(city)) {
             return retrieveForecastInfo(city);
         } else
         {
+            System.out.println("///////////Reached here/////////////////");
 			String[] data = APIInterface.get5DayForecast(city);
             //api call and insert method will be called here
 			insertForecastInfo(data);
+            System.out.println("Lenghth of data array");
+            System.out.println(data.length);
 			return data;
         }
 	}

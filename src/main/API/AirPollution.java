@@ -1,17 +1,19 @@
 package main.API;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-import java.net.*;
-import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import java.util.TimeZone;
-import java.util.Date;
 
-public class AirPollution {
+public class AirPollution{
 
 	@Deprecated
     public String[] getAirQualityData(String queryParameter, String apiKey) {
