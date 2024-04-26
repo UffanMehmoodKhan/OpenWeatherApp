@@ -1,6 +1,7 @@
 package main.Session; 
-
 import main.API.API;
+
+  //Methods for API calls ----> made to DB first ----> then to API calls ----> then back ----------------< 
 
 public interface Session
 { 
@@ -24,8 +25,6 @@ public interface Session
     public void get5DayForecastDataProcess(double[][] dataarr); // 5 day forecast by cords
     public void get5DayForecastDataProcess(String cityName);// 5 day forecast by city name
 
-    
-
-    //Methods for API calls ----> made to DB first ----> then to API calls ----> then back ----------------< 
-
+  
 } 
+

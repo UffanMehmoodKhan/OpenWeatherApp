@@ -1,5 +1,6 @@
 
 package main.UserInterface; 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import main.Session.*;
 import main.API.*;
@@ -17,7 +18,8 @@ public class terminal implements UserInterface
         "Weather Description",
         "Temperature",
         "Feels Like",
-        "Maximum Temp"
+        "Minimum Temp",
+		"Maximum Temp"
     };
 
     String[] AirPoll_titles = {
@@ -41,8 +43,8 @@ public class terminal implements UserInterface
         "Latitude",
         "Longitude",
         "Time Stamp",
-        "Current Max Temp",
         "Current Min Temp",
+		"Current Max Temp",
         "Weather",
         "Weather Description"
     };
@@ -60,7 +62,7 @@ public class terminal implements UserInterface
     @Override
     public void welcomeScreen(Session sessionInstance)
     { 
-        int choice; Scanner sc = new Scanner(System.in); sc.reset();
+        int choice = 0; Scanner sc = new Scanner(System.in); sc.reset();
         String[][] arr = new String[3][2];
         
         // if(choice == (1)){
@@ -85,35 +87,30 @@ public class terminal implements UserInterface
 		boolean status = true;
 		while(status == true){
 		System.out.print("\033[H\033[2J");  
-		System.out.flush(); 
+		System.out.flush(); sc.reset();
 		System.out.println("\tWelcome to the OpenWeatherMap API Interface!");
         System.out.println("\n\tChoose the following options:");
         System.out.println("\n[1] Weather Report\t\t[2]Air Pollution Report");
         System.out.println("\n[3] 5-Day Forecast\t\t[4]Exit");
 
-        choice = sc.nextInt(); System.out.println(choice); sc.reset(); 
-       
+        try {
+            choice = sc.nextInt(); System.out.println(choice); sc.reset(); 
+            
+        } catch (InputMismatchException e) {
+            //System.out.println("InputMismatchException: Please enter a valid integer.");
+            sc.nextLine(); // Consume the invalid input to prevent an infinite loop
+        } 
+
         if (choice == 1){
-            System.out.print("\033[H\033[2J");  
-		    System.out.flush(); 
-            System.out.println("\n\tChoose the following options for Weather Report:");
-            System.out.println("\n[1] Lat/Lon\t\t[2]City, Country");
-            sc.reset(); choice = sc.nextInt();
             this.lat_locInputScreen(sessionInstance, choice);
         }
         else if (choice == 2){
-            System.out.print("\033[H\033[2J");  
-		    System.out.flush(); 
-            System.out.println("\n\tAir Pollution Index Report\n");
             this.displayAirPollutionScreen(sessionInstance,  arr, choice);
         }
-        else if (choice == 3)
-        {
-            System.out.print("\033[H\033[2J");  
-		    System.out.flush(); 
+        else if (choice == 3){
             this.display_forecast(sessionInstance, arr, choice);
         }
-        else {
+        else if(choice == 4){
 			status = false;
 		}
         
@@ -126,22 +123,66 @@ public class terminal implements UserInterface
     @Override
     public void lat_locInputScreen(Session sessionInstance,int choice) 
     {
+        System.out.print("\033[H\033[2J");  
+        System.out.flush(); 
+        System.out.println("\n\tChoose the following options for Weather Report:");
+        System.out.println("\n[1] Lat/Lon\t\t[2]City, Country");
         Scanner sc = new Scanner(System.in); 
-        double lat; double lon; String loc;
-        
+        double lat = 1; double lon = 1; String loc = "Lahore";
         String[] weather = null;
+ 
+        try {
+            choice = sc.nextInt(); sc.reset(); 
+            
+        } catch (InputMismatchException e) {
+            sc.nextLine(); // Consume the invalid input to prevent an infinite loop
+            lat_locInputScreen(sessionInstance, choice); 
+        } 
+
         if(choice == 1){
-            System.out.println("Enter lat: "); lat = sc.nextDouble(); 
-            System.out.println("Enter lon: ");lon = sc.nextDouble();
-            weather = OpenAI.getCurrentWeather(lat, lon);
+            System.out.println("Enter lat: ");
+            try {
+                lat = sc.nextDouble();  sc.reset(); 
+                
+            } catch (InputMismatchException e) {
+                sc.nextLine(); // Consume the invalid input to prevent an infinite loop
+                lat_locInputScreen(sessionInstance, choice); 
+            } 
+
+            System.out.println("Enter lon: ");
+            try {
+                lon = sc.nextDouble();  sc.reset(); 
+                
+            } catch (InputMismatchException e) {
+                sc.nextLine(); // Consume the invalid input to prevent an infinite loop
+                lat_locInputScreen(sessionInstance, choice); 
+            } 
+            weather = DB_cache.GetWeather(lat, lon);
         }
+        
         else if(choice == 2){
-            System.out.println("Enter location: "); loc = sc.next(); 
-            weather = OpenAI.getCurrentWeather("London");
+            System.out.println("Enter location: "); 
+            try {
+                loc = sc.next();  sc.reset(); 
+                
+            } catch (InputMismatchException e) {
+                sc.nextLine(); // Consume the invalid input to prevent an infinite loop
+                lat_locInputScreen(sessionInstance, choice = 0); 
+            }
+            weather = DB_cache.GetWeather(loc);
+        }
+        else{
+            System.out.println("Invalid input. Please try again.");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            lat_locInputScreen(sessionInstance, choice);
         }
 		
-        for(int i = 0; i < weather.length - 1; i++){
-			System.out.println(weather_titles[i] +": "+weather[i]);
+        for(int i = 0; i < weather.length; i++){
+			System.out.println(weather_titles[i] +": " + weather[i]);
 		}
         
         try{
@@ -149,20 +190,6 @@ public class terminal implements UserInterface
         } catch (InterruptedException e) {
            // e.printStackTrace();
         }
-        //this.welcomeScreen(sessionInstance);
-         //take 3 longitudes and 3 latitudes as input
-        // Scanner sc = new Scanner(System.in);
-        // double[][] dataArr = new double[3][2];
-        // for(int i = 0; i < 3; i++)
-        // {
-        //     System.out.println("Enter the latitude of location " + (i+1));
-        //     dataArr[i][0] = sc.nextInt();
-        //     System.out.println("Enter the longitude of location " + (i+1));
-        //     dataArr[i][1] = sc.nextInt();
-        // }
-        // sc.close();
-        
-        // sessionInstance.getWeatherLoc_LatProcess(dataArr);  
     }
 
     @Override
@@ -178,13 +205,33 @@ public class terminal implements UserInterface
     }
     @Override
     public void displayAirPollutionScreen(Session sessionInstance, String[][] arr, int count) {
-
+		
+		System.out.print("\033[H\033[2J");  
+		System.out.flush(); 
+		System.out.println("\n\tAir Pollution Index Report\n\n");
         Scanner sc = new Scanner(System.in); 
-        double lat; double lon; String loc;
-        System.out.println("\nEnter latitude: "); lat = sc.nextDouble(); 
-        System.out.println("Enter longitude: "); lon = sc.nextDouble();
+        double lat = 1; double lon = 1; 
+        System.out.println("\nEnter latitude: "); 
         
-        String[] air_poll = OpenAI.getAirQuality(lat, lon);
+
+		try {
+			lat = sc.nextDouble();  sc.reset(); 
+			
+		} catch (InputMismatchException e) {
+			sc.nextLine(); // Consume the invalid input to prevent an infinite loop
+			displayAirPollutionScreen(sessionInstance, arr, count); 
+		}
+
+		System.out.println("Enter longitude: "); 
+		try {
+			lon = sc.nextDouble();;  sc.reset(); 
+			
+		} catch (InputMismatchException e) {
+			sc.nextLine(); // Consume the invalid input to prevent an infinite loop
+			displayAirPollutionScreen(sessionInstance, arr, count); 
+		}
+        
+        String[] air_poll = DB_cache.GetAirPoll(lat, lon);
         
         for(int i = 0; i < air_poll.length - 1; i++){
 			System.out.println(AirPoll_titles[i] +": "+air_poll[i]);
@@ -195,18 +242,54 @@ public class terminal implements UserInterface
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //throw new UnsupportedOperationException("Unimplemented method 'displayAirPollutionScreen'");
+       sc.close();
     }
 
     public void display_forecast(Session sessionInstance, String[][] arr, int count){
-        Scanner sc = new Scanner(System.in); 
-        double lat; double lon; String loc;
+        System.out.print("\033[H\033[2J");  
+		System.out.flush(); 
+		System.out.println("\n\tChoose the following options for Weather Report:");
+		System.out.println("\n[1] Lat/Lon\t\t[2]City, Country");
+		Scanner sc = new Scanner(System.in);
+        double lat = 1; double lon = 1; String loc = "Lahore";
         
         String[] forecast = null;
+
+		try {
+            count = sc.nextInt(); sc.reset(); 
+            
+        } catch (InputMismatchException e) {
+			sc.nextLine();
+            display_forecast(sessionInstance, arr, count);
+           // Consume the invalid input to prevent an infinite loop
+        } 
         
-        System.out.println("Enter lat: "); lat = sc.nextDouble(); 
-        System.out.println("Enter lon: ");lon = sc.nextDouble();
-        forecast = OpenAI.get5DayForecast((double)lat, (double)lon);
+        if(count == 1){
+            System.out.println("Enter lat: ");
+			try {
+				lat = sc.nextDouble();  sc.reset(); 
+				
+			} catch (InputMismatchException e) {
+				sc.nextLine(); // Consume the invalid input to prevent an infinite loop
+				display_forecast(sessionInstance, arr, count);
+			}
+
+			System.out.println("Enter lon: ");
+			try {
+				lat = sc.nextDouble();  sc.reset(); 
+				
+			} catch (InputMismatchException e) {
+				sc.nextLine(); // Consume the invalid input to prevent an infinite loop
+				display_forecast(sessionInstance, arr, count);
+			}
+
+            forecast = DB_cache.GetForecast(lat, lon);
+        }
+        else if(count == 2){
+            System.out.println("Enter location: "); loc = sc.next(); 
+            forecast = DB_cache.GetForecast(loc);
+        }
+
         System.out.println("\n");
     
         for(int i = 0; i < 9; i++){
@@ -230,19 +313,20 @@ public class terminal implements UserInterface
         
         //throw new UnsupportedOperationException("Unimplemented method 'forecast screen'");
     }
-    @Override
+    
+	
+	
+	
+	@Override
     public void ForecastLocationInputScreen(Session sessionInstance) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'ForecastLocationInputScreen'");
     }
     @Override
     public void ForecastLocationbyNameInput(Session sessionInstance) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'ForecastLocationbyNameInput'");
     }
     public void display5DayForecastScreen(Session sessionInstance,String[][]arr,int count)
     {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'display5DayForecastScreen'");
     }
     
