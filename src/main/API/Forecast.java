@@ -28,7 +28,6 @@ public class Forecast {
             int responseCode = con.getResponseCode();
             if (responseCode != 200) {
                 System.out.println("Failed : HTTP error code : " + responseCode);
-                System.out.println("11111111111111111");
                 for (int i = 0; i < 4; i++) {
                     forecastInfoList.add(null);
                 }
@@ -53,7 +52,6 @@ public class Forecast {
 
                 if (jsonObject.containsKey("error")) {
                     System.out.println("Error: " + jsonObject.get("message"));
-                    System.out.println("222222222222222");
                     for (int i = 0; i < 4; i++) {
                         forecastInfoList.add(null);
                     }

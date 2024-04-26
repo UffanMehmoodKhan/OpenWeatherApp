@@ -1,7 +1,7 @@
 package main.Session; 
 
 
-import main.Database.*;
+import main.Database.DB;
 import main.UserInterface.UserInterface;
 import main.UserInterface.terminal; 
 
@@ -12,9 +12,9 @@ public class SessionT implements Session
     DB DB_cache;
     public SessionT(DB db)
     { 
-		UIInterface = new terminal(); 
+        DB_cache = db;
+		UIInterface = new terminal(DB_cache); 
 		//SQL_cache = new SQL(); txt_cache = new txt();
-        DB_cache = db;;
         System.out.println("Terminal is Operational"); 
         this.getWelcomeScreen();
         System.out.println("Terminal is Operational");
@@ -41,38 +41,32 @@ public class SessionT implements Session
 
     @Override
     public void getWeatherLocationInput(Session sessionInstance) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getWeatherLocationInput'");
     }
 
     @Override
     public void getWeatherLocationProcess(String[] dataarra) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getWeatherLocationProcess'");
        // will process the data and then call the display screen
     }
 
     @Override
     public void displayWeatherscreen(Session sessionInstance, String[][] arr,int count) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'displayscreen'");
     }
 
     @Override
     public void getAirPollutionLoc_LatProcess(double[][] dataarr) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAirPollutionLoc_LatProcess'");
     }
 
     @Override
     public void displayAirPollutionScreen(Session sessionInstance, String[][] arr, int count) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'displayAirPollutionScreen'");
     }
 
     @Override
     public void get5DayForecastDataProcess(double[][] dataarr) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'get5DayForecastDataProcess'");
     } 
     @Override
@@ -81,21 +75,15 @@ public class SessionT implements Session
     }
     @Override
     public void display5DayForecastScreen(Session sessionInstance, String[][] arr, int count) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'display5DayForecastScreen'");
     }
 
     @Override
     public void GetForecastLocationInput(Session sessionInstance) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'GetForecastLocationInput'");
     }
     @Override 
     public void GetForecastLocationbyNameInput(Session sessionInstance) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'GetForecastLocationbyNameInput'");
     }
 }
-
-
-    

@@ -1,9 +1,9 @@
-
 package main.UserInterface; 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import main.Session.*;
 import main.API.*;
+import main.Database.*;
 
 public class terminal implements UserInterface
  {  String[] weather_titles = {
@@ -58,31 +58,18 @@ public class terminal implements UserInterface
     };
     
     API OpenAI = new API();
-    public terminal(){ }
+    DB DB_cache;
+    
+    public terminal(DB db){ 
+        DB_cache = db;
+    }
+
+    
     @Override
     public void welcomeScreen(Session sessionInstance)
     { 
         int choice = 0; Scanner sc = new Scanner(System.in); sc.reset();
         String[][] arr = new String[3][2];
-        
-        // if(choice == (1)){
-        //     this.lat_locInputScreen(sessionInstance, 1);
-        //        try{
-        //         Thread.sleep(1000);
-        //     } catch (InterruptedException e) {
-        //         e.printStackTrace();
-        //     }
-        //     this.welcomeScreen(sessionInstance);
-        // }
-        // else if(choice == 2){
-        //     this.displayAirPollutionScreen(sessionInstance, arr, choice);
-        // }
-        // else if(choice == 3){
-        //     this.display_forecast(sessionInstance, arr, choice);
-        // }
-        // else if(choice == 4){
-     
-        // }
        
 		boolean status = true;
 		while(status == true){
@@ -113,9 +100,6 @@ public class terminal implements UserInterface
         else if(choice == 4){
 			status = false;
 		}
-        
-        // complete if else will be implemented 
-        // sessionInstance.getLoc_LatInpu(sessionInstance,0);
         //sc.close();
     }
 }
@@ -188,7 +172,7 @@ public class terminal implements UserInterface
         try{
             Thread.sleep(5000);
         } catch (InterruptedException e) {
-           // e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -302,16 +286,12 @@ public class terminal implements UserInterface
             System.out.println(forecast[i]);
         }
 
-        
-
         try{
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         
-        
-        //throw new UnsupportedOperationException("Unimplemented method 'forecast screen'");
     }
     
 	
@@ -331,4 +311,3 @@ public class terminal implements UserInterface
     }
     
 } 
- 
