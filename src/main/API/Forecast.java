@@ -97,7 +97,8 @@ public class Forecast{
                     JSONArray weatherArray = (JSONArray) forecastObject.get("weather");
                     JSONObject weatherObject = (JSONObject) weatherArray.get(0);
                     String weather = (String) weatherObject.get("main");
-                    String weatherDescription = (String) weatherObject.get("description");
+                    String weatherDescriptionn = (String) weatherObject.get("description");
+                    String weatherDescription = weatherDescriptionn.replace(" ", "_");
 
                     // Convert temperature from Kelvin to Celsius
                     Double minTempCelsius = minTemp.doubleValue() - 273.15;

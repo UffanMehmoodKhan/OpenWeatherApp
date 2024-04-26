@@ -1,0 +1,1 @@
+Lahore null 31.5497 74.3436 2024-04-26 27.65 33.21 Rain light_rain 2024-04-27 24.38 24.38 Rain light_rain 2024-04-28 21.64 21.64 Clear clear_sky 2024-04-29 25.37 25.37 Clear clear_sky 2024-04-30 22.77 22.77 Clear clear_sky 2024-05-01 20.05 20.05 Rain light_rain

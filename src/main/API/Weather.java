@@ -69,7 +69,8 @@ public class Weather{
                 JSONArray weatherArray = (JSONArray) jsonObject.get("weather");
                 JSONObject weatherObject = (JSONObject) weatherArray.get(0);
                 String weather = (String) weatherObject.get("main");
-                String weatherDescription = (String) weatherObject.get("description");
+                String weatherDescriptionn = (String) weatherObject.get("description");
+                String weatherDescription = weatherDescriptionn.replace(" ", "_");
                 JSONObject coordObject = (JSONObject) jsonObject.get("coord");
                 Number latitudeN = (Number) coordObject.get("lat");
                 Number longitudeN = (Number) coordObject.get("lon");

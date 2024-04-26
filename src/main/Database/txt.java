@@ -19,7 +19,7 @@ public class txt implements DB {
                     out.print(datum);
                 }
                 else{
-                    out.print(datum + "$");
+                    out.print(datum + " ");
                 }
             }
             out.println();
@@ -40,7 +40,7 @@ public class txt implements DB {
                     out.print(datum);
                 }
                 else{
-                    out.print(datum + "$");
+                    out.print(datum + " ");
                 }
             }
             out.println();
@@ -62,7 +62,7 @@ public class txt implements DB {
                     out.print(datum);
                 }
                 else{
-                    out.print(datum + "$");
+                    out.print(datum + " ");
                 }
             }
             out.println();
@@ -76,7 +76,7 @@ public class txt implements DB {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             while ((line = br.readLine()) != null) {
                 if (line.contains(searchCriteria)) {
-                    return line.split("$");
+                    return line.split(" ");
                 }
             }
         } catch (IOException e) {
