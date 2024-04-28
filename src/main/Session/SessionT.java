@@ -87,6 +87,3 @@ public class SessionT implements Session
         throw new UnsupportedOperationException("Unimplemented method 'GetForecastLocationbyNameInput'");
     }
 }
-
-
-    

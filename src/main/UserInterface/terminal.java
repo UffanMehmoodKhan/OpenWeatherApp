@@ -1,4 +1,3 @@
-
 package main.UserInterface; 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -312,4 +311,3 @@ public class terminal implements UserInterface
     }
     
 } 
- 

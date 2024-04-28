@@ -30,7 +30,6 @@ public class Forecast{
             int responseCode = con.getResponseCode();
             if (responseCode != 200) {
                 System.out.println("Failed : HTTP error code : " + responseCode);
-                System.out.println("11111111111111111");
                 for (int i = 0; i < 4; i++) {
                     forecastInfoList.add(null);
                 }
@@ -55,7 +54,6 @@ public class Forecast{
 
                 if (jsonObject.containsKey("error")) {
                     System.out.println("Error: " + jsonObject.get("message"));
-                    System.out.println("222222222222222");
                     for (int i = 0; i < 4; i++) {
                         forecastInfoList.add(null);
                     }
@@ -99,7 +97,8 @@ public class Forecast{
                     JSONArray weatherArray = (JSONArray) forecastObject.get("weather");
                     JSONObject weatherObject = (JSONObject) weatherArray.get(0);
                     String weather = (String) weatherObject.get("main");
-                    String weatherDescription = (String) weatherObject.get("description");
+                    String weatherDescriptionn = (String) weatherObject.get("description");
+                    String weatherDescription = weatherDescriptionn.replace(" ", "_");
 
                     // Convert temperature from Kelvin to Celsius
                     Double minTempCelsius = minTemp.doubleValue() - 273.15;

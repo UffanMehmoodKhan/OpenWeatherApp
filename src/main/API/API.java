@@ -1,6 +1,7 @@
 package main.API;
 
 
+
 public class API {
 
     // OpenWeatherMap API key
