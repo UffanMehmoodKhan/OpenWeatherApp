@@ -20,54 +20,49 @@ Current features include:
 
 ### Clone the Repository
 
-Clone the repository using the following command:
+Ensure to have the latest version of Java & Jave Development Kit (JDK) installed on you local machine. Once that is done, clone the repository using the following command:
 
 ```bash
 git clone https://github.com/UffanMehmoodKhan/OpenWeatherApp.git
 ````
 
-### Compile the Application
+### Run the Application
 
-Navigate to the project directory and compile the application using Java compiler:
+Navigate to the OpenWeatherApp respository in you filesystem either on your command prompt or IDE:
 
 ````bash
 cd OpenWeatherApp
-javac -d bin src/main/App/*.java
+E:\OpenWeatherMap
 ````
 
-### Windows Installation
+This folder contains the .jar executable file needed to run the application, so ensure that you navigate to the appropriate directory in you file.
 
-* Desktop Session with SQL Database
+### Running the project
 
-Run the application with the following command:
+The OpenWeatherMap Application has interchangeable UI and Databases which means that, you can chose to run the project from a combination pair of:
+
+* UserInterfaces: __desktop__ [Java Swing] and/or __terminal__
+* Databases: __SQL__  and/or __txt__
+
+Run the application by typing the following command:
 
 ```bash
-cmd /C ""C:\Program Files\Java\jdk-21\bin\java.exe" @C:\Users\HP\AppData\Local\Temp\cp_b6rnjcjkktnnlwh83xkc6khos.argfile main.App.App desktop SQL"
+java -jar OpenWeatherApp.jar <UserInterface> <Database>
 ````
 
-* Desktop Session with txt Database
-
-Run the application with the following command:
+and example of this can be:
 
 ```bash
-cmd /C ""C:\Program Files\Java\jdk-21\bin\java.exe" @C:\Users\HP\AppData\Local\Temp\cp_b6rnjcjkktnnlwh83xkc6khos.argfile main.App.App desktop txt"
+java -jar OpenWeatherApp.jar terminal txt
 ````
 
-* Terminal Session with SQL Database
-
-Run the application with the following command:
+or
 
 ```bash
-cmd /C ""C:\Program Files\Java\jdk-21\bin\java.exe" @C:\Users\HP\AppData\Local\Temp\cp_b6rnjcjkktnnlwh83xkc6khos.argfile main.App.App terminal SQL"
+java -jar OpenWeatherApp.jar desktop SQL
 ````
 
-* Terminal Session with txt Database
-
-Run the application with the following command:
-
-```bash
-cmd /C ""C:\Program Files\Java\jdk-21\bin\java.exe" @C:\Users\HP\AppData\Local\Temp\cp_b6rnjcjkktnnlwh83xkc6khos.argfile main.App.App terminal txt"
-````
+A combination of any UserInterface or Database can be chosen, determine to fulfill you user experience.
 
 ## License
 
