@@ -1,11 +1,17 @@
 package main.Database;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class txt implements DB {
-    private static final String WEATHER_FILE = "weather.txt";
-    private static final String FORECAST_FILE = "forecast.txt";
-    private static final String AIR_FILE = "pollution.txt";
+    private static final String WEATHER_FILE = "src/main/Database/weather.txt";
+    private static final String FORECAST_FILE = "src/main/Database/forecast.txt";
+    private static final String AIR_FILE = "src/main/Database/pollution.txt";
 
     @Override
     public void insertWeatherInfo(String[] data) {

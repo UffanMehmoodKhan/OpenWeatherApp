@@ -16,25 +16,21 @@ public class App{
     App(String argvString, String ui) {
 		if(!ui.equals(null)){
 			if(ui.equals("SQL")){ 			//creates a terminal Session
-				System.out.println("is this sql even working?");
 				db = new SQL();
 			}
 			else if(ui.equals("txt")){		//creates a desktop Session
-				System.out.println("is this txt even working?");
 				db = new txt();
 			}
 		}
 		if(!argvString.equals(null)){
+
 			if(argvString.equals("terminal")){ 			//creates a terminal Session
-			System.out.println("is this terminal even working?");
-			session = new SessionT(db);
+				session = new SessionT(db);
 
 			}
-			else if(argvString.equals("desktop")){		//creates a desktop Session
-				System.out.println("is this desktop even working?");
+			else if(argvString.equals("desktop")){		//creates a desktop Sessi
 				session = new SessionDT(db); 
 			}
-			//clearDatabase();
 		}
 		
     }

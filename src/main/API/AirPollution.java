@@ -103,14 +103,14 @@ public class AirPollution{
                 airQualityInfoList.add(localTime);
                 Double aqiDouble = aqi.doubleValue();
                 airQualityInfoList.add(aqiDouble.toString());
-                airQualityInfoList.add(Dco + " µg/m³");
-                airQualityInfoList.add(Dno + " µg/m³");
-                airQualityInfoList.add(Dno2 + " µg/m³");
-                airQualityInfoList.add(Do3 + " µg/m³");
-                airQualityInfoList.add(Dso2 + " µg/m³");
-                airQualityInfoList.add(Dpm2_5 + " µg/m³");
-                airQualityInfoList.add(Dpm10 + " µg/m³");
-                airQualityInfoList.add(Dnh3 + " µg/m³");
+                airQualityInfoList.add(Dco + "_µg/m³");
+                airQualityInfoList.add(Dno + "_µg/m³");
+                airQualityInfoList.add(Dno2 + "_µg/m³");
+                airQualityInfoList.add(Do3 + "_µg/m³");
+                airQualityInfoList.add(Dso2 + "_µg/m³");
+                airQualityInfoList.add(Dpm2_5 + "_µg/m³");
+                airQualityInfoList.add(Dpm10 + "_µg/m³");
+                airQualityInfoList.add(Dnh3 + "_µg/m³");
             }
 
         } catch (Exception e) {

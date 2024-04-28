@@ -1,9 +1,10 @@
 package main.UserInterface; 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import main.Session.*;
-import main.API.*;
-import main.Database.*;
+
+import main.API.API;
+import main.Database.DB;
+import main.Session.Session;
 
 public class terminal implements UserInterface
  {  String[] weather_titles = {
@@ -66,8 +67,7 @@ public class terminal implements UserInterface
 
     
     @Override
-    public void welcomeScreen(Session sessionInstance)
-    { 
+    public void welcomeScreen(Session sessionInstance){ 
         int choice = 0; Scanner sc = new Scanner(System.in); sc.reset();
         String[][] arr = new String[3][2];
        
@@ -75,10 +75,10 @@ public class terminal implements UserInterface
 		while(status == true){
 		System.out.print("\033[H\033[2J");  
 		System.out.flush(); sc.reset();
-		System.out.println("\tWelcome to the OpenWeatherMap API Interface!");
-        System.out.println("\n\tChoose the following options:");
-        System.out.println("\n[1] Weather Report\t\t[2]Air Pollution Report");
-        System.out.println("\n[3] 5-Day Forecast\t\t[4]Exit");
+		System.out.println("\t\t\tWelcome to the OpenWeatherMap API Interface!");
+        System.out.println("\n\t\t\tChoose the following options:");
+        System.out.println("\n\n\t\t[1] Weather Report\t\t[2]Air Pollution Report");
+        System.out.println("\n\t\t[3] 5-Day Forecast\t\t[4]Exit");
 
         try {
             choice = sc.nextInt(); System.out.println(choice); sc.reset(); 
@@ -159,6 +159,9 @@ public class terminal implements UserInterface
             System.out.println("Invalid input. Please try again.");
             try {
                 Thread.sleep(1000);
+                System.out.println("Press Enter to continue...");
+                Scanner scanner = new Scanner(System.in);
+                scanner.nextLine();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -171,6 +174,9 @@ public class terminal implements UserInterface
         
         try{
             Thread.sleep(5000);
+            System.out.println("Press Enter to continue...");
+            Scanner scanner = new Scanner(System.in);
+            scanner.nextLine();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -221,12 +227,15 @@ public class terminal implements UserInterface
 			System.out.println(AirPoll_titles[i] +": "+air_poll[i]);
 		}
         
-        try{
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-       sc.close();
+        //Thread.sleep(5000);
+        System.out.println("Press Enter to continue...");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+
+        welcomeScreen(sessionInstance);
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();
+        sc.close();
     }
 
     public void display_forecast(Session sessionInstance, String[][] arr, int count){
@@ -288,6 +297,9 @@ public class terminal implements UserInterface
 
         try{
             Thread.sleep(5000);
+            System.out.println("Press Enter to continue...");
+            Scanner scanner = new Scanner(System.in);
+            scanner.nextLine();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

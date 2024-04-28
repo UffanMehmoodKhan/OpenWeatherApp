@@ -1,22 +1,21 @@
 package main.Session; 
 
-import main.Database.*;
-import main.UserInterface.*; 
+import main.Database.DB;
+import main.UserInterface.UserInterface;
+import main.UserInterface.desktop; 
 public class SessionDT implements Session { 
 
     UserInterface UIInterface; 
     //DB SQL_cache; DB txt_cache;
     DB DB_cache;
     // SessionST constructor 
-    public SessionDT(DB db)
-    { 
+    public SessionDT(DB db) { 
         System.out.println("Desktop is Operational"); 
         UIInterface = new desktop(); 
        //SQL_cache = new SQL(); txt_cache = new txt();
         DB_cache = db;
         this.getWelcomeScreen();
-        System.out.println("Desktop is Operational");
-    }   
+    }
   
     // ---------------------------------------------
     // displaying the welcome screen
