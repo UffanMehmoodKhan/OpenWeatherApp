@@ -38,6 +38,12 @@ public class API {
 	// Method to get 5-day weather by coordinates
 	@SuppressWarnings("deprecation")
     public String[] get5DayForecast(double lat, double lon){
+        if ((lat*10)%10 == 0) {
+            lat = lat+0.01;
+        }
+        if ((lon*10)%10 == 0) {
+            lon += 0.01;
+        }
 		return forecast.get5DayForecastData("lat=" + lat + "&lon=" + lon, API_Key);
 	}
 

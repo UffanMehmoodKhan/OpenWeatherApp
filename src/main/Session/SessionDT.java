@@ -1,5 +1,5 @@
 package main.Session; 
-
+import main.API.*;
 import main.Database.DB;
 import main.UserInterface.UserInterface;
 import main.UserInterface.desktop; 
@@ -145,7 +145,7 @@ public class SessionDT implements Session {
         String[] forecastData = DB_cache.GetForecast(dataarr[0][0],dataarr[0][1]);
        
 
-        String[][] Weatherarr = new String[7][]; // Initialize the 2D array with 7 rows
+        String[][] Weatherarr = new String[6][]; // Initialize the 2D array with 7 rows
         int x = 0;
         // Initialize the first row with 4 elements
         Weatherarr[0] = new String[4];
@@ -153,7 +153,7 @@ public class SessionDT implements Session {
             Weatherarr[0][x] = forecastData[x];
         }
         // Initialize the rest of the rows with 5 elements each
-        for (int i = 1; i < 7; i++) {
+        for (int i = 1; i < 6; i++) {
             Weatherarr[i] = new String[5];
             for (int j = 0; j < 5; j++) {
                 Weatherarr[i][j] = forecastData[x++];
@@ -165,10 +165,11 @@ public class SessionDT implements Session {
     // getting the 5 day forecast by city name
     @Override
     public void get5DayForecastDataProcess(String cityName) {
-    
+            
             //String[] forecastData = APIInterface.get5DayForecast(cityName);
             String[] forecastData = DB_cache.GetForecast(cityName);
-            String[][] Weatherarr = new String[7][]; // Initialize the 2D array with 7 rows
+            System.out.println(forecastData.length);
+            String[][] Weatherarr = new String[6][]; // Initialize the 2D array with 7 rows
             int x = 0;
             // Initialize the first row with 4 elements
             System.out.println(forecastData.length);
@@ -182,7 +183,7 @@ public class SessionDT implements Session {
                 Weatherarr[0][x] = forecastData[x];
             }
             // Initialize the rest of the rows with 5 elements each
-            for (int i = 1; i < 7; i++) {
+            for (int i = 1; i < 6; i++) {
                 Weatherarr[i] = new String[5];
                 for (int j = 0; j < 5; j++) {
                     Weatherarr[i][j] = forecastData[x++];
