@@ -45,6 +45,5 @@ public class App{
 		
 		System.out.println("\n" + args[0] + " application config"); 
 		App OpenWeatherMap = new App(args[0], args[1]); //Initialize OpenWeatherMap App object
-		OpenWeatherMap.getSession();
     }
 }
